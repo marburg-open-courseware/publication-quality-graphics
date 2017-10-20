@@ -86,7 +86,6 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -111,14 +110,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="2.1" data-path="a-few-notes-on-using-color.html"><a href="a-few-notes-on-using-color.html"><i class="fa fa-check"></i><b>2.1</b> A few Notes on using Color</a></li>
-<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice-way.html"><a href="scatter-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice way)</a></li>
-<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2-way.html"><a href="scatter-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice-way.html"><a href="box-and-whisker-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2-way.html"><a href="box-and-whisker-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice-way.html"><a href="histograms-and-density-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2-way.html"><a href="histograms-and-density-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice-way.html"><a href="plotting-error-bars-lattice-way.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice way)</a></li>
-<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2 way)</a></li>
+<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice.html"><a href="scatter-plots-lattice.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice)</a></li>
+<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2.html"><a href="scatter-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice.html"><a href="box-and-whisker-plots-lattice.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice)</a></li>
+<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2.html"><a href="box-and-whisker-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice.html"><a href="histograms-and-density-plots-lattice.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice)</a></li>
+<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2.html"><a href="histograms-and-density-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice.html"><a href="plotting-error-bars-lattice.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice)</a></li>
+<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2)</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>3</b> Manipulating Plots with the grid Package</a><ul>
 <li class="chapter" data-level="3.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>3.1</b> Multiple Plots per Page</a></li>
@@ -154,7 +153,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="merging-data" class="section level2">
 <h2><span class="header-section-number">1.4</span> Merging Data</h2>
 <p>Often enough we end up with multiple data sets on our hard drive that contain useful data for the same analysis. In this case we might want to amalgamate our data sets so that we have all the data in one set.<br />
-R provides a function called <code>merge()</code> that does just that</p>
+R provides a function called <code>merge()</code> that does just that:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ave_n_cut_color_price &lt;-<span class="st"> </span><span class="kw">merge</span>(ave_n_cut_color, ave_price_cut, 
                                <span class="dt">by.x =</span> <span class="st">&quot;cut&quot;</span>, <span class="dt">by.y =</span> <span class="st">&quot;Group.1&quot;</span>)
 ave_n_cut_color_price</code></pre></div>
@@ -195,7 +194,7 @@ ave_n_cut_color_price</code></pre></div>
 ## 34 Very Good     G 2299 3981.760
 ## 35 Very Good     E 2400 3981.760</code></pre>
 <p>As the variable names of our two data sets differ, we need to specifically provide the names for each by which the merging should be done (<code>by.x</code> and <code>by.y</code>). The default of <code>merge()</code> tries to find variable names which are identical.</p>
-<p>Note, in order to merge more that two data frames at a time, we need to call a powerful higher order function called <code>Reduce()</code>. This is one mighty function for doing all sorts of things iteratively.</p>
+<p>Note, in order to merge more than two data frames at a time, we need to call a powerful higher-order function called <code>Reduce()</code>. This is one mighty function for doing all sorts of things iteratively.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ave_price_cut) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cut&quot;</span>, <span class="st">&quot;price&quot;</span>)
 
 <span class="kw">set.seed</span>(<span class="dv">12</span>)
@@ -247,7 +246,7 @@ ave_n_cut_color_price</code></pre></div>
 ## 35 Very Good     E 2400 3981.760  8.086511  87.43490</code></pre>
 <p>Obviously, setting proper names would be the next step now…</p>
 <p>Ok, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen…</p>
-<p>So, let’s start plotting stuff</p>
+<p><strong>So, let’s start plotting stuff.</strong></p>
 
 </div>
 <!-- </div> -->

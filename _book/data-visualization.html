@@ -86,7 +86,6 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -111,14 +110,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="2.1" data-path="a-few-notes-on-using-color.html"><a href="a-few-notes-on-using-color.html"><i class="fa fa-check"></i><b>2.1</b> A few Notes on using Color</a></li>
-<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice-way.html"><a href="scatter-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice way)</a></li>
-<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2-way.html"><a href="scatter-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice-way.html"><a href="box-and-whisker-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2-way.html"><a href="box-and-whisker-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice-way.html"><a href="histograms-and-density-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2-way.html"><a href="histograms-and-density-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice-way.html"><a href="plotting-error-bars-lattice-way.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice way)</a></li>
-<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2 way)</a></li>
+<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice.html"><a href="scatter-plots-lattice.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice)</a></li>
+<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2.html"><a href="scatter-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice.html"><a href="box-and-whisker-plots-lattice.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice)</a></li>
+<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2.html"><a href="box-and-whisker-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice.html"><a href="histograms-and-density-plots-lattice.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice)</a></li>
+<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2.html"><a href="histograms-and-density-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice.html"><a href="plotting-error-bars-lattice.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice)</a></li>
+<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2)</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>3</b> Manipulating Plots with the grid Package</a><ul>
 <li class="chapter" data-level="3.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>3.1</b> Multiple Plots per Page</a></li>
@@ -153,17 +152,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="data-visualization" class="section level1">
 <h1><span class="header-section-number">2</span> Data Visualization</h1>
-<p>In the next few sections, we will produce several varieties of <em>scatter plots</em>, <em>box &amp; whisker plots</em>, <em>plots with error bars</em>, <em>histograms</em> and <em>density plots</em>. All of these will first be produced using the <strong>lattice</strong> package and then an attempt is made to recreate these in (pretty much) the exact same way in <strong>ggplot2</strong>. First, the default versions are created and then we will see how they can be modified in order to produce plots that satisfy the requirements of most academic journals.</p>
-<p>We will see that some things are easier to achieve using <strong>lattice</strong>, some other things are easier in <strong>ggplot2</strong>, so it is good to learn how to use both of them…</p>
-<p>Before we start, we need to load the necessary packages and data set again</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### here&#39;s a rather handy way of loading all packages that you need
-### for your code to work in one go
-pkg &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;latticeExtra&quot;</span>, <span class="st">&quot;gridExtra&quot;</span>, <span class="st">&quot;MASS&quot;</span>, 
-         <span class="st">&quot;colorspace&quot;</span>, <span class="st">&quot;plyr&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;scales&quot;</span>)
-jnk &lt;-<span class="st"> </span><span class="kw">sapply</span>(pkg, library, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)
-
-### load the diamonds data set (comes with ggplot2)
-<span class="kw">data</span>(diamonds)</code></pre></div> 
+<p>In the next few sections, we will produce several varieties of <em>scatter plots</em>, <em>box-and-whisker plots</em> (from here on after ‘boxplots’), <em>histograms</em> and <em>density plots</em>, and <em>plots with error bars</em>. All of these will first be produced using the <strong>lattice</strong> package and then an attempt is made to recreate these in (pretty much) the exact same way in <strong>ggplot2</strong>. First, the default versions are created and then we will see how they can be modified in order to produce plots that satisfy the requirements of most academic journals.</p>
+<p>We will see that some things are easier to achieve using <strong>lattice</strong>, whereas other things are easier in <strong>ggplot2</strong>, so it is probably good advice to learn how to use both of them…</p> 
 </div>
             </section>
 

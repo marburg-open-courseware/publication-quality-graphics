@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="data-visualization.html">
-<link rel="next" href="scatter-plots-lattice-way.html">
+<link rel="next" href="scatter-plots-lattice.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -86,7 +86,6 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -111,14 +110,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="2.1" data-path="a-few-notes-on-using-color.html"><a href="a-few-notes-on-using-color.html"><i class="fa fa-check"></i><b>2.1</b> A few Notes on using Color</a></li>
-<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice-way.html"><a href="scatter-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice way)</a></li>
-<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2-way.html"><a href="scatter-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice-way.html"><a href="box-and-whisker-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2-way.html"><a href="box-and-whisker-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice-way.html"><a href="histograms-and-density-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2-way.html"><a href="histograms-and-density-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice-way.html"><a href="plotting-error-bars-lattice-way.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice way)</a></li>
-<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2 way)</a></li>
+<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice.html"><a href="scatter-plots-lattice.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice)</a></li>
+<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2.html"><a href="scatter-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice.html"><a href="box-and-whisker-plots-lattice.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice)</a></li>
+<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2.html"><a href="box-and-whisker-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice.html"><a href="histograms-and-density-plots-lattice.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice)</a></li>
+<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2.html"><a href="histograms-and-density-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice.html"><a href="plotting-error-bars-lattice.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice)</a></li>
+<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2)</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>3</b> Manipulating Plots with the grid Package</a><ul>
 <li class="chapter" data-level="3.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>3.1</b> Multiple Plots per Page</a></li>
@@ -153,9 +152,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="a-few-notes-on-using-color" class="section level2">
 <h2><span class="header-section-number">2.1</span> A few Notes on using Color</h2>
-<p>Before we start plotting our data, we need to spend some time to have a closer look at color representation of certain variables. A careful study of color-spaces (e.g., <a href="http://statmath.wu.ac.at/~zeileis/papers/Zeileis+Hornik+Murrell-2009.pdf">here</a>, <a href="http://hclwizard.org/hcl-color-scheme/">here</a>, <a href="http://vis4.net/blog/posts/avoid-equidistant-hsv-colors/">here</a> or <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">here</a>) leads to the conclusion that the HCL color space is preferable when mapping a variable to color (be it factorial or continuous).</p>
-<p>This color space is readily available in R through the package <code>colorspace</code> and the function of interest is called <code>hcl()</code>.</p>
-<p>In the code chunk that follows we will create a color palette that varies in both color (hue) and also luminance (brightness) so that this can be distinguished even in grey-scale (printed) versions of the plot. As a reference color palette we will use the ‘Spectral’ palette from clorobrewer.org which is also a multi-hue palette but represents a diverging color palette. Hence, each end of the palette will look rather similar when converted to grey-scale.</p>
+<p>Before we start plotting our data, we need to spend some time to have a closer look at color representation of certain variables. A careful study of color spaces (e.g. <span class="citation">Zeileis, Hornik, and Murrell (<a href="#ref-Zeileis2009">2009</a>)</span>, <a href="http://hclwizard.org/hcl-color-scheme/">HCLwizard</a>, <a href="http://vis4.net/blog/posts/avoid-equidistant-hsv-colors/">Aisch (2011)</a> or <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">Wikipedia</a>) leads to the conclusion that the HCL color space is preferable when mapping a variable to color (be it factorial or continuous).</p>
+<p>This color space is readily available in R through the package <strong>colorspace</strong> and the function of interest is called <code>hcl()</code>.</p>
+<p>In the code chunk that follows we will create a color palette that varies in both color (hue) and also luminance (brightness) so that this can be distinguished even in grey-scale (printed) versions of the plot. As a reference color palette we will use the ‘Spectral’ palette from <a href="http://colorbrewer2.org">ColorBrewer</a> which is also a multi-hue palette but represents a diverging color palette. Hence, each end of the palette will look rather similar when converted to greyscale.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RColorBrewer)
 
 clrs_spec &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">rev</span>(<span class="kw">brewer.pal</span>(<span class="dv">11</span>, <span class="st">&quot;Spectral&quot;</span>)))
@@ -173,7 +172,7 @@ pal &lt;-<span class="st"> </span><span class="cf">function</span>(col, <span cl
       <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, ...)
  <span class="kw">rect</span>(<span class="dv">0</span><span class="op">:</span>(n<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>n, <span class="dv">0</span>, <span class="dv">1</span><span class="op">:</span>n<span class="op">/</span>n, <span class="dv">1</span>, <span class="dt">col =</span> col, <span class="dt">border =</span> border)
 }</code></pre></div>
-<p>So here’s the Spectral palette from colorbrewer.org interpolated over 100 colors</p>
+<p>So here’s the Spectral palette from ColorBrewer interpolated over 100 colors:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pal</span>(<span class="kw">clrs_spec</span>(<span class="dv">100</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:spectr-pal"></span>
 <img src="_main_files/figure-html/spectr-pal-1.svg" alt="A diverging rainbow color palette from [ColorBrewer](http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3)." width="768" />
@@ -181,7 +180,7 @@ pal &lt;-<span class="st"> </span><span class="cf">function</span>(col, <span cl
 Figure 2.1: A diverging rainbow color palette from <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer</a>.
 </p>
 </div>
-<p>And this is what it looks like in grey-scale</p>
+<p>And this is what it looks like in greyscale:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pal</span>(<span class="kw">desaturate</span>(<span class="kw">clrs_spec</span>(<span class="dv">100</span>)))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:spectr-pal-grey"></span>
 <img src="_main_files/figure-html/spectr-pal-grey-1.svg" alt="Same palette as above in grey-scale." width="768" />
@@ -189,10 +188,10 @@ Figure 2.1: A diverging rainbow color palette from <a href="http://colorbrewer2.
 Figure 2.2: Same palette as above in grey-scale.
 </p>
 </div>
-<p>We see that this palette varies in lightness from a very bright center to darker ends on each side. Note, that the red end is slightly darker than the blue end</p>
-<p>This is quite ok in case we want to show some diverging data (deviations from a zero point - e.g. the mean). If we, however, are dealing with a sequential measure, such as temperature, or in our case the density of points plotted per some grid cell, we really need to use a sequential color palette. There are two common problems with sequential palettes:</p>
+<p>We see that this palette varies in lightness from a very bright center to darker ends on each side. Note, that the red end is slightly darker than the blue end.</p>
+<p>This is quite ok in case we want to show some diverging data (deviations from a zero point, for example the mean). However, if we are dealing with a sequential measure, such as temperature, or in our case the density of points plotted per some grid cell, we really need to use a sequential color palette. There are two common problems with sequential palettes:</p>
 <ol style="list-style-type: decimal">
-<li>We need to create a palette that maps the data accurately. This means that the perceived distances between the different hues utilized needs to reflect the distances between our data points. AND this distance needs to be constant, no matter between which two point of the palette we want to estimate their distance. Let me give you an example. Consider the classic ‘rainbow’ palette (<a href="https://www.mathworks.com/products/matlab.html">MATLAB</a> refers to this as ‘jet colors’)</li>
+<li>We need to create a palette that maps the data accurately. This means that the perceived distances between the different hues utilized need to reflect the distances between our data points. AND this distance needs to be constant, no matter between which two point of the palette we want to estimate their distance. Let me give you an example. Consider the classic ‘rainbow’ palette (<a href="https://www.mathworks.com/products/matlab.html">MATLAB</a> refers to this as ‘jet colors’):</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pal</span>(<span class="kw">rainbow</span>(<span class="dv">100</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:rainb-pal"></span>
@@ -201,8 +200,8 @@ Figure 2.2: Same palette as above in grey-scale.
 Figure 2.3: The classic rainbow color palette.
 </p>
 </div>
-<p>It becomes obvious that there are several thin bands in this color palette (yellow, aquamarine, purple) which do not map the distances between variable values accurately. That is, the distance between two values located in/around the yellow region of the palette will seem to change faster than, for example somewhere in the green region (and red and blue).</p>
-<p>When converted to grey-scale this palette produces a hell of a mess…</p>
+<p>It becomes obvious that there are several thin bands in this color palette (yellow, aquamarine, purple) which do not map the distances between variable values accurately. That is, the distance between two values located in or around the yellow region of the palette will seem to change faster than, for example, somewhere in the green region (and red and blue).</p>
+<p>When converted to greyscale, this palette produces a hell of a mess:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pal</span>(<span class="kw">desaturate</span>(<span class="kw">rainbow</span>(<span class="dv">100</span>)))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:rainb-pal-grey"></span>
 <img src="_main_files/figure-html/rainb-pal-grey-1.svg" alt="Same palette as above in grey-scale." width="768" />
@@ -210,9 +209,8 @@ Figure 2.3: The classic rainbow color palette.
 Figure 2.4: Same palette as above in grey-scale.
 </p>
 </div>
-<p>Note, that this palette is maybe the most widely used color coding palette for mapping a sequential continuous variable to color. We will see further examples later on…</p>
-<p>I hope you get the idea that this is not a good way of mapping a sequential variable to color!</p>
-<p><code>hcl()</code> produces so-called perceptually uniform color palettes and is therefore much better suited to represent sequential data.</p>
+<p>Note, that this palette is maybe the most widely used color coding palette for mapping a sequential continuous variable to color. We will see further examples later on… We hope you get the idea that this is not a good way of mapping a sequential variable to color!</p>
+<p><code>hcl()</code> produces so-called perceptually uniform color palettes and is therefore much better suited to represent sequential data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pal</span>(<span class="kw">clrs_hcl</span>(<span class="dv">100</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:hcl-pal"></span>
 <img src="_main_files/figure-html/hcl-pal-1.svg" alt="An HCL based multi-hue color palette with increasing luminance towards the red end." width="768" />
@@ -220,8 +218,7 @@ Figure 2.4: Same palette as above in grey-scale.
 Figure 2.5: An HCL based multi-hue color palette with increasing luminance towards the red end.
 </p>
 </div>
-<p>We see that the different hues are spread constantly over the palette and therefore it is easy to estimate distances between data values from the changes in color.<br />
-The fact that we also vary luminance here means that we get a very light color at one end (here the red end - which is a more of a pink tone than red). This might, at first sight, not seem very aesthetically pleasing, yet it enables us to encode our data even in grey-scale…</p>
+<p>We see that the different hues are spread constantly over the palette and therefore it is easy to estimate distances between data values from the changes in color. The fact that we also vary luminance here means that we get a very light color at one end (in our case, the red end which is more of a pink tone than red). This might, at first sight, not seem very aesthetically pleasing, yet it enables us to encode our data even in greyscale:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pal</span>(<span class="kw">desaturate</span>(<span class="kw">clrs_hcl</span>(<span class="dv">100</span>)))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:hcl-pal-grey"></span>
 <img src="_main_files/figure-html/hcl-pal-grey-1.svg" alt="Same palette as above in grey-scale." width="768" />
@@ -229,8 +226,18 @@ The fact that we also vary luminance here means that we get a very light color a
 Figure 2.6: Same palette as above in grey-scale.
 </p>
 </div>
-<p>As a general suggestion I encourage you to make use of the HCL color space whenever you can. But most importantly, it is essential to do some thinking before mapping data to color. The most basic question you always need to ask yourself is <strong>what is the nature of the data that I want to show? - sequential, diverging or qualitative?</strong> Once you know this, it is easy to choose the appropriate color palette for the mapping. A good place to start for choosing perceptually well thought through palettes is <a href="http://www.colorbrewer2.org">ColorBrewer</a>.</p>
-<p>Ok, so now let’s start with the classic statistical plot, the scatterplot…</p>
+<p>As a general suggestion I encourage you to make use of the HCL color space whenever you can. But most importantly, it is essential to do some thinking before mapping data to color. The most basic question you always need to ask yourself is probably</p>
+<blockquote>
+<p>What is the nature of the data that I want to show? More precisely, is it sequential, diverging, or qualitative?</p>
+</blockquote>
+<p>Once you know this, it is easy to choose the appropriate color palette for the mapping. A good place to start for choosing palettes that are perceptually well thought through is <a href="http://www.colorbrewer2.org">ColorBrewer</a>.</p>
+<p>Ok, so now let’s start with the classic statistical plot, the scatter plot…</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Zeileis2009">
+<p>Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. “Escaping RGBland: Selecting Colors for Statistical Graphics.” <em>Computational Statistics and Data Analysis</em> 53: 3259–70. doi:<a href="https://doi.org/10.1016/j.csda.2008.11.033">10.1016/j.csda.2008.11.033</a>.</p>
+</div>
 </div>
             </section>
 
@@ -238,7 +245,7 @@ Figure 2.6: Same palette as above in grey-scale.
         </div>
       </div>
 <a href="data-visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="scatter-plots-lattice-way.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scatter-plots-lattice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,3 +1,4 @@
+% Encoding: UTF-8
 @Manual{xie2014knitr,
   title = {knitr: A general-purpose package for dynamic report generation in R},
   author = {Yihui Xie},
@@ -28,3 +29,24 @@
   year = {2014},
   url = {http://www.gitbook.io/},
 }
+
+@Book{Xie2016,
+  title     = {{\textbf{bookdown}: Authoring Books and Technical Documents with R Markdown}},
+  publisher = {{CRC Press}},
+  year      = {2016},
+  author    = {Yihui Xie},
+  series    = {{Chapman \& Hall/CRC the R}},
+  isbn      = {9781138700109},
+  note      = {Available online: \url{https://bookdown.org/yihui/bookdown/}},
+}
+
+@Article{Zeileis2009,
+  author  = {Zeileis, Achim and Hornik, Kurt and Murrell, Paul},
+  title   = {{Escaping RGBland: Selecting Colors for Statistical Graphics}},
+  journal = {Computational Statistics and Data Analysis},
+  year    = {2009},
+  volume  = {53},
+  pages   = {3259--3270},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

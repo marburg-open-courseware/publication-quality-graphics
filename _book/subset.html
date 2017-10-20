@@ -86,7 +86,6 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -111,14 +110,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="2.1" data-path="a-few-notes-on-using-color.html"><a href="a-few-notes-on-using-color.html"><i class="fa fa-check"></i><b>2.1</b> A few Notes on using Color</a></li>
-<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice-way.html"><a href="scatter-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice way)</a></li>
-<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2-way.html"><a href="scatter-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice-way.html"><a href="box-and-whisker-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2-way.html"><a href="box-and-whisker-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice-way.html"><a href="histograms-and-density-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2-way.html"><a href="histograms-and-density-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice-way.html"><a href="plotting-error-bars-lattice-way.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice way)</a></li>
-<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2 way)</a></li>
+<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice.html"><a href="scatter-plots-lattice.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice)</a></li>
+<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2.html"><a href="scatter-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice.html"><a href="box-and-whisker-plots-lattice.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice)</a></li>
+<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2.html"><a href="box-and-whisker-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice.html"><a href="histograms-and-density-plots-lattice.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice)</a></li>
+<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2.html"><a href="histograms-and-density-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice.html"><a href="plotting-error-bars-lattice.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice)</a></li>
+<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2)</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>3</b> Manipulating Plots with the grid Package</a><ul>
 <li class="chapter" data-level="3.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>3.1</b> Multiple Plots per Page</a></li>
@@ -153,16 +152,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="subset" class="section level2">
 <h2><span class="header-section-number">1.1</span> Subsetting Data</h2>
-<p>As a final introductory note I would like to draw your attention to the fact that for the sake of reproducibility, this workshop will make use of the diamonds data set (which comes with <strong>ggplot2</strong>) in all the provided examples</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### here&#39;s a rather handy way of loading all packages that you need
-### for your code to work in one go
-pkg &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;latticeExtra&#39;</span>, <span class="st">&#39;gridExtra&#39;</span>, <span class="st">&#39;MASS&#39;</span>, 
-         <span class="st">&#39;colorspace&#39;</span>, <span class="st">&#39;plyr&#39;</span>, <span class="st">&#39;Hmisc&#39;</span>, <span class="st">&#39;scales&#39;</span>)
-jnk &lt;-<span class="st"> </span><span class="kw">sapply</span>(pkg, library, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)
-
-### load the diamonds data set (comes with ggplot2)
-<span class="kw">data</span>(diamonds)</code></pre></div>
-<p>The diamonds data set is structured as follows</p>
+<p>The <code>diamonds</code> data set from <strong>ggplot2</strong> is structured as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(diamonds)</code></pre></div>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    53940 obs. of  10 variables:
 ##  $ carat  : num  0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
@@ -176,12 +166,10 @@ jnk &lt;-<span class="st"> </span><span class="kw">sapply</span>(pkg, library, <
 ##  $ y      : num  3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
 ##  $ z      : num  2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
 <p>The <code>str()</code> command is probably the most useful command in all of R. It shows the complete structure of our data set and provides a ‘road map’ of how to access certain parts of the data.</p>
-<p>For example</p>
-<pre><code>diamonds$carat</code></pre>
-<p>is a numerical vector of length 53940 and</p>
-<pre><code>diamonds$cut</code></pre>
-<p>is an ordered factor with the ordered levels Fair, Good, Very Good, Premium, Ideal</p>
-<p>Suppose we’re a stingy person and don’t want to spend too much money on the wedding ring for our loved one, we could create a data set only including diamonds that cost less than 1000 US$ (though 1000 US$ does still seem very generous to me).</p>
+<p>For example, the console output tells us that <code>diamonds$carat</code> is a numerical vector of length 53940, whereas <code>diamonds$cut</code> is a factor with the ordered levels</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(diamonds<span class="op">$</span>cut)</code></pre></div>
+<pre><code>## [1] &quot;Fair&quot;      &quot;Good&quot;      &quot;Very Good&quot; &quot;Premium&quot;   &quot;Ideal&quot;</code></pre>
+<p>Suppose we’re a stingy person and don’t want to spend too much money on the wedding ring for our loved one, we could create a data set only including diamonds that cost less than 1000 USD (though 1000 USD does still seem very generous to me).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_cheap &lt;-<span class="st"> </span><span class="kw">subset</span>(diamonds, price <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>)</code></pre></div>
 <p>Then our new data set would look like this</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(diamonds_cheap)</code></pre></div>
@@ -196,8 +184,8 @@ jnk &lt;-<span class="st"> </span><span class="kw">sapply</span>(pkg, library, <
 ##  $ x      : num  3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
 ##  $ y      : num  3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
 ##  $ z      : num  2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
-<p>Now the new <code>diamonds_cheap</code> subset is a reduced data set of the original <code>diamonds</code> data set only having 14499 entries instead of the original 53940 entries.</p>
-<p>In case we were interested in a subset only including all diamonds of quality (cut) ‘Premium’ the command would be</p>
+<p>Now the new <code>diamonds_cheap</code> subset is a reduced version of the original <code>diamonds</code> data set only having 14499 entries instead of the original 53940 entries.</p>
+<p>In case we were interested in a subset only including all diamonds of ‘Premium’ quality (column <code>cut</code>), the command would be</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_premium &lt;-<span class="st"> </span><span class="kw">subset</span>(diamonds, cut <span class="op">==</span><span class="st"> &quot;Premium&quot;</span>)
 <span class="kw">str</span>(diamonds_premium)</code></pre></div>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    13791 obs. of  10 variables:
@@ -211,18 +199,18 @@ jnk &lt;-<span class="st"> </span><span class="kw">sapply</span>(pkg, library, <
 ##  $ x      : num  3.89 4.2 3.88 3.79 4.38 3.97 4.24 3.93 3.91 4.43 ...
 ##  $ y      : num  3.84 4.23 3.84 3.75 4.42 3.94 4.26 3.89 3.88 4.38 ...
 ##  $ z      : num  2.31 2.63 2.33 2.27 2.68 2.47 2.65 2.41 2.31 2.61 ...</code></pre>
-<p>Note the <strong>two</strong> equal signs in order to specify our selection (this stems from an effort to be consistent with selection criteria such as <em>smaller than</em> <code>&lt;=</code> or <em>not equal</em> <code>!=</code> and basically translates to <em>is equal</em>)!!</p>
-<p>Any combinations of these subset commands are valid, e.g.</p>
+<p>Note the <strong>two</strong> equal signs in order to specify our selection. This stems from an effort to be consistent with selection criteria such as “smaller than” (<code>&lt;=</code>) or “not equal” (<code>!=</code>) and basically translates to “is equal”!</p>
+<p>Any combinations of these conditional statements are valid within one and the same <code>subset</code> call, e.g.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_premium_and_cheap &lt;-<span class="st"> </span><span class="kw">subset</span>(diamonds, cut <span class="op">==</span><span class="st"> &quot;Premium&quot;</span> <span class="op">&amp;</span><span class="st"> </span>
-<span class="st">                                   </span>price <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1000</span>)</code></pre></div>
-<p>produces a rather strict subset only allowing diamonds of premium quality that cost less than 1000 US$</p>
-<p>In case we want <strong>ANY</strong> of these, meaning all diamonds of premium quality <strong>OR</strong> cheaper than 1000 US$, we would use the <strong>|</strong> operator to combine the two specifications</p>
+<span class="st">                                       </span>price <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1000</span>)</code></pre></div>
+<p>produces a rather strict subset only allowing diamonds of premium quality that cost less than 1000 USD.</p>
+<p>In case we want <strong>ANY</strong> of these, meaning all diamonds of premium quality <strong>OR</strong> cheaper than 1000 USD, we would use the <code>|</code> operator to combine the two specifications:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_premium_or_cheap &lt;-<span class="st"> </span><span class="kw">subset</span>(diamonds, cut <span class="op">==</span><span class="st"> &quot;Premium&quot;</span> <span class="op">|</span><span class="st"> </span>
 <span class="st">                                   </span>price <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1000</span>)</code></pre></div>
 <p>The <strong>OR</strong> specification is much less rigid than the <strong>AND</strong> specification which will result in a larger data set:</p>
 <ul>
 <li><code>diamonds_premium_and_cheap</code> has 3204 rows, while</li>
-<li><code>diamonds_premium_or_cheap</code> has 25111 rows</li>
+<li><code>diamonds_premium_or_cheap</code> has 25111 rows.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(diamonds_premium_and_cheap)</code></pre></div>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    3204 obs. of  10 variables:
@@ -248,7 +236,16 @@ jnk &lt;-<span class="st"> </span><span class="kw">sapply</span>(pkg, library, <
 ##  $ x      : num  3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
 ##  $ y      : num  3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
 ##  $ z      : num  2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
-<p>There is, in principle, no limitation to the combination of these so-called Boolean operators (and, or, equal to, not equal to, greater than, less than). I guess you get the idea…</p>
+<p>There is, in principle, no limitation to the combination of these so-called Boolean (or logical) operators</p>
+<ul>
+<li>and: <code>&amp;</code></li>
+<li>or: <code>|</code></li>
+<li>equal to: <code>==</code></li>
+<li>not equal to: <code>!=</code></li>
+<li>greater than (or equal): <code>&gt;</code> (<code>&gt;=</code>)</li>
+<li>less than (or equal): <code>&lt;</code> (<code>&lt;=</code>)</li>
+</ul>
+<p>I guess you get the idea…</p>
 </div>
             </section>
 

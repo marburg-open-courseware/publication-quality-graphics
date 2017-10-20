@@ -2,14 +2,7 @@
 
 One thing that most people fail to acknowledge is that visualizing data in R (or any other programming language for that matter) usually involves a little more effort than simply calling some plot function to create a meaningful graph. Data visualization is in essence an abstract representation of raw data. Most plotting routines available in R, however, are not designed to provide any useful data abstraction. This means that it is up to us to prepare our data to a level of abstraction that is feasible for what we want to show with our visualization. 
 
-Therefore, before we start to produce plots, we will need to spend some time and effort to get familiar with some tools to manipulate our raw data sets. In particular, we will learn how to `subset()`, `aggregate()`, `sort()`, and `merge` our data sets.
-
-**Right, enough of that introductory talk, let's start getting our hands dirty...**
-
-
-## Subsetting Data {#subset}
-
-As a final introductory note I would like to draw your attention to the fact that for the sake of reproducibility, this workshop will make use of the diamonds data set (which comes with **ggplot2**) in all the provided examples
+Therefore, before we start to produce plots, we will need to spend some time and effort to get familiar with some tools to manipulate our raw data sets. In particular, we will learn how to `subset()`, `aggregate()`, `sort()`, and `merge()` our data sets. For the sake of reproducibility, this workshop will make use of the `diamonds` data set (which comes with **ggplot2**) in all the provided examples.
 
 ```{r global settings, tidy = FALSE, message = FALSE, results = 'hide'}
 ### here's a rather handy way of loading all packages that you need
@@ -22,7 +15,12 @@ jnk <- sapply(pkg, library, character.only = TRUE)
 data(diamonds)
 ```
 
-The diamonds data set is structured as follows
+**Right, enough of that introductory talk, let's start getting our hands dirty...**
+
+
+## Subsetting Data {#subset}
+
+The `diamonds` data set from **ggplot2** is structured as follows:
 
 ```{r str, tidy = FALSE}
 str(diamonds)
@@ -30,19 +28,13 @@ str(diamonds)
 
 The `str()` command is probably the most useful command in all of R. It shows the complete structure of our data set and provides a 'road map' of how to access certain parts of the data.   
 
-For example
-```
-diamonds$carat
-```
-is a numerical vector of length `r length(diamonds$carat)` and
+For example, the console output tells us that `diamonds$carat` is a numerical vector of length `r nrow(diamonds)`, whereas `diamonds$cut` is a factor with the ordered levels 
 
-```
-diamonds$cut
+```{r levels}
+levels(diamonds$cut)
 ```
 
-is an ordered factor with the ordered levels `r levels(diamonds$cut)`
-
-Suppose we're a stingy person and don't want to spend too much money on the wedding ring for our loved one, we could create a data set only including diamonds that cost less than 1000 US$ (though 1000 US$ does still seem very generous to me).
+Suppose we're a stingy person and don't want to spend too much money on the wedding ring for our loved one, we could create a data set only including diamonds that cost less than 1000 USD (though 1000 USD does still seem very generous to me).
 
 ```{r subset cheap, tidy = FALSE}
 diamonds_cheap <- subset(diamonds, price < 1000)
@@ -54,27 +46,27 @@ Then our new data set would look like this
 str(diamonds_cheap)
 ```
 
-Now the new ```diamonds_cheap``` subset is a reduced data set of the original ```diamonds``` data set only having `r nrow(diamonds_cheap)` entries instead of the original `r nrow(diamonds)` entries.
+Now the new ```diamonds_cheap``` subset is a reduced version of the original ```diamonds``` data set only having `r nrow(diamonds_cheap)` entries instead of the original `r nrow(diamonds)` entries.
 
-In case we were interested in a subset only including all diamonds of quality (cut) 'Premium' the command would be
+In case we were interested in a subset only including all diamonds of 'Premium' quality (column `cut`), the command would be
 
 ```{r subset premium, tidy = FALSE}
 diamonds_premium <- subset(diamonds, cut == "Premium")
 str(diamonds_premium)
 ```
 
-Note the **two** equal signs in order to specify our selection (this stems from an effort to be consistent with selection criteria such as *smaller than* ```<=``` or *not equal* ```!=``` and basically translates to *is equal*)!!
+Note the **two** equal signs in order to specify our selection. This stems from an effort to be consistent with selection criteria such as "smaller than" (`<=`) or "not equal" (`!=`) and basically translates to "is equal"!
 
-Any combinations of these subset commands are valid, e.g.
+Any combinations of these conditional statements are valid within one and the same `subset` call, e.g.
 
 ```{r subset premium and cheap, tidy = FALSE}
 diamonds_premium_and_cheap <- subset(diamonds, cut == "Premium" & 
-                                   price <= 1000)
+                                       price <= 1000)
 ```
 
-produces a rather strict subset only allowing diamonds of premium quality that cost less than 1000 US$
+produces a rather strict subset only allowing diamonds of premium quality that cost less than 1000 USD.
 
-In case we want **ANY** of these, meaning all diamonds of premium quality **OR** cheaper than 1000 US$, we would use the **|** operator to combine the two specifications
+In case we want **ANY** of these, meaning all diamonds of premium quality **OR** cheaper than 1000 USD, we would use the `|` operator to combine the two specifications:
 
 ```{r subset premium or cheap, tidy = FALSE}
 diamonds_premium_or_cheap <- subset(diamonds, cut == "Premium" | 
@@ -84,35 +76,38 @@ diamonds_premium_or_cheap <- subset(diamonds, cut == "Premium" |
 The **OR** specification is much less rigid than the **AND** specification which will result in a larger data set:
 
 * `diamonds_premium_and_cheap` has `r nrow(diamonds_premium_and_cheap)` rows, while
-* `diamonds_premium_or_cheap` has `r nrow(diamonds_premium_or_cheap)` rows
+* `diamonds_premium_or_cheap` has `r nrow(diamonds_premium_or_cheap)` rows.
 
 ```{r str comparison, tidy = FALSE}
 str(diamonds_premium_and_cheap)
 str(diamonds_premium_or_cheap)
 ```
 
-There is, in principle, no limitation to the combination of these so-called Boolean operators (and, or, equal to, not equal to, greater than, less than). I guess you get the idea...
+There is, in principle, no limitation to the combination of these so-called Boolean (or logical) operators 
+
+* and: `&` 
+* or: `|` 
+* equal to: `==` 
+* not equal to: `!=` 
+* greater than (or equal): `>` (`>=`)
+* less than (or equal): `<` (`<=`)
+
+I guess you get the idea...
 
 
 ## Aggregating Data
 
-Suppose we wanted to calculate the average price of the diamonds for each level of ```cut```, i.e. the average price for all diamonds of "Ideal" quality, for all diamonds of "Premium" quality and so on, this would be done like this
+Suppose we wanted to calculate the average price of the diamonds for each level of ```cut```, i.e. the average price for all diamonds of "Ideal" quality, for all diamonds of "Premium" quality and so on, this could be done using `aggregate()` like this:
 
 ```{r aggregate price cut, tidy = FALSE}
 ave_price_cut <- aggregate(diamonds$price, by = list(diamonds$cut), 
                            FUN = mean)
-### by = ... needs a list, even if there is only one entry
-```
-
-and will look like this
-
-```{r show table, tidy = FALSE}
 ave_price_cut
 ```
 
-Note, that the original column names are not carried over to the newly created table of averaged values. Instead these get the generic names ```Group.1``` and ```x```
+Note that `by = ...` needs a list of grouping variables, even if there is only one entry. Unless a named list is specified (see 'Value' in `?aggregate`), the original column names are not carried over to the newly created table of averaged values. Instead, these get the generic names ```Group.1``` and ```x```.
 
-The ```Group.1``` already indicates that we are not limited to aggregate just over one factorial variable, more are also possible. Furthermore, any  function to compute the summary statistics which can be applied to all data subsets is allowed, e.g. to compute the number of items per category we could use ```length```
+```Group.1``` already indicates that we are not limited to aggregate just over one factorial variable, more are also possible. Furthermore, any  function to compute the summary statistics which can be applied to all data subsets is allowed, e.g. to compute the number of items per category we could use ```length()```:
 
 ```{r aggregate price cut + color, tidy = FALSE}
 ave_n_cut_color <- aggregate(diamonds$price, 
@@ -122,7 +117,7 @@ ave_n_cut_color <- aggregate(diamonds$price,
 ave_n_cut_color
 ```
 
-Given that as a result of aggregating this way we loose our variable names, it makes sense to set them afterwards, so that we can easily refer to them later
+Given that as a result of aggregating this way we loose our variable names, it makes sense to set them afterwards, so that we can easily refer to them later on.
 
 ```{r set names, tidy = FALSE}
 names(ave_n_cut_color) <- c("cut", "color", "n")
@@ -133,14 +128,13 @@ So, I hope you see how useful ```aggregate()``` is for calculating summary stati
 
 ## Sorting Data
 
-Sorting our data according to one (or more) of the variables in our data can also be very handy.   
-Sorting of a vector can be achieved using ```sort()```
+Sorting our data according to one (or more) of the variables can also come in very handy and can be achieved using ```sort()```.
 
 ```{r sort vector, tidy = FALSE}
 sort(ave_n_cut_color$n)
 ```
 
-sorting of an entire data frame is done using ```order()``` as follows
+Sorting an entire data frame is a little less straightforward and can be done using ```order()```.
 
 * for sorting according to one variable
 
@@ -157,13 +151,11 @@ ave_n_cut_color <- ave_n_cut_color[order(ave_n_cut_color$cut,
 ave_n_cut_color
 ```
 
-Note, that the original column names are not carried over to the newly created table of averaged values. Instead these get the generic names ```Group.1``` and ```x```
-
 
 ## Merging Data
 
 Often enough we end up with multiple data sets on our hard drive that contain useful data for the same analysis. In this case we might want to amalgamate our data sets so that we have all the data in one set.   
-R provides a function called ```merge()``` that does just that
+R provides a function called ```merge()``` that does just that:
 
 ```{r merge 2 dfs, tidy = FALSE}
 ave_n_cut_color_price <- merge(ave_n_cut_color, ave_price_cut, 
@@ -173,7 +165,7 @@ ave_n_cut_color_price
 
 As the variable names of our two data sets differ, we need to specifically provide the names for each by which the merging should be done (```by.x``` and ```by.y```). The default of ```merge()``` tries to find variable names which are identical.
 
-Note, in order to merge more that two data frames at a time, we need to call a powerful higher order function called ```Reduce()```. This is one mighty function for doing all sorts of things iteratively.
+Note, in order to merge more than two data frames at a time, we need to call a powerful higher-order function called ```Reduce()```. This is one mighty function for doing all sorts of things iteratively.
 
 ```{r merge multiple dfs, tidy = FALSE}
 names(ave_price_cut) <- c("cut", "price")
@@ -195,4 +187,4 @@ Obviously, setting proper names would be the next step now...
 
 Ok, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
 
-So, let's start plotting stuff
+**So, let's start plotting stuff.**

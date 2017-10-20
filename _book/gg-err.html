@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="plotting-error-bars-lattice-way.html">
+<link rel="prev" href="plotting-error-bars-lattice.html">
 <link rel="next" href="manipulating-plots-with-the-grid-package.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -86,7 +86,6 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -111,14 +110,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="2.1" data-path="a-few-notes-on-using-color.html"><a href="a-few-notes-on-using-color.html"><i class="fa fa-check"></i><b>2.1</b> A few Notes on using Color</a></li>
-<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice-way.html"><a href="scatter-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice way)</a></li>
-<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2-way.html"><a href="scatter-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice-way.html"><a href="box-and-whisker-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2-way.html"><a href="box-and-whisker-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice-way.html"><a href="histograms-and-density-plots-lattice-way.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice way)</a></li>
-<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2-way.html"><a href="histograms-and-density-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2 way)</a></li>
-<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice-way.html"><a href="plotting-error-bars-lattice-way.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice way)</a></li>
-<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2 way)</a></li>
+<li class="chapter" data-level="2.2" data-path="scatter-plots-lattice.html"><a href="scatter-plots-lattice.html"><i class="fa fa-check"></i><b>2.2</b> Scatter plots (lattice)</a></li>
+<li class="chapter" data-level="2.3" data-path="scatter-plots-ggplot2.html"><a href="scatter-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.3</b> Scatter plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.4" data-path="box-and-whisker-plots-lattice.html"><a href="box-and-whisker-plots-lattice.html"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots (lattice)</a></li>
+<li class="chapter" data-level="2.5" data-path="box-and-whisker-plots-ggplot2.html"><a href="box-and-whisker-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.5</b> Box-and-Whisker Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.6" data-path="histograms-and-density-plots-lattice.html"><a href="histograms-and-density-plots-lattice.html"><i class="fa fa-check"></i><b>2.6</b> Histograms and Density Plots (lattice)</a></li>
+<li class="chapter" data-level="2.7" data-path="histograms-and-density-plots-ggplot2.html"><a href="histograms-and-density-plots-ggplot2.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and Density Plots (ggplot2)</a></li>
+<li class="chapter" data-level="2.8" data-path="plotting-error-bars-lattice.html"><a href="plotting-error-bars-lattice.html"><i class="fa fa-check"></i><b>2.8</b> Plotting Error Bars (lattice)</a></li>
+<li class="chapter" data-level="2.9" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>2.9</b> Plotting Error Bars (ggplot2)</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>3</b> Manipulating Plots with the grid Package</a><ul>
 <li class="chapter" data-level="3.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>3.1</b> Multiple Plots per Page</a></li>
@@ -152,7 +151,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="gg-err" class="section level2">
-<h2><span class="header-section-number">2.9</span> Plotting Error Bars (ggplot2 way)</h2>
+<h2><span class="header-section-number">2.9</span> Plotting Error Bars (ggplot2)</h2>
 <p>As mentioned above, when plotting error bars <strong>ggplot2</strong> is much easier. Whether this is because of the general ongoing discussion about the usefulness of these plots I do not want to judge.</p>
 <p>Anyway, plotting error bars in <strong>ggplot2</strong> is as easy as everything else…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">errbar_ggplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(cuts, <span class="kw">aes</span>(cut, fit, <span class="dt">ymin =</span> fit <span class="op">-</span><span class="st"> </span>se.fit, 
@@ -166,7 +165,7 @@ g_err &lt;-<span class="st"> </span>errbar_ggplot <span class="op">+</span><span
 <div class="figure" style="text-align: center"><span id="fig:gg-err"></span>
 <img src="_main_files/figure-html/gg-err-1.svg" alt="A basic dotplot with error bars produced with **ggplot2**." width="672" />
 <p class="caption">
-Figure 2.32: A basic dotplot with error bars produced with <strong>ggplot2</strong>.
+Figure 2.33: A basic dotplot with error bars produced with <strong>ggplot2</strong>.
 </p>
 </div>
 <p>Especially, when plotting them as part of a bar plot.</p>
@@ -180,7 +179,7 @@ Figure 2.32: A basic dotplot with error bars produced with <strong>ggplot2</stro
 <div class="figure" style="text-align: center"><span id="fig:gg-err-bar"></span>
 <img src="_main_files/figure-html/gg-err-bar-1.svg" alt="A **ggplot2** bar plot with error bars." width="672" />
 <p class="caption">
-Figure 2.33: A <strong>ggplot2</strong> bar plot with error bars.
+Figure 2.34: A <strong>ggplot2</strong> bar plot with error bars.
 </p>
 </div>
 <p>Just as before (with the box widths) though, applying this to each panel is a little more complicated…</p>
@@ -200,14 +199,13 @@ g_err_f &lt;-<span class="st"> </span>errbar_ggplot_facets <span class="op">+</s
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, 
                <span class="dt">fill =</span> <span class="kw">rep</span>(<span class="kw">clrs_hcl</span>(<span class="dv">7</span>), <span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> myFun, <span class="dt">geom =</span> <span class="st">&quot;linerange&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cut) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_bw</span>()
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cut)
 
 <span class="kw">print</span>(g_err_f)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:gg-facet-err-bar"></span>
 <img src="_main_files/figure-html/gg-facet-err-bar-1.svg" alt="A **ggplot2** panel bar plot with error bars and modified fill colors." width="672" />
 <p class="caption">
-Figure 2.34: A <strong>ggplot2</strong> panel bar plot with error bars and modified fill colors.
+Figure 2.35: A <strong>ggplot2</strong> panel bar plot with error bars and modified fill colors.
 </p>
 </div>
 <p>Still, trust me on this, much easier than to achieve the same result in <strong>lattice</strong>.</p>
@@ -219,7 +217,7 @@ Figure 2.34: A <strong>ggplot2</strong> panel bar plot with error bars and modif
           </div>
         </div>
       </div>
-<a href="plotting-error-bars-lattice-way.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="plotting-error-bars-lattice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="manipulating-plots-with-the-grid-package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

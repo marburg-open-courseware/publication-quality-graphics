@@ -15,19 +15,13 @@ github-repo: marburg-open-courseware/publication-quality-graphics
 
 # Preface {-}
 
-This tutorial was developed as part of a one-day workshop held within the Ecosystem Informatics PhD program at the University of Marburg. The contents of this tutorial are published under the creative commons license ['Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)'](http://creativecommons.org/licenses/by-sa/3.0/).
+This tutorial was developed as part of a one-day workshop held within the Ecosystem Informatics PhD program at the University of Marburg. Its contents are published under the creative commons license ['Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)'](http://creativecommons.org/licenses/by-sa/3.0/).
 
 ![](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
-The tutorial was originally provided as one big document, but for easier digestion of the content, we have decided to break it into several smaller bits.
+The tutorial was originally provided as one big document, but for easier digestion of the content, we have decided to break it into several smaller bits. We hope you find parts of this tutorial, if not all of it useful.
 
-To see what we are usually up to I refer the interested reader to our [homepage](http://www.environmentalinformatics-marburg.de).
-
-Another resource for creating visualizations, with a particular focus on climatological and atmospheric applications, using R can be found at http://metvurst.wordpress.com
-
-We hope you find parts of this tutorial, if not all of it useful.
-
-Comments, feedback, suggestions and bug reports should be directed to [florian.detsch{at}staff.uni-marburg.de](mailto:florian.detsch@staff.uni-marburg.de).
+Comments, feedback, suggestions and bug reports are always welcome and should be directed to [florian.detsch{at}staff.uni-marburg.de](mailto:florian.detsch@staff.uni-marburg.de).
 
 <b>In this workshop we will</b>
 
@@ -38,7 +32,7 @@ Comments, feedback, suggestions and bug reports should be directed to [florian.d
 * learn even more flexibility using the <b>grid</b> package to (i) create visualizations comprising multiple plots on one page and (ii) manipulate existing plots to suit our needs; and
 * learn how to save our visualizations in different formats that comply with general publication standards of most academic journals.
 
-TIP: If you study the code provided in this tutorial closely, you will likely find some additional programming gems here and there which are not specifically introduced in this workshop (such as the first few lines of code in Section \@ref(subset) ;-)).
+TIP: If you study the code provided in this tutorial closely, you will likely find some additional programming gems here and there which are not specifically introduced in this workshop (such as the first few lines of code in Section \@ref(data-handling) ;-)).
 
 <b>In this workshop it is assumed that you</b>
 
@@ -56,6 +50,8 @@ _Before we start, we would like to highlight a few useful web resources for find
 * [Rseek](http://www.rseek.org) is a search site dedicated exclusively to R-related stuff.
 * [R-Bloggers](http://www.r-bloggers.com) is a nice site that provides access to all sorts of blog sites dedicated to R from all around the world (in fact, a lot of the material of this workshop is derived from posts found there).
 * Another great tutorial on how to prepare publication quality graphics can be found [here](http://cellbio.emory.edu/bnanes/figures/). This tutorial also uses R as the data analysis tool of choice, but it goes a fair bit further using additional software such as [InkScape](https://inkscape.org/en/) for the final touches of the graphics.
+* Another resource for creating visualizations, with a particular focus on climatological and atmospheric applications, using R can be found at http://metvurst.wordpress.com
+* To see what we are usually up to at Environmental Informatics Marburg, we refer the interested reader to our [homepage](http://www.environmentalinformatics-marburg.de).
 
 Finally, please note that we adhere to the format conventions introduced by @Xie2016 in his [introductory book](https://bookdown.org/yihui/bookdown/) about the R <b>bookdown</b> package. Accordingly, we do not add prompts (`>` and `+`) to the R source code presented herein, and text output is commented out with two hashes (`##`) by default, for example: 
 
