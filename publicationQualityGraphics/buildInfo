@@ -1,5 +1,0 @@
-this gitbook was built using the fork from:
-
-devtools::install_github("raulossada/Rgitbook")
-
-http://raulossada.gitbooks.io/usando-github-com-rstudio/content/index.html

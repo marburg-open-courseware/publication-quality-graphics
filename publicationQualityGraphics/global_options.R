@@ -1,2 +1,0 @@
-cch <- FALSE
-tdy <- TRUE

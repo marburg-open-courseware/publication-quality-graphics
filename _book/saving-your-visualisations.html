@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Creating Publication Quality Graphs in R</title>
+  <meta name="description" content="Creating Publication Quality Graphs in R">
+  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Creating Publication Quality Graphs in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="marburg-open-courseware/publication-quality-graphics" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Creating Publication Quality Graphs in R" />
+  
+  
+  
+
+<meta name="author" content="Tim Appelhans, Florian Detsch">
+
+
+<meta name="date" content="2017-10-20">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="manipulating-existing-plots.html">
+<link rel="next" href="tagged-image-file-format.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data-handling.html"><a href="data-handling.html"><i class="fa fa-check"></i><b>2</b> Data Handling</a><ul>
+<li class="chapter" data-level="2.1" data-path="subsetting-data.html"><a href="subsetting-data.html"><i class="fa fa-check"></i><b>2.1</b> Subsetting Data</a></li>
+<li class="chapter" data-level="2.2" data-path="aggregating-data.html"><a href="aggregating-data.html"><i class="fa fa-check"></i><b>2.2</b> Aggregating Data</a></li>
+<li class="chapter" data-level="2.3" data-path="sorting-data.html"><a href="sorting-data.html"><i class="fa fa-check"></i><b>2.3</b> Sorting Data</a></li>
+<li class="chapter" data-level="2.4" data-path="merging-data.html"><a href="merging-data.html"><i class="fa fa-check"></i><b>2.4</b> Merging Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>3</b> Data Visualisation</a><ul>
+<li class="chapter" data-level="3.1" data-path="a-few-notes-on-using-colour.html"><a href="a-few-notes-on-using-colour.html"><i class="fa fa-check"></i><b>3.1</b> A few Notes on using Colour</a></li>
+<li class="chapter" data-level="3.2" data-path="scatter-plots-lattice-way.html"><a href="scatter-plots-lattice-way.html"><i class="fa fa-check"></i><b>3.2</b> Scatter plots (lattice way)</a></li>
+<li class="chapter" data-level="3.3" data-path="scatter-plots-ggplot2-way.html"><a href="scatter-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>3.3</b> Scatter plots (ggplot2 way)</a></li>
+<li class="chapter" data-level="3.4" data-path="box-and-whisker-plots-lattice-way.html"><a href="box-and-whisker-plots-lattice-way.html"><i class="fa fa-check"></i><b>3.4</b> Box-and-Whisker Plots (lattice way)</a></li>
+<li class="chapter" data-level="3.5" data-path="box-and-whisker-plots-ggplot2-way.html"><a href="box-and-whisker-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>3.5</b> Box-and-Whisker Plots (ggplot2 way)</a></li>
+<li class="chapter" data-level="3.6" data-path="histograms-and-density-plots-lattice-way.html"><a href="histograms-and-density-plots-lattice-way.html"><i class="fa fa-check"></i><b>3.6</b> Histograms and Density Plots (lattice way)</a></li>
+<li class="chapter" data-level="3.7" data-path="histograms-and-density-plots-ggplot2-way.html"><a href="histograms-and-density-plots-ggplot2-way.html"><i class="fa fa-check"></i><b>3.7</b> Histograms and Density Plots (ggplot2 way)</a></li>
+<li class="chapter" data-level="3.8" data-path="plotting-error-bars-lattice-way.html"><a href="plotting-error-bars-lattice-way.html"><i class="fa fa-check"></i><b>3.8</b> Plotting Error Bars (lattice way)</a></li>
+<li class="chapter" data-level="3.9" data-path="plotting-error-bars-ggplot2-way.html"><a href="plotting-error-bars-ggplot2-way.html"><i class="fa fa-check"></i><b>3.9</b> Plotting Error Bars (ggplot2 way)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>4</b> Manipulating Plots with the grid Package</a><ul>
+<li class="chapter" data-level="4.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>4.1</b> Multiple Plots per Page</a></li>
+<li class="chapter" data-level="4.2" data-path="manipulating-existing-plots.html"><a href="manipulating-existing-plots.html"><i class="fa fa-check"></i><b>4.2</b> Manipulating Existing Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="saving-your-visualisations.html"><a href="saving-your-visualisations.html"><i class="fa fa-check"></i><b>5</b> Saving your Visualisations</a><ul>
+<li class="chapter" data-level="5.1" data-path="tagged-image-file-format.html"><a href="tagged-image-file-format.html"><i class="fa fa-check"></i><b>5.1</b> Tagged Image File Format</a></li>
+<li class="chapter" data-level="5.2" data-path="portable-network-graphics.html"><a href="portable-network-graphics.html"><i class="fa fa-check"></i><b>5.2</b> Portable Network Graphics</a></li>
+<li class="chapter" data-level="5.3" data-path="encapsulated-postscript.html"><a href="encapsulated-postscript.html"><i class="fa fa-check"></i><b>5.3</b> Encapsulated Postscript</a></li>
+<li class="chapter" data-level="5.4" data-path="protable-document-format.html"><a href="protable-document-format.html"><i class="fa fa-check"></i><b>5.4</b> Protable Document Format</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-remarks.html"><a href="final-remarks.html"><i class="fa fa-check"></i><b>6</b> Final remarks</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creating Publication Quality Graphs in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="saving-your-visualisations" class="section level1">
+<h1><span class="header-section-number">5</span> Saving your Visualisations</h1>
+<p>Saving graphics in R is, in theory, straight forward. We simply need to call a suitable device. There are a number of different plotting devices available. Here, we will introduce 4 examples, <code>tiff</code>, <code>png</code>, <code>postscript</code> and <code>pdf</code>. <code>postscript</code> and <code>pdf</code> should be used for vector graphics (e.g. line plots, point plots, polygon plots etc.), whereas <code>tiff</code> and <code>png</code> are preferable for raster graphics (e.g. photos, our density scatter plot or anything pixel based).</p>
+<p>All the graphics devices in R basically work the same way:</p>
+<ol style="list-style-type: decimal">
+<li>we open the respective device (postscript, png, tiff, pdf, jpeg, …)</li>
+<li>we plot (or in our case print our plot objects)</li>
+<li>we close the device using <code>dev.off()</code> - otherwise the file will not be written to the hard drive.</li>
+</ol>
+<p>In code, this is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">png</span>(<span class="st">&quot;some_filename.png&quot;</span>, <span class="dt">width =</span> <span class="dv">10</span>, <span class="dt">height =</span> <span class="dv">10</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>, <span class="dt">res =</span> <span class="dv">300</span>)
+## here goes your plotting routine, e.g.: xyplot(1:10 ~ 1:10)
+<span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<p>Sounds rather easy, but as they say, the devil is in the details… Unfortunately, neither <code>lattice</code> nor <code>ggplot2</code> grpahics play very well with the respective graphics devices. Consider the following setting where we want to produce a <code>tiff</code> output with a resolution of 300 dpi, a width of 17.35 cm, a height of 23.35 cm, the font family “ArialMT” and a pointsize of 18.</p>
+<p>Insetad of saving a graph, however, we only check whether the pointsize of 18 is passed correctly to the respective plotting environment (i.e. <code>base graphics</code>, <code>lattice</code> and <code>ggplot2</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tiff</span>(<span class="st">&quot;test.tif&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>,
+     <span class="dt">width =</span> <span class="fl">17.35</span>, <span class="dt">height =</span> <span class="fl">23.35</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>, <span class="dt">res =</span> <span class="dv">300</span>)
+
+<span class="co"># query base graphics graphical parameter text size (pointsize)</span>
+<span class="kw">par</span>()<span class="op">$</span>ps</code></pre></div>
+<pre><code>## [1] 18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query lattice text size</span>
+<span class="kw">trellis.par.get</span>()<span class="op">$</span>fontsize<span class="op">$</span>text</code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query ggplot2 text size</span>
+<span class="kw">theme_bw</span>()<span class="op">$</span>text<span class="op">$</span>size</code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
+<span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<p>We see that neither <code>lattice</code> nor <code>ggplot2</code> adhere to the specified pointsize whereas <code>base grpahics</code> do. Let’s try this for the other devices too. First, <code>png</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">png</span>(<span class="st">&quot;test.png&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>,
+     <span class="dt">width =</span> <span class="fl">17.35</span>, <span class="dt">height =</span> <span class="fl">23.35</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>, <span class="dt">res =</span> <span class="dv">300</span>)
+<span class="co"># query base graphics graphical parameter text size (pointsize)</span>
+<span class="kw">par</span>()<span class="op">$</span>ps</code></pre></div>
+<pre><code>## [1] 18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query lattice text size</span>
+<span class="kw">trellis.par.get</span>()<span class="op">$</span>fontsize<span class="op">$</span>text</code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query ggplot2 text size</span>
+<span class="kw">theme_bw</span>()<span class="op">$</span>text<span class="op">$</span>size</code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
+<span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<p>Similar to <code>tiff</code>. Now for <code>eps</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">postscript</span>(<span class="st">&quot;test.eps&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>,
+           <span class="dt">width =</span> <span class="fl">17.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">height =</span> <span class="fl">23.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>)
+<span class="co"># query base graphics graphical parameter text size (pointsize)</span>
+<span class="kw">par</span>()<span class="op">$</span>ps</code></pre></div>
+<pre><code>## [1] 18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query lattice text size</span>
+<span class="kw">trellis.par.get</span>()<span class="op">$</span>fontsize<span class="op">$</span>text</code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query ggplot2 text size</span>
+<span class="kw">theme_bw</span>()<span class="op">$</span>text<span class="op">$</span>size</code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
+<span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<p>Finally, for <code>pdf</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">&quot;test.pdf&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>,
+    <span class="dt">width =</span> <span class="fl">17.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">height =</span> <span class="fl">23.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>)
+<span class="co"># query base graphics graphical parameter text size (pointsize)</span>
+<span class="kw">par</span>()<span class="op">$</span>ps</code></pre></div>
+<pre><code>## [1] 18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query lattice text size</span>
+<span class="kw">trellis.par.get</span>()<span class="op">$</span>fontsize<span class="op">$</span>text</code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># query ggplot2 text size</span>
+<span class="kw">theme_bw</span>()<span class="op">$</span>text<span class="op">$</span>size</code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
+<span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<p>… and we see that only <code>base graphics</code> really correctly sets the supplied fontsize.</p>
+<p>Alright, this was only a small exercise to highlight the fact, that it is not straight forward to get that fine control over grphics output in R. But before we dive into this deeper, we will first need to know what it is that we want to achive, meaning we need a precise definition of the guidlines our grpahics output should adhere to. Generally, academic journals provide formatting guidelines for both figures and tables. These, however, differ from journal to journal so that it is impossible to come up with a one-fits-all solution here. Therefore, we will pick one of these guides to highlight the process of achieving the desired formatting which can then be adapted to any other formatting guide. Even though this is in R terms not directly related to exporting visualisations through different devices, these finer controls will be covered her, as from an academic publishing point of view this is exactly the point where we need to start thinking about these formatting issues.</p>
+<p>Depending on the journal the formatting guidelines can be quite detailed, though some journals allow for more flexibility. Generally, there are a few parameters that the majority of journals define in their formatting guides. These include (but are surely not limited to):</p>
+<ul>
+<li>filetypes</li>
+<li>font size</li>
+<li>font family (font type)</li>
+<li>dimensions</li>
+<li>resolution (in case of raster graphics)</li>
+</ul>
+<p>In case of more rigid formatting guidelines, further rules may be imposed on:</p>
+<ul>
+<li>color mode</li>
+<li>background colour</li>
+<li>lines and strokes</li>
+<li>file size</li>
+<li>orientation</li>
+</ul>
+<p>As an example, we will use the guidelines from PLOS ONE. An overview of these can be found <a href="http://www.plosone.org/static/figureGuidelines#figures">here</a> and more details are listed <a href="http://www.plosone.org/static/figureSpecifications">here</a>.</p>
+<p>For <code>tiff</code> images the requirements are as follows:</p>
+<ul>
+<li><strong>width:</strong> 8.30 cm (one column images), 17.35 (two column images)</li>
+<li><strong>maximum height:</strong> 23.35 cm (caption will not fit on the same page then)</li>
+<li><strong>minimum resolution:</strong> 300 ppi</li>
+<li><strong>compression:</strong> LZW</li>
+<li><strong>color mode:</strong> RGB (millions of colors), 8 bits per channel</li>
+<li><strong>background:</strong> white, not transparent</li>
+<li><strong>layers:</strong> a single layer called “Background”</li>
+<li><strong>text:</strong> font types Arial, Times or Symbol 6 - 12 pt</li>
+<li><strong>lines:</strong> line width between 0.5 to 1.5 pt</li>
+<li><strong>white space:</strong> a 2 pt white space around each figure is recommended</li>
+<li><strong>file size:</strong> 10 MB max</li>
+<li><strong>orientation:</strong> up to the author</li>
+</ul>
+<p>Additionally, some general remarks on software related issues can be found <a href="http://www.plosone.org/static/figureInstructions">here</a>. From the latter I quote:</p>
+<blockquote>
+<p>Numerous programs can create figures but are not dedicated to working with graphics. These may be limited in their capability to create TIFFs or EPSs that comply with PLOS specifications. Such applications include ChemDraw, Haploview, PyMol, R, ImageMagick, Corel Draw, GeneSpring, Matlab, Origin, Prism, Sigmaplot, and Stata. To create a high-quality TIFF from images created in other applications, use the instructions below to convert to PDF and then to TIFF or EPS.</p>
+</blockquote>
+<p>This basically means that we should not directly export our graphics from R to either <code>tiff</code> or <code>eps</code> (the only two file formats accepted by PLOS ONE), but rather save them as a <code>pdf</code> and then follow <a href="http://www.plosone.org/static/figureInstructions#convertingfigs">this guide</a> on how to convert the <code>pdf</code> to acceptable <code>tiff</code> or <code>eps</code> formats. Here, we will cover all of these, so whether you send an original R <code>tiff</code> or convert it from the R <code>pdf</code> is completely up to you.</p>
+<p>Ok, so let’s start with the <code>tiff</code> device…</p> 
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="manipulating-existing-plots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tagged-image-file-format.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
