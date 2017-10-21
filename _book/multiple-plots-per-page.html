@@ -152,12 +152,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="multiple-plots-per-page" class="section level2">
 <h2><span class="header-section-number">3.1</span> Multiple Plots per Page</h2>
-<p><strong>In order to succeed plotting several of our previously created plots on one page, there’s two things of importance:</strong></p>
+<p>In order to succeed plotting several of our previously created plots on one page, there’s two things of importance:</p>
 <ol style="list-style-type: decimal">
-<li>The <code>lattice/ggplot2</code> plot objects need to be printed using <code>print(latticeObject)/print(ggplot2Object)</code>, and</li>
+<li>The <strong>lattice</strong> and <strong>ggplot2</strong> plot objects need to be printed using <code>print</code> , and</li>
 <li>We need to set <code>newpage = FALSE</code> in the print call so that the previously drawn elements are not deleted.</li>
 </ol>
-<p>Let’s try and plot some <strong>lattice</strong> and <code>ggplot2</code> plots next to each other on one page by setting up a suitable viewport structure. First of all we obviously need to produce plots. We will produce very basic plots here, but this should work with whatever <code>lattice</code> or <code>ggplot2</code> object you have created earlier.</p>
+<p>Let’s try and plot some of these plots next to each other on one page by setting up a suitable viewport structure. First of all, we obviously need to produce plots. Note that we will use very basic plots here, but this should work with whatever <strong>lattice</strong> or <strong>ggplot2</strong> object you have created earlier.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1_lattice &lt;-<span class="st"> </span><span class="kw">xyplot</span>(price <span class="op">~</span><span class="st"> </span>carat, <span class="dt">data =</span> diamonds)
 p2_lattice &lt;-<span class="st"> </span><span class="kw">histogram</span>(<span class="op">~</span><span class="st"> </span>price, <span class="dt">data =</span> diamonds)
 
@@ -235,12 +235,12 @@ vp4 &lt;-<span class="st"> </span><span class="kw">viewport</span>(<span class="
 
 <span class="kw">upViewport</span>(<span class="dv">1</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:grid-multiple"></span>
-<img src="_main_files/figure-html/grid-multiple-1.svg" alt="Using **grid** to place multiple plots on one page." width="960" />
+<img src="_main_files/figure-html/grid-multiple-1.svg" alt="Using **grid** to arrange multiple plots on one page." width="960" />
 <p class="caption">
-Figure 3.5: Using <strong>grid</strong> to place multiple plots on one page.
+Figure 3.5: Using <strong>grid</strong> to arrange multiple plots on one page.
 </p>
 </div>
-<p>So there we have it. Creating and navigating between viewports enables us to build a graphical layout in whatever way we want. In my opinion this is way better than saving all the plots to the hard drive and then using some sort of graphics software such as <a href="https://de.wikipedia.org/wiki/Adobe_Photoshop">Adobe Photoshop</a> or <a href="https://de.wikipedia.org/wiki/Inkscape">Inkscape</a> to arrange the plots onto one page. After all, sometimes we may have several of these multi-plot-pages that we want to produce and now we know how to do this automatically and we won’t need any post-production steps.</p>
+<p>So there we have it. Creating and navigating between viewports enables us to build a graphical layout in whatever way we want. In our opinion, this is way better than saving all the plots to the hard drive and then using some sort of graphics software such as <a href="https://de.wikipedia.org/wiki/Adobe_Photoshop">Adobe Photoshop</a> or <a href="https://de.wikipedia.org/wiki/Inkscape">Inkscape</a> to arrange the plots onto one page. After all, sometimes we may have several of these multi-plot pages that we want to produce. As of now, we know how to do this automatically, thus rendering any post-production steps unnecessary.</p>
 </div>
             </section>
 

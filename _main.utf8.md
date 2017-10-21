@@ -1,7 +1,7 @@
 ---
 title: "Creating Publication Quality Graphs in R"
 author: "<b>Tim Appelhans and Florian Detsch</b>"
-date: "Last modified: 2017-10-20"
+date: "Last modified: 2017-10-21"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -910,6 +910,10 @@ l_sc_smooth <- update(scatter_lattice, aspect = 1,
 print(l_sc_smooth)
 ```
 
+```
+## (loaded the KernSmooth namespace)
+```
+
 <div class="figure" style="text-align: center">
 <img src="_main_files/figure-html/latt-smooth-scat-1.svg" alt="A **lattice** panel plot of the point density within each panel created by `panel.smoothScatter()`." width="672" />
 <p class="caption">(\#fig:latt-smooth-scat)A **lattice** panel plot of the point density within each panel created by `panel.smoothScatter()`.</p>
@@ -1091,7 +1095,7 @@ In addition to the rather obvious provision of a color palette to fill the boxes
 
 ## Box-and-Whisker Plots (ggplot2)
 
-As much as I love **lattice**, I always end up drawing boxplots with **ggplot2** because they look so much nicer, meaning that there's no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a **ggplot2** version using the default settings.
+As much as we are **lattice** enthusiasts, we always end up drawing boxplots with **ggplot2** because they look so much nicer, meaning that there's no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a **ggplot2** version using the default settings.
 
 
 ```r
@@ -1162,7 +1166,7 @@ Boxplots are, as mentioned above, a brilliant way to visualize data distribution
 
 The classic way to visualize the distribution of any data are histograms. They are closely related to density plots, where the individual data points are not binned into certain classes but a continuous density function is calculated to show the distribution. Both approaches reflect a certain level of abstraction (binning vs. functional representation), therefore a general formulation of which of them is more accepted is hard. In any case, the both achieve exactly the same result, they will show us the distribution of our data.
 
-As is to be expected with **lattice**, the default plotting routine does not really satisfy the (or maybe better my) aesthetic expectations.
+As is to be expected with **lattice**, the default plotting routine does not really satisfy the (or maybe better our) aesthetic expectations.
 
 
 ```r
@@ -1209,7 +1213,7 @@ print(l_his)
 
 Now, this is a plot that every journal editor will very likely accept.
 
-Until now, we have seen how to condition our plots according to one factorial variable (```diamonds$cut```). It is, in theory, possible to condition plots on any number of factorial variable, though more than two is seldom advisable. Two, however, is definitely acceptable and still easy enough to perceive and interpret. In **lattice** this is generally done as follows.
+Until now, we have seen how to condition our plots according to one factorial variable (```diamonds$cut```). It is, in theory, possible to condition plots on any number of factorial variable, though more than two is seldom advisable. Two, however, is definitely acceptable and still easy enough to perceive and interpret. In **lattice** this is generally formulated as 
 
 ```
 y ~ x | g + f
@@ -1217,7 +1221,7 @@ y ~ x | g + f
 
 where ```g``` and ```f``` are the factorial variables used for the conditioning.
 
-In the below code chunk we are first creating out plot object and the we are using a function called ```useOuterStrips()``` which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default **lattice** setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.
+In the below code chunk, we are first creating our plot object. Then, we are using a function called ```useOuterStrips()``` which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default **lattice** setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.
 
 Another default setting for density plots in **lattice** is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x--axis. In our case, as we have a lot of data points, this is not desirable, so we set ```plot.points = FALSE```.
 
@@ -1237,18 +1241,18 @@ print(l_den)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/latt-panel-dens-1.svg" alt="A panel density plot conditioned according to 2 variables using **lattice**." width="672" />
-<p class="caption">(\#fig:latt-panel-dens)A panel density plot conditioned according to 2 variables using **lattice**.</p>
+<img src="_main_files/figure-html/latt-panel-dens-1.svg" alt="A panel density plot conditioned according to two variables using **lattice**." width="672" />
+<p class="caption">(\#fig:latt-panel-dens)A panel density plot conditioned according to two variables using **lattice**.</p>
 </div>
 
-You may have noticed that the lines of the density plot are plotted in a light shade of blue (cornflowerblue to be precise). I it up to you to change this yourself...
+You may have noticed that the lines of the density plot are plotted in a light shade of blue (cornflowerblue to be precise). It is up to you to change this...
 
-Another thing you may notice when looking at the above plot is that the x-axis labels are rotated by 45 degrees. This one I also leave up to you to figure out... ;-)
+Another thing you may notice when looking at the above plot is that the x-axis labels are rotated by 45 degrees. This one we also leave up to you to figure out... ;-)
 
 
 ## Histograms and Density Plots (ggplot2)
 
-Much like with the box-and-whisker plot, the default settings of **ggplot2** are quite a bit nicer for both histograms and density plots.
+Much like with boxplots, the default settings of **ggplot2** are quite a bit nicer for both histograms and density plots.
 
 
 ```r
@@ -1260,16 +1264,12 @@ g_his <- hist_ggplot +
 print(g_his)
 ```
 
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
-
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/gg-hist-1.svg" alt="A basic histogram produced with **ggplot2**." width="672" />
-<p class="caption">(\#fig:gg-hist)A basic histogram produced with **ggplot2**.</p>
+<img src="_main_files/figure-html/gg-hist-eval-1.svg" alt="A basic histogram produced with **ggplot2**." width="672" />
+<p class="caption">(\#fig:gg-hist-eval)A basic histogram produced with **ggplot2**.</p>
 </div>
 
-One thing that is really nice about the **ggplot2** density plots that it is so easy to fill the area under the curve which really helps the visual representation of the data.
+One thing that is really nice about the **ggplot2** density plots is that it is so easy to fill the area under the curve which really helps the visual representation of the data.
 
 
 ```r
@@ -1286,9 +1286,9 @@ print(g_den)
 <p class="caption">(\#fig:gg-dens)A basic density plot produced with **ggplot2**.</p>
 </div>
 
-Just as before, we are encountering again the rather peculiar way of **ggplot2** to adjust certain default settings to suit our needs (likes). In we wanted to show percentages instead of counts for the histograms, we again need to use the strange ```..something..``` syntax.
+Just as before, we are encountering the rather peculiar way of **ggplot2** to adjust certain default settings to suit our needs (likes). If we wanted to show percentages instead of counts for the histograms, we again need to use the strange ```..something..``` syntax.
 
-Another thing I want to highlight in the following code chunk is the way to achieve binary conditioning in **ggplot2**. This is done as follows:
+Another thing I want to highlight in the following code chunk is the way to achieve binary conditioning in **ggplot2**. This can be achieved through
 
 ```
 facet_grid(g ~ f)
@@ -1308,8 +1308,8 @@ print(g_his)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/gg-facet-hist-1.svg" alt="A **ggplot2** panel histogram with y-axis labelled according to percentages." width="672" />
-<p class="caption">(\#fig:gg-facet-hist)A **ggplot2** panel histogram with y-axis labelled according to percentages.</p>
+<img src="_main_files/figure-html/gg-facet-hist-1.svg" alt="A faceted **ggplot2** histogram with percentages on the y-axis." width="672" />
+<p class="caption">(\#fig:gg-facet-hist)A faceted **ggplot2** histogram with percentages on the y-axis.</p>
 </div>
 
 Similar to our **lattice** approach we're going to rotate the x-axis labels by 45 degrees.
@@ -1327,16 +1327,16 @@ print(g_den)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/gg-facet-density-1.svg" alt="A **ggplot2** panel density plot conditioned according to 2 variables." width="672" />
-<p class="caption">(\#fig:gg-facet-density)A **ggplot2** panel density plot conditioned according to 2 variables.</p>
+<img src="_main_files/figure-html/gg-facet-density-1.svg" alt="A faceted **ggplot2** density plot conditioned according to two variables." width="672" />
+<p class="caption">(\#fig:gg-facet-density)A faceted **ggplot2** density plot conditioned according to two variables.</p>
 </div>
 
-Ok, another thing we might want to show is the value of a certain estimated value (like the mean of our sample) including error bars.
+Ok, another thing we might want to show is a certain estimated value (like the mean of our sample) including error bars.
 
 
 ## Plotting Error Bars (lattice)
 
-Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, I refer you to StackOverflow and other R related forums and lists, where you will find a solution, but I doubt that you will like it... As you will see in Section `{#gg-err}`, error bars are much easier plotted using **ggplot2**.
+Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, we refer you to StackOverflow and other R related forums and lists. You will possibly find a workable solution there, but we doubt that you will like it. As you will see in Section `{#gg-err}`, error bars are much easier plotted using **ggplot2**.
 
 
 ```r
@@ -1362,8 +1362,8 @@ print(l_err)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/latt-err-1.svg" alt="A basic dotplot with error bars produced with **lattice**." width="672" />
-<p class="caption">(\#fig:latt-err)A basic dotplot with error bars produced with **lattice**.</p>
+<img src="_main_files/figure-html/latt-err-1.svg" alt="A **lattice** dotplot including error bars produced with `Hmisc::Dotplot()`." width="672" />
+<p class="caption">(\#fig:latt-err)A **lattice** dotplot including error bars produced with `Hmisc::Dotplot()`.</p>
 </div>
 
 
@@ -1386,8 +1386,8 @@ print(g_err)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/gg-err-1.svg" alt="A basic dotplot with error bars produced with **ggplot2**." width="672" />
-<p class="caption">(\#fig:gg-err)A basic dotplot with error bars produced with **ggplot2**.</p>
+<img src="_main_files/figure-html/gg-err-1.svg" alt="A **ggplot2** dotplot including error bars and using a classic theme." width="672" />
+<p class="caption">(\#fig:gg-err)A **ggplot2** dotplot including error bars and using a classic theme.</p>
 </div>
 
 Especially, when plotting them as part of a bar plot.
@@ -1404,11 +1404,11 @@ print(g_err)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/gg-err-bar-1.svg" alt="A **ggplot2** bar plot with error bars." width="672" />
-<p class="caption">(\#fig:gg-err-bar)A **ggplot2** bar plot with error bars.</p>
+<img src="_main_files/figure-html/gg-err-bar-1.svg" alt="A **ggplot2** bar plot including error bars and using a classic theme." width="672" />
+<p class="caption">(\#fig:gg-err-bar)A **ggplot2** bar plot including error bars and using a classic theme.</p>
 </div>
 
-Just as before (with the box widths) though, applying this to each panel is a little more complicated...
+Just as before with the box widths, though, applying this to each facet is a little more complicated... But still, trust us on this, much easier than to achieve the same result in **lattice**.
 
 
 ```r
@@ -1438,45 +1438,53 @@ print(g_err_f)
 <p class="caption">(\#fig:gg-facet-err-bar)A **ggplot2** panel bar plot with error bars and modified fill colors.</p>
 </div>
 
-Still, trust me on this, much easier than to achieve the same result in **lattice**.
-
 <!--chapter:end:02-data-visualisation.Rmd-->
 
 # Manipulating Plots with the grid Package
 
-Ok, so now we have seen how to produce a variety of widely used plot types using both **lattice** and **ggplot2**. I hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we've touched upon here in scenarios other than the ones provided here.
+Okay, so now we have seen how to produce a variety of widely used plot types using both **lattice** and **ggplot2**. I hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we've touched upon in scenarios other than the ones provided here.
 
-Now, we're moving on to a more basic and much more flexible level of modifying, constructing and arranging graphs. Both, **lattice** and **ggplot2** are based upon the ```grid``` package. This means that we can use this package to fundamentally modify whatever we've produced (remember, we're always storing our plots in objects) in a much more flexible way that provided by any pf these packages.
+Now, we're moving on to a more basic and much more flexible level of modifying, constructing and arranging graphs. Both **lattice** and **ggplot2** are based on the **grid** package. This means that we can use this package to fundamentally modify whatever we've produced (remember, we're always storing our plots in objects) in a much more flexible way than provided by any of these packages.
 
-With his ```grid``` package, Paul Murrell has achieved nothing less than a, in my opinion, much more flexible and powerful plotting framework for R. As a side note, this has already been 'officially' recognized as he is now member of the core team (at least I think so) and his ```grid``` package is now shipped with the base version of R. This means that we don't have to install the package anymore (however, we still have to load it via ```library(grid)```.
+With his **grid** package, Paul Murrell has achieved nothing less than a highly sophisticated and, in our opinion, much more flexible and powerful plotting framework for R. This has also been 'officially' recognized by the R Core Team as Paul is now a member of the very same (at least to our knowledge) and his **grid** package is shipped with the base version of R. This means that we don't have to install the package anymore (however, we still have to load it via ```library(grid)```).
 
-In order to fully appreciate the possibilities of the ```grid``` package, it helps to think of this package as a package for **drawing** things. Yes, we're not producing statistical plots as such (for this we have **lattice** and **ggplot2**), we're actually *drawing** things!
+In order to fully appreciate the possibilities of the **grid** package, it helps to think of this package as a package for drawing things. Yes, we're not producing statistical plots as such (for this we have **lattice** and **ggplot2**), we're actually _drawing_ things!
 
-The fundamental features of the ```grid``` package are the ```viewports```. By default, the whole plotting area, may it be the standard R plotting device or the `png()` plotting device, is considered as the root viewport (basically like the ```home/<username>``` folder on your Linux system or the ```C:\Users\<username>``` folder in Windows). In this viewport we now have the possibility to specify other viewports which are relative to the root viewport (just like the ```Users<username>\Documents``` folder in Windows or - to provide a different example - the ```home/<username>/Downloads``` folder in Linux). 
+The fundamental features of the **grid** package are the ```viewports```. By default, the whole plotting area, may it be the standard R or any other such plotting device (e.g. `png()`), is considered as the root viewport (basically like the ```home/<username>``` folder on Linux or the ```C:\Users\<username>``` folder on Windows). In this viewport we now have the possibility to specify other viewports which are relative to the root viewport (just like the ```Users\<username>\Documents``` folder on Windows or ```home/<username>/Downloads``` under Linux). 
 
-The very important thing to realize here is that in order to do anything in this folder (be it creating another sub-folder or simply saving a file or whatever), we need to first **create** the folder and then we also need to **navigate/change/go** into the folder. If you keep this in mind, you will quickly understand the fundamental principle of ```grid```.
+The very important thing to realize here is that in order to do anything in this folder (be it creating another sub-folder, or simply saving a file, or whatever), we first need to _create_ the folder and then we need to _navigate_ into it. If you keep this in mind, you will quickly understand the fundamental principle of **grid**.
 
-When we start using the ```grid``` package, we always start with the 'root' viewport. This is already available, it is created for us, so we don't need to do anything. This is our starting point. The really neat thing about ```grid``` is that each viewport is, by default, defined as both x and y ranging from 0 - 1. In the lower left corner x = 0 and y = 0. The lower right corner is x = 1 and y = 0, the upper right corner x = 1 & y = 1 and so on... It is, however, possible to specify a myriad of different unit systems (type, with the ```grid``` package loaded, ```?unit``` to get an overview of what is available). I usually stick to these default settings called `npc` ('Normalised Parent Coordinates') which range from 0 to 1 in each direction, as this makes setting up viewports very intuitive.
+When we start using the **grid** package, we always start with the 'root' viewport. This is already available, it is created for us, so we don't need to do anything. This is our starting point. The really neat thing about **grid** is that each viewport is, by default, defined as ranging from 0 to 1 in both x and y direction. For example, the lower left corner is defined as `x = 0` and `y = 0`. Accordingly, the lower right corner is `x = 1` and `y = 0`, the upper right corner is `x = 1` and `y = 1` and so on... 
+
+It is, however, possible to specify a myriad of different unit systems (type ```?grid::unit``` to get an overview of what is available). We usually stick to the default settings called `npc` ('Normalised Parent Coordinates') which range from 0 to 1 in each direction, as this makes setting up viewports very intuitive (as demonstrated above).
 
 A viewport needs some basic specifications for it to be located somewhere in the plotting area (the current viewport). These are:
 
-* x - the location along the x-axis
-* y - the location along the y -axis
-* width - the width of the viewport
-* height - the height of the viewport
-* just - the justification of the viewport in both x and y directions
+* `x` - location along the x-axis
+* `y` - location along the y -axis
+* `width` - width of the viewport
+* `height` - height of the viewport
+* `just` - justification of the viewport in both x and y directions
 
-Here, `width` and `height` should be rather self-explanatory. On the other hand, `x`, `y` and `just` are a bit more mind-bending. As default, `x` and `y` are 0.5 and `just` is `c(centre, centre)`. This means that the new viewport will be positioned at `x = 0.5` and `y = 0.5`. As the default of `just` is `centre` this means that a new viewport will be created at the midpoint of the current viewport (0.5, 0.5) and it will be centered on this point. It helps to think of the `just` specification in the same way that you provide your text justification in Word (left, right, centre & justified). Let us try a first example which should highlight the way this works
+Here, `width` and `height` should be rather self-explanatory. On the other hand, `x`, `y` and `just` are a bit more mind-bending. By default, `x = y = 0.5` and `just = cemtre`. This means that the new viewport will be positioned at `x = 0.5` and `y = 0.5`. The default of `just` is `centre` which means that a new viewport will be created at the midpoint of the current viewport (`x, y`) and centered on this point. It helps to think of the `just` specification in the same way that you provide your text justification in an Office software (left, right, centre & justified). Let's try a first example which should highlight the way this works.
 
 
 
 
 ```r
 library(grid)
-grid.newpage()
+```
+
+<div class="figure" style="text-align: center">
+<img src="_main_files/figure-html/grid-first-vp-1.svg" alt="Producing a standard viewport using **grid**." width="672" />
+<p class="caption">(\#fig:grid-first-vp)Producing a standard viewport using **grid**.</p>
+</div>
+
+```r
+grid.newpage() # open a new (ie empty) 'root' viewport
 
 grid.rect()
-grid.text("this is the root vp", x = 0.5, y = 1, 
+grid.text("this is the root vp", x = 0.5, y = 0.95, 
           just = c("centre", "top"))
 
 our_first_vp <- viewport(x = 0.5, y = 0.5, 
@@ -1486,20 +1494,18 @@ our_first_vp <- viewport(x = 0.5, y = 0.5,
 pushViewport(our_first_vp)
 
 grid.rect(gp = gpar(fill = "pink"))
-grid.text("this is our first vp", x = 0.5, y = 1, 
+grid.text("this is our first vp", x = 0.5, y = 0.95, 
           just = c("centre", "top"))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/grid-first-vp-1.svg" alt="Producing a standard viewport using **grid**." width="672" />
+<img src="_main_files/figure-html/grid-first-vp-2.svg" alt="Producing a standard viewport using **grid**." width="672" />
 <p class="caption">(\#fig:grid-first-vp)Producing a standard viewport using **grid**.</p>
 </div>
 
-Ok, so now we have created a viewport in the middle of the `root` viewport at `x = 0.5` and `y = 0.5` - `just = c("centre", "centre")` that is half the height and half the width of the original viewport - `height = 0.5` and `width = 0.5`.
+Okay, so now we have created a new viewport in the middle of the current (i.e. 'root') viewport that is half the height and half the width of its root. Afterwards, we navigated into this new viewport using `pushViewport()` and drew a pink-filled rectangle spanning the entire area using `grid.rect()`.
 
-Afterwards we navigated into this viewport - `pushViewport(our_first_vp)` and then we have drawn a rectangle that fills the entire viewport and filled it in pink color - `grid.rect(gp = gpar(fill = "pink"))`
-
-Note that we didn't leave the viewport yet. This means, whatever we do now, will happen in the currently active viewport (the pink one). To illustrate this, we will simply repeat the exact same code from above once more.
+Note that we didn't leave the viewport yet. This means that, whatever we do now, will happen in the currently active viewport (i.e. the pink one). To illustrate this, we will simply repeat the exact same code from above once more.
 
 
 ```r
@@ -1517,11 +1523,11 @@ grid.rect(gp = gpar(fill = "cornflowerblue"))
 <p class="caption">(\#fig:grid-second-vp)Producing a second viewport using **grid**.</p>
 </div>
 
-This means, that whatever viewport we are currently in, this defines our reference system (0 to 1). In case you don't believe me, we can repeat this 10 times more...
+In more practical terms, this means that whatever viewport we are currently in, this one defines our reference system (0 to 1). In case you don't believe me, we can repeat this procedure five times more...
 
 
 ```r
-for (i in 1:10) {
+for (i in 1:5) {
   our_first_vp <- viewport(x = 0.5, y = 0.5, 
                            height = 0.5, width = 0.5,
                            just = c("centre", "centre"))
@@ -1537,16 +1543,14 @@ for (i in 1:10) {
 <p class="caption">(\#fig:grid-several-vps)Producing several viewports using **grid**.</p>
 </div>
 
-I hope this is proof enough now! We are cascading down viewports always creating a rectangle that fills half the 'mother' viewport each time. Yet, as the 'mother' viewport becomes smaller and smaller, our rectangles also become smaller at each step along the way (programmers would actually call these steps iterations, but we won't be bothered here...)
+Now that should be proof enough! We are cascading down viewports always creating a rectangle that fills half the 'mother' viewport at each step. Yet, as the 'mother' viewport becomes smaller and smaller, our rectangles also become smaller along the way (programmers would actually call these steps iterations, but we won't be bothered here...).
 
-So, how do we navigate back?
-
-If I counted correctly, we went down 12 rabbit holes. In order to get out of these again, we need to `upViewport(12)` and in order to see whether we are correct, we ask ```grid``` what viewport we are currently in.
+So, how do we navigate back? If we counted correctly, we went down 7 rabbit holes. In order to get out of these again, we need to use `upViewport(7)` and, in order to verify that we are back in 'root', we may ask **grid** what viewport we are currently in.
 
 
 
 ```r
-upViewport(12)
+upViewport(7)
 
 current.viewport()
 ```
@@ -1555,9 +1559,9 @@ current.viewport()
 ## viewport[ROOT]
 ```
 
-Sweet, we're back in the 'root' viewport...
+Sweet, we're back in the 'root' viewport... (by the way, `upViewport(0)` would have taken us right up to the 'root' viewport without the requirement for counting, see `?grid::upViewport`).
 
-Now, let's see how this `just` parameter works. As you have seen we are now in the `root` viewport. Let's try to draw another rectangle that sits right at the top left corner of the pink one. In theory the lower right corner of this viewport should be located at `x = 0.25` and `y = 0.75`. If we specify it like this, we need to adjust the justification, because we do not want to center it on these coordinates. If these coordinates are the point of origin, this viewport should be justified right horizontally and bottom vertically. And the space we have to plot should be `0.25` vertically and `0.25` horizontally. Let's try this...
+Now, let's see how this `just` parameter works. As you have seen we are now in the 'root' viewport. Let's try to draw another rectangle that sits right at the top left corner of the pink one. In theory the lower right corner of this viewport should be located at `x = 0.25` and `y = 0.75`. If we specify it like this, we need to adjust the justification, because we do not want to center it on these coordinates. If these coordinates are the point of origin, this viewport should be justified right horizontally and bottom vertically. And the space we have to plot should be `0.25` vertically and `0.25` horizontally. Let's try this...
 
 
 ```r
@@ -1577,22 +1581,22 @@ grid.rect(gp = gpar(fill = "grey", alpha = 0.5))
 
 
 
-I hope that you have understood 2 things now:
+I hope that you have understood two things now:
 
 1. How to create and navigate between viewports, and
-2. Why I said earlier that `grid` is a package for drawing.
+2. Why I said earlier that **grid** is a package for drawing.
 
 Assuming that you have understood these two points, let's make use of the first one and use this incredibly flexible plotting framework for arranging multiple plots on one page.
 
 
 ## Multiple Plots per Page
 
-**In order to succeed plotting several of our previously created plots on one page, there's two things of importance:**
+In order to succeed plotting several of our previously created plots on one page, there's two things of importance:
 
-1. The `lattice/ggplot2` plot objects need to be printed using `print(latticeObject)/print(ggplot2Object)`, and
+1. The **lattice** and **ggplot2** plot objects need to be printed using `print` , and
 2. We need to set `newpage = FALSE` in the print call so that the previously drawn elements are not deleted.
 
-Let's try and plot some **lattice** and `ggplot2` plots next to each other on one page by setting up a suitable viewport structure. First of all we obviously need to produce plots. We will produce very basic plots here, but this should work with whatever `lattice` or `ggplot2` object you have created earlier.
+Let's try and plot some of these plots next to each other on one page by setting up a suitable viewport structure. First of all, we obviously need to produce plots. Note that we will use very basic plots here, but this should work with whatever **lattice** or **ggplot2** object you have created earlier.
 
 
 ```r
@@ -1675,18 +1679,22 @@ upViewport(1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/grid-multiple-1.svg" alt="Using **grid** to place multiple plots on one page." width="960" />
-<p class="caption">(\#fig:grid-multiple)Using **grid** to place multiple plots on one page.</p>
+<img src="_main_files/figure-html/grid-multiple-1.svg" alt="Using **grid** to arrange multiple plots on one page." width="960" />
+<p class="caption">(\#fig:grid-multiple)Using **grid** to arrange multiple plots on one page.</p>
 </div>
 
-So there we have it. Creating and navigating between viewports enables us to build a graphical layout in whatever way we want. In my opinion this is way better than saving all the plots to the hard drive and then using some sort of graphics software such as [Adobe Photoshop](https://de.wikipedia.org/wiki/Adobe_Photoshop) or [Inkscape](https://de.wikipedia.org/wiki/Inkscape) to arrange the plots onto one page. After all, sometimes we may have several of these multi-plot-pages that we want to produce and now we know how to do this automatically and we won't need any post-production steps.
+So there we have it. Creating and navigating between viewports enables us to build a graphical layout in whatever way we want. In our opinion, this is way better than saving all the plots to the hard drive and then using some sort of graphics software such as [Adobe Photoshop](https://de.wikipedia.org/wiki/Adobe_Photoshop) or [Inkscape](https://de.wikipedia.org/wiki/Inkscape) to arrange the plots onto one page. After all, sometimes we may have several of these multi-plot pages that we want to produce. As of now, we know how to do this automatically, thus rendering any post-production steps unnecessary.
 
 
 ## Manipulating Existing Plots
 
-Another application of `grid` is to manipulate an existing plot object. You may have noted that our version of the 2D density scatter plot produced with `lattice` lacks a color key. This can be easily added using `grid`. As `lattice` is built upon `grid`, it produces a lot of viewports in the creation of the plots (like our scatter plot). We can, after they have been set up, navigate to each of these and edit them or delete them or add new stuff. Looking at the `ggplot2` version of the density scatter, we see that this has a color key which is placed to right of the main plot. Given that we have 5 panels, we actually have some 'white' space that we could use for the color key placement, thus making better use of the available space...
+Another application of **grid** is to manipulate an existing plot object. You may have noted that our version of the 2-dimensional density scatter plot produced with **lattice** lacks a color key. Looking at the **ggplot2** version of the density scatter, by contrast, we see that this one already has a color key which is placed to the right of the main plot. 
 
-In order to do so, we need to know into which of the viewports created by `lattice` we need to navigate. Therefore, we need to know their names. `lattice` provides a function for this. We can use `trellis.vpname()` to extract the name(s) of the viewport(s) we are interested in. `lattice` provides a structured naming convention for its viewports. We can use this to specify what viewport name(s) we want to extract. As we are interested in the viewport that comprises the main figure, we will tell `lattice` to extract this name (see below in the code). Then we can navigate into this viewport `downViewport()` and set up a new viewport in the main plotting area (the figure viewport) to make use of the existing 'white' space. Remember that the default units of `grid` are 0 - 1. This means that we can easily calculate the necessary viewport dimensions. Let's see how this is done (Note, we are actually creating 2 new viewports in the figure area, one for the color key and another one for the color key label).
+As regards the **lattice** version, a color key can be easily added using **grid**. Since **lattice** is built upon **grid**, it produces a lot of viewports in the creation of the plots (like our scatter plot). After these have been set up, we can navigate to each of them and edit (or delete) them or add new stuff. Given that we have five panels, we actually have some 'white' space left in the bottom-right corner that we could use for the color key placement, thus making better use of the available space...
+
+In order to do so, we need to know into which of the viewports we need to navigate. Luckily, **lattice** provides a structured naming convention for its viewports, which makes navigating between single viewports rather easy. Since we are interested in the area covered by the main figure only, we will use `trellis.vpname("figure")` to extract the name of the corresponding viewport and pass this on to `downViewport()` in order to navigate to it. You will notice that this is very similar to `pushViewport()`, except for the target viewport being already there. 
+
+Like that, we can set up a new viewport in the main plotting area (the 'figure' viewport) to make use of the existing white space. Remember that the default units of **grid** range from 0 to 1. This means that we can easily calculate the necessary viewport dimensions. Let's see how this is done (note that we are actually creating two new viewports in the figure area, one for the color key and another one for the color key label).
 
 
 ```r
@@ -1795,11 +1803,9 @@ upViewport(3)
 <p class="caption">(\#fig:grid-manipulate)Using **grid** to add a color key to an existing **lattice** plot object.</p>
 </div>
 
-Not too complicated, is it? And, in comparison to the `ggplot2` version, we are utilizing the available space a bit more efficiently. Though, obviously, we could also manipulate the `ggplot2` density scatter plot (or any other plot) in a similar manner. 
+Not too complicated, is it? And, in comparison to the **ggplot2** version, we are utilizing the available space a bit more efficiently. Though, obviously, we could also manipulate the **ggplot2** density scatter plot (or any other plot) in a similar manner. In general, we hope that it has become clear just how useful **grid** can be and how it provides us with tools which enable us to produce individual graphics that satisfy our needs. 
 
-I hope it became clear just how useful `grid` can be and how it provides us with tools which enable us to produce individual graphics that satisfy our needs. 
-
-So far, we have put our efforts into plot creation. I think, by now, we have a few tools handy to achieve what we want, so let's see how we can save our graphics to our hard drive.
+So far, we have put our efforts into plot creation and learned about a variety of tools that can help us achieve what we want. As a next logical step, let's see how we can save our graphics to our hard drive.
 
 <!--chapter:end:03-data-manipulation.Rmd-->
 
@@ -2221,10 +2227,10 @@ ps.options()
 
 ```
 ## $onefile
-## [1] FALSE
+## [1] TRUE
 ## 
 ## $family
-## [1] "Times"
+## [1] "Helvetica"
 ## 
 ## $title
 ## [1] "R Graphics Output"
@@ -2236,25 +2242,25 @@ ps.options()
 ## [1] "default"
 ## 
 ## $bg
-## [1] "white"
+## [1] "transparent"
 ## 
 ## $fg
 ## [1] "black"
 ## 
 ## $width
-## [1] 6.83
+## [1] 0
 ## 
 ## $height
-## [1] 7
+## [1] 0
 ## 
 ## $horizontal
-## [1] FALSE
+## [1] TRUE
 ## 
 ## $pointsize
 ## [1] 12
 ## 
 ## $paper
-## [1] "special"
+## [1] "default"
 ## 
 ## $pagecentre
 ## [1] TRUE
@@ -2288,7 +2294,7 @@ ps.options()
 ## [1] FALSE
 ## 
 ## $family
-## [1] "Times"
+## [1] "Helvetica"
 ## 
 ## $title
 ## [1] "R Graphics Output"
@@ -2300,7 +2306,7 @@ ps.options()
 ## [1] "default"
 ## 
 ## $bg
-## [1] "white"
+## [1] "transparent"
 ## 
 ## $fg
 ## [1] "black"

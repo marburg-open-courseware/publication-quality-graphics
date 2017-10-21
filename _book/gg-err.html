@@ -163,9 +163,9 @@ g_err &lt;-<span class="st"> </span>errbar_ggplot <span class="op">+</span><span
 
 <span class="kw">print</span>(g_err)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:gg-err"></span>
-<img src="_main_files/figure-html/gg-err-1.svg" alt="A basic dotplot with error bars produced with **ggplot2**." width="672" />
+<img src="_main_files/figure-html/gg-err-1.svg" alt="A **ggplot2** dotplot including error bars and using a classic theme." width="672" />
 <p class="caption">
-Figure 2.33: A basic dotplot with error bars produced with <strong>ggplot2</strong>.
+Figure 2.33: A <strong>ggplot2</strong> dotplot including error bars and using a classic theme.
 </p>
 </div>
 <p>Especially, when plotting them as part of a bar plot.</p>
@@ -177,12 +177,12 @@ Figure 2.33: A basic dotplot with error bars produced with <strong>ggplot2</stro
 
 <span class="kw">print</span>(g_err)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:gg-err-bar"></span>
-<img src="_main_files/figure-html/gg-err-bar-1.svg" alt="A **ggplot2** bar plot with error bars." width="672" />
+<img src="_main_files/figure-html/gg-err-bar-1.svg" alt="A **ggplot2** bar plot including error bars and using a classic theme." width="672" />
 <p class="caption">
-Figure 2.34: A <strong>ggplot2</strong> bar plot with error bars.
+Figure 2.34: A <strong>ggplot2</strong> bar plot including error bars and using a classic theme.
 </p>
 </div>
-<p>Just as before (with the box widths) though, applying this to each panel is a little more complicated…</p>
+<p>Just as before with the box widths, though, applying this to each facet is a little more complicated… But still, trust us on this, much easier than to achieve the same result in <strong>lattice</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">errbar_ggplot_facets &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> color, <span class="dt">y =</span> price))
 
 ### function to calculate the standard error of the mean
@@ -208,7 +208,6 @@ g_err_f &lt;-<span class="st"> </span>errbar_ggplot_facets <span class="op">+</s
 Figure 2.35: A <strong>ggplot2</strong> panel bar plot with error bars and modified fill colors.
 </p>
 </div>
-<p>Still, trust me on this, much easier than to achieve the same result in <strong>lattice</strong>.</p>
 
 </div>
 <!-- </div> -->

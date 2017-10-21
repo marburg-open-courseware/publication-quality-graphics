@@ -152,27 +152,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="manipulating-plots-with-the-grid-package" class="section level1">
 <h1><span class="header-section-number">3</span> Manipulating Plots with the grid Package</h1>
-<p>Ok, so now we have seen how to produce a variety of widely used plot types using both <strong>lattice</strong> and <strong>ggplot2</strong>. I hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we’ve touched upon here in scenarios other than the ones provided here.</p>
-<p>Now, we’re moving on to a more basic and much more flexible level of modifying, constructing and arranging graphs. Both, <strong>lattice</strong> and <strong>ggplot2</strong> are based upon the <code>grid</code> package. This means that we can use this package to fundamentally modify whatever we’ve produced (remember, we’re always storing our plots in objects) in a much more flexible way that provided by any pf these packages.</p>
-<p>With his <code>grid</code> package, Paul Murrell has achieved nothing less than a, in my opinion, much more flexible and powerful plotting framework for R. As a side note, this has already been ‘officially’ recognized as he is now member of the core team (at least I think so) and his <code>grid</code> package is now shipped with the base version of R. This means that we don’t have to install the package anymore (however, we still have to load it via <code>library(grid)</code>.</p>
-<p>In order to fully appreciate the possibilities of the <code>grid</code> package, it helps to think of this package as a package for <strong>drawing</strong> things. Yes, we’re not producing statistical plots as such (for this we have <strong>lattice</strong> and <strong>ggplot2</strong>), we’re actually *drawing** things!</p>
-<p>The fundamental features of the <code>grid</code> package are the <code>viewports</code>. By default, the whole plotting area, may it be the standard R plotting device or the <code>png()</code> plotting device, is considered as the root viewport (basically like the <code>home/&lt;username&gt;</code> folder on your Linux system or the <code>C:\Users\&lt;username&gt;</code> folder in Windows). In this viewport we now have the possibility to specify other viewports which are relative to the root viewport (just like the <code>Users&lt;username&gt;\Documents</code> folder in Windows or - to provide a different example - the <code>home/&lt;username&gt;/Downloads</code> folder in Linux).</p>
-<p>The very important thing to realize here is that in order to do anything in this folder (be it creating another sub-folder or simply saving a file or whatever), we need to first <strong>create</strong> the folder and then we also need to <strong>navigate/change/go</strong> into the folder. If you keep this in mind, you will quickly understand the fundamental principle of <code>grid</code>.</p>
-<p>When we start using the <code>grid</code> package, we always start with the ‘root’ viewport. This is already available, it is created for us, so we don’t need to do anything. This is our starting point. The really neat thing about <code>grid</code> is that each viewport is, by default, defined as both x and y ranging from 0 - 1. In the lower left corner x = 0 and y = 0. The lower right corner is x = 1 and y = 0, the upper right corner x = 1 &amp; y = 1 and so on… It is, however, possible to specify a myriad of different unit systems (type, with the <code>grid</code> package loaded, <code>?unit</code> to get an overview of what is available). I usually stick to these default settings called <code>npc</code> (‘Normalised Parent Coordinates’) which range from 0 to 1 in each direction, as this makes setting up viewports very intuitive.</p>
+<p>Okay, so now we have seen how to produce a variety of widely used plot types using both <strong>lattice</strong> and <strong>ggplot2</strong>. I hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we’ve touched upon in scenarios other than the ones provided here.</p>
+<p>Now, we’re moving on to a more basic and much more flexible level of modifying, constructing and arranging graphs. Both <strong>lattice</strong> and <strong>ggplot2</strong> are based on the <strong>grid</strong> package. This means that we can use this package to fundamentally modify whatever we’ve produced (remember, we’re always storing our plots in objects) in a much more flexible way than provided by any of these packages.</p>
+<p>With his <strong>grid</strong> package, Paul Murrell has achieved nothing less than a highly sophisticated and, in our opinion, much more flexible and powerful plotting framework for R. This has also been ‘officially’ recognized by the R Core Team as Paul is now a member of the very same (at least to our knowledge) and his <strong>grid</strong> package is shipped with the base version of R. This means that we don’t have to install the package anymore (however, we still have to load it via <code>library(grid)</code>).</p>
+<p>In order to fully appreciate the possibilities of the <strong>grid</strong> package, it helps to think of this package as a package for drawing things. Yes, we’re not producing statistical plots as such (for this we have <strong>lattice</strong> and <strong>ggplot2</strong>), we’re actually <em>drawing</em> things!</p>
+<p>The fundamental features of the <strong>grid</strong> package are the <code>viewports</code>. By default, the whole plotting area, may it be the standard R or any other such plotting device (e.g. <code>png()</code>), is considered as the root viewport (basically like the <code>home/&lt;username&gt;</code> folder on Linux or the <code>C:\Users\&lt;username&gt;</code> folder on Windows). In this viewport we now have the possibility to specify other viewports which are relative to the root viewport (just like the <code>Users\&lt;username&gt;\Documents</code> folder on Windows or <code>home/&lt;username&gt;/Downloads</code> under Linux).</p>
+<p>The very important thing to realize here is that in order to do anything in this folder (be it creating another sub-folder, or simply saving a file, or whatever), we first need to <em>create</em> the folder and then we need to <em>navigate</em> into it. If you keep this in mind, you will quickly understand the fundamental principle of <strong>grid</strong>.</p>
+<p>When we start using the <strong>grid</strong> package, we always start with the ‘root’ viewport. This is already available, it is created for us, so we don’t need to do anything. This is our starting point. The really neat thing about <strong>grid</strong> is that each viewport is, by default, defined as ranging from 0 to 1 in both x and y direction. For example, the lower left corner is defined as <code>x = 0</code> and <code>y = 0</code>. Accordingly, the lower right corner is <code>x = 1</code> and <code>y = 0</code>, the upper right corner is <code>x = 1</code> and <code>y = 1</code> and so on…</p>
+<p>It is, however, possible to specify a myriad of different unit systems (type <code>?grid::unit</code> to get an overview of what is available). We usually stick to the default settings called <code>npc</code> (‘Normalised Parent Coordinates’) which range from 0 to 1 in each direction, as this makes setting up viewports very intuitive (as demonstrated above).</p>
 <p>A viewport needs some basic specifications for it to be located somewhere in the plotting area (the current viewport). These are:</p>
 <ul>
-<li>x - the location along the x-axis</li>
-<li>y - the location along the y -axis</li>
-<li>width - the width of the viewport</li>
-<li>height - the height of the viewport</li>
-<li>just - the justification of the viewport in both x and y directions</li>
+<li><code>x</code> - location along the x-axis</li>
+<li><code>y</code> - location along the y -axis</li>
+<li><code>width</code> - width of the viewport</li>
+<li><code>height</code> - height of the viewport</li>
+<li><code>just</code> - justification of the viewport in both x and y directions</li>
 </ul>
-<p>Here, <code>width</code> and <code>height</code> should be rather self-explanatory. On the other hand, <code>x</code>, <code>y</code> and <code>just</code> are a bit more mind-bending. As default, <code>x</code> and <code>y</code> are 0.5 and <code>just</code> is <code>c(centre, centre)</code>. This means that the new viewport will be positioned at <code>x = 0.5</code> and <code>y = 0.5</code>. As the default of <code>just</code> is <code>centre</code> this means that a new viewport will be created at the midpoint of the current viewport (0.5, 0.5) and it will be centered on this point. It helps to think of the <code>just</code> specification in the same way that you provide your text justification in Word (left, right, centre &amp; justified). Let us try a first example which should highlight the way this works</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grid)
-<span class="kw">grid.newpage</span>()
+<p>Here, <code>width</code> and <code>height</code> should be rather self-explanatory. On the other hand, <code>x</code>, <code>y</code> and <code>just</code> are a bit more mind-bending. By default, <code>x = y = 0.5</code> and <code>just = cemtre</code>. This means that the new viewport will be positioned at <code>x = 0.5</code> and <code>y = 0.5</code>. The default of <code>just</code> is <code>centre</code> which means that a new viewport will be created at the midpoint of the current viewport (<code>x, y</code>) and centered on this point. It helps to think of the <code>just</code> specification in the same way that you provide your text justification in an Office software (left, right, centre &amp; justified). Let’s try a first example which should highlight the way this works.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grid)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:grid-first-vp"></span>
+<img src="_main_files/figure-html/grid-first-vp-1.svg" alt="Producing a standard viewport using **grid**." width="672" />
+<p class="caption">
+Figure 3.1: Producing a standard viewport using <strong>grid</strong>.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.newpage</span>() <span class="co"># open a new (ie empty) &#39;root&#39; viewport</span>
 
 <span class="kw">grid.rect</span>()
-<span class="kw">grid.text</span>(<span class="st">&quot;this is the root vp&quot;</span>, <span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="dv">1</span>, 
+<span class="kw">grid.text</span>(<span class="st">&quot;this is the root vp&quot;</span>, <span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="fl">0.95</span>, 
           <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;centre&quot;</span>, <span class="st">&quot;top&quot;</span>))
 
 our_first_vp &lt;-<span class="st"> </span><span class="kw">viewport</span>(<span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, 
@@ -182,17 +189,16 @@ our_first_vp &lt;-<span class="st"> </span><span class="kw">viewport</span>(<spa
 <span class="kw">pushViewport</span>(our_first_vp)
 
 <span class="kw">grid.rect</span>(<span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">fill =</span> <span class="st">&quot;pink&quot;</span>))
-<span class="kw">grid.text</span>(<span class="st">&quot;this is our first vp&quot;</span>, <span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="dv">1</span>, 
+<span class="kw">grid.text</span>(<span class="st">&quot;this is our first vp&quot;</span>, <span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="fl">0.95</span>, 
           <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;centre&quot;</span>, <span class="st">&quot;top&quot;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:grid-first-vp"></span>
-<img src="_main_files/figure-html/grid-first-vp-1.svg" alt="Producing a standard viewport using **grid**." width="672" />
+<img src="_main_files/figure-html/grid-first-vp-2.svg" alt="Producing a standard viewport using **grid**." width="672" />
 <p class="caption">
 Figure 3.1: Producing a standard viewport using <strong>grid</strong>.
 </p>
 </div>
-<p>Ok, so now we have created a viewport in the middle of the <code>root</code> viewport at <code>x = 0.5</code> and <code>y = 0.5</code> - <code>just = c(&quot;centre&quot;, &quot;centre&quot;)</code> that is half the height and half the width of the original viewport - <code>height = 0.5</code> and <code>width = 0.5</code>.</p>
-<p>Afterwards we navigated into this viewport - <code>pushViewport(our_first_vp)</code> and then we have drawn a rectangle that fills the entire viewport and filled it in pink color - <code>grid.rect(gp = gpar(fill = &quot;pink&quot;))</code></p>
-<p>Note that we didn’t leave the viewport yet. This means, whatever we do now, will happen in the currently active viewport (the pink one). To illustrate this, we will simply repeat the exact same code from above once more.</p>
+<p>Okay, so now we have created a new viewport in the middle of the current (i.e. ‘root’) viewport that is half the height and half the width of its root. Afterwards, we navigated into this new viewport using <code>pushViewport()</code> and drew a pink-filled rectangle spanning the entire area using <code>grid.rect()</code>.</p>
+<p>Note that we didn’t leave the viewport yet. This means that, whatever we do now, will happen in the currently active viewport (i.e. the pink one). To illustrate this, we will simply repeat the exact same code from above once more.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">our_first_vp &lt;-<span class="st"> </span><span class="kw">viewport</span>(<span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, 
                          <span class="dt">height =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> <span class="fl">0.5</span>,
                          <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;centre&quot;</span>, <span class="st">&quot;centre&quot;</span>))
@@ -206,8 +212,8 @@ Figure 3.1: Producing a standard viewport using <strong>grid</strong>.
 Figure 3.2: Producing a second viewport using <strong>grid</strong>.
 </p>
 </div>
-<p>This means, that whatever viewport we are currently in, this defines our reference system (0 to 1). In case you don’t believe me, we can repeat this 10 times more…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {
+<p>In more practical terms, this means that whatever viewport we are currently in, this one defines our reference system (0 to 1). In case you don’t believe me, we can repeat this procedure five times more…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
   our_first_vp &lt;-<span class="st"> </span><span class="kw">viewport</span>(<span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, 
                            <span class="dt">height =</span> <span class="fl">0.5</span>, <span class="dt">width =</span> <span class="fl">0.5</span>,
                            <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;centre&quot;</span>, <span class="st">&quot;centre&quot;</span>))
@@ -222,15 +228,14 @@ Figure 3.2: Producing a second viewport using <strong>grid</strong>.
 Figure 3.3: Producing several viewports using <strong>grid</strong>.
 </p>
 </div>
-<p>I hope this is proof enough now! We are cascading down viewports always creating a rectangle that fills half the ‘mother’ viewport each time. Yet, as the ‘mother’ viewport becomes smaller and smaller, our rectangles also become smaller at each step along the way (programmers would actually call these steps iterations, but we won’t be bothered here…)</p>
-<p>So, how do we navigate back?</p>
-<p>If I counted correctly, we went down 12 rabbit holes. In order to get out of these again, we need to <code>upViewport(12)</code> and in order to see whether we are correct, we ask <code>grid</code> what viewport we are currently in.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upViewport</span>(<span class="dv">12</span>)
+<p>Now that should be proof enough! We are cascading down viewports always creating a rectangle that fills half the ‘mother’ viewport at each step. Yet, as the ‘mother’ viewport becomes smaller and smaller, our rectangles also become smaller along the way (programmers would actually call these steps iterations, but we won’t be bothered here…).</p>
+<p>So, how do we navigate back? If we counted correctly, we went down 7 rabbit holes. In order to get out of these again, we need to use <code>upViewport(7)</code> and, in order to verify that we are back in ‘root’, we may ask <strong>grid</strong> what viewport we are currently in.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upViewport</span>(<span class="dv">7</span>)
 
 <span class="kw">current.viewport</span>()</code></pre></div>
 <pre><code>## viewport[ROOT]</code></pre>
-<p>Sweet, we’re back in the ‘root’ viewport…</p>
-<p>Now, let’s see how this <code>just</code> parameter works. As you have seen we are now in the <code>root</code> viewport. Let’s try to draw another rectangle that sits right at the top left corner of the pink one. In theory the lower right corner of this viewport should be located at <code>x = 0.25</code> and <code>y = 0.75</code>. If we specify it like this, we need to adjust the justification, because we do not want to center it on these coordinates. If these coordinates are the point of origin, this viewport should be justified right horizontally and bottom vertically. And the space we have to plot should be <code>0.25</code> vertically and <code>0.25</code> horizontally. Let’s try this…</p>
+<p>Sweet, we’re back in the ‘root’ viewport… (by the way, <code>upViewport(0)</code> would have taken us right up to the ‘root’ viewport without the requirement for counting, see <code>?grid::upViewport</code>).</p>
+<p>Now, let’s see how this <code>just</code> parameter works. As you have seen we are now in the ‘root’ viewport. Let’s try to draw another rectangle that sits right at the top left corner of the pink one. In theory the lower right corner of this viewport should be located at <code>x = 0.25</code> and <code>y = 0.75</code>. If we specify it like this, we need to adjust the justification, because we do not want to center it on these coordinates. If these coordinates are the point of origin, this viewport should be justified right horizontally and bottom vertically. And the space we have to plot should be <code>0.25</code> vertically and <code>0.25</code> horizontally. Let’s try this…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">top_left_vp &lt;-<span class="st"> </span><span class="kw">viewport</span>(<span class="dt">x =</span> <span class="fl">0.25</span>, <span class="dt">y =</span> <span class="fl">0.75</span>, 
                         <span class="dt">height =</span> <span class="fl">0.25</span>, <span class="dt">width =</span> <span class="fl">0.25</span>,
                         <span class="dt">just =</span> <span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>))
@@ -244,10 +249,10 @@ Figure 3.3: Producing several viewports using <strong>grid</strong>.
 Figure 3.4: Producing yet another viewport using <strong>grid</strong>.
 </p>
 </div>
-<p>I hope that you have understood 2 things now:</p>
+<p>I hope that you have understood two things now:</p>
 <ol style="list-style-type: decimal">
 <li>How to create and navigate between viewports, and</li>
-<li>Why I said earlier that <code>grid</code> is a package for drawing.</li>
+<li>Why I said earlier that <strong>grid</strong> is a package for drawing.</li>
 </ol>
 <p>Assuming that you have understood these two points, let’s make use of the first one and use this incredibly flexible plotting framework for arranging multiple plots on one page.</p> 
 </div>

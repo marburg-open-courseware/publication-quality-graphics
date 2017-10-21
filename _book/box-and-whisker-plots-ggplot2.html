@@ -152,7 +152,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="box-and-whisker-plots-ggplot2" class="section level2">
 <h2><span class="header-section-number">2.5</span> Box-and-Whisker Plots (ggplot2)</h2>
-<p>As much as I love <strong>lattice</strong>, I always end up drawing boxplots with <strong>ggplot2</strong> because they look so much nicer, meaning that there’s no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a <strong>ggplot2</strong> version using the default settings.</p>
+<p>As much as we are <strong>lattice</strong> enthusiasts, we always end up drawing boxplots with <strong>ggplot2</strong> because they look so much nicer, meaning that there’s no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a <strong>ggplot2</strong> version using the default settings.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bw_ggplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> color, <span class="dt">y =</span> price))
 
 g_bw &lt;-<span class="st"> </span>bw_ggplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()

@@ -153,7 +153,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="histograms-and-density-plots-lattice" class="section level2">
 <h2><span class="header-section-number">2.6</span> Histograms and Density Plots (lattice)</h2>
 <p>The classic way to visualize the distribution of any data are histograms. They are closely related to density plots, where the individual data points are not binned into certain classes but a continuous density function is calculated to show the distribution. Both approaches reflect a certain level of abstraction (binning vs. functional representation), therefore a general formulation of which of them is more accepted is hard. In any case, the both achieve exactly the same result, they will show us the distribution of our data.</p>
-<p>As is to be expected with <strong>lattice</strong>, the default plotting routine does not really satisfy the (or maybe better my) aesthetic expectations.</p>
+<p>As is to be expected with <strong>lattice</strong>, the default plotting routine does not really satisfy the (or maybe better our) aesthetic expectations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist_lattice &lt;-<span class="st"> </span><span class="kw">histogram</span>(<span class="op">~</span><span class="st"> </span>price, <span class="dt">data =</span> diamonds)
 hist_lattice</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:altt-hist"></span>
@@ -187,10 +187,10 @@ Figure 2.26: A <strong>lattice</strong> panel histogram with modified graphical 
 </p>
 </div>
 <p>Now, this is a plot that every journal editor will very likely accept.</p>
-<p>Until now, we have seen how to condition our plots according to one factorial variable (<code>diamonds$cut</code>). It is, in theory, possible to condition plots on any number of factorial variable, though more than two is seldom advisable. Two, however, is definitely acceptable and still easy enough to perceive and interpret. In <strong>lattice</strong> this is generally done as follows.</p>
+<p>Until now, we have seen how to condition our plots according to one factorial variable (<code>diamonds$cut</code>). It is, in theory, possible to condition plots on any number of factorial variable, though more than two is seldom advisable. Two, however, is definitely acceptable and still easy enough to perceive and interpret. In <strong>lattice</strong> this is generally formulated as</p>
 <pre><code>y ~ x | g + f</code></pre>
 <p>where <code>g</code> and <code>f</code> are the factorial variables used for the conditioning.</p>
-<p>In the below code chunk we are first creating out plot object and the we are using a function called <code>useOuterStrips()</code> which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default <strong>lattice</strong> setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.</p>
+<p>In the below code chunk, we are first creating our plot object. Then, we are using a function called <code>useOuterStrips()</code> which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default <strong>lattice</strong> setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.</p>
 <p>Another default setting for density plots in <strong>lattice</strong> is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x–axis. In our case, as we have a lot of data points, this is not desirable, so we set <code>plot.points = FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dens_lattice &lt;-<span class="st"> </span><span class="kw">densityplot</span>(<span class="op">~</span><span class="st"> </span>price <span class="op">|</span><span class="st"> </span>cut <span class="op">+</span><span class="st"> </span>color, 
                             <span class="dt">data =</span> diamonds,
@@ -204,13 +204,13 @@ l_den &lt;-<span class="st"> </span><span class="kw">useOuterStrips</span>(dens_
 
 <span class="kw">print</span>(l_den)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:latt-panel-dens"></span>
-<img src="_main_files/figure-html/latt-panel-dens-1.svg" alt="A panel density plot conditioned according to 2 variables using **lattice**." width="672" />
+<img src="_main_files/figure-html/latt-panel-dens-1.svg" alt="A panel density plot conditioned according to two variables using **lattice**." width="672" />
 <p class="caption">
-Figure 2.27: A panel density plot conditioned according to 2 variables using <strong>lattice</strong>.
+Figure 2.27: A panel density plot conditioned according to two variables using <strong>lattice</strong>.
 </p>
 </div>
-<p>You may have noticed that the lines of the density plot are plotted in a light shade of blue (cornflowerblue to be precise). I it up to you to change this yourself…</p>
-<p>Another thing you may notice when looking at the above plot is that the x-axis labels are rotated by 45 degrees. This one I also leave up to you to figure out… ;-)</p>
+<p>You may have noticed that the lines of the density plot are plotted in a light shade of blue (cornflowerblue to be precise). It is up to you to change this…</p>
+<p>Another thing you may notice when looking at the above plot is that the x-axis labels are rotated by 45 degrees. This one we also leave up to you to figure out… ;-)</p>
 </div>
             </section>
 

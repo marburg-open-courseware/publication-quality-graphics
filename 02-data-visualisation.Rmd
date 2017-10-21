@@ -401,7 +401,7 @@ In addition to the rather obvious provision of a color palette to fill the boxes
 
 ## Box-and-Whisker Plots (ggplot2)
 
-As much as I love **lattice**, I always end up drawing boxplots with **ggplot2** because they look so much nicer, meaning that there's no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a **ggplot2** version using the default settings.
+As much as we are **lattice** enthusiasts, we always end up drawing boxplots with **ggplot2** because they look so much nicer, meaning that there's no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a **ggplot2** version using the default settings.
 
 ```{r gg-bw1, tidy = FALSE, fig.cap = "A basic **ggplot2** boxplot.", fig.align = 'center'}
 bw_ggplot <- ggplot(diamonds, aes(x = color, y = price))
@@ -454,7 +454,7 @@ Boxplots are, as mentioned above, a brilliant way to visualize data distribution
 
 The classic way to visualize the distribution of any data are histograms. They are closely related to density plots, where the individual data points are not binned into certain classes but a continuous density function is calculated to show the distribution. Both approaches reflect a certain level of abstraction (binning vs. functional representation), therefore a general formulation of which of them is more accepted is hard. In any case, the both achieve exactly the same result, they will show us the distribution of our data.
 
-As is to be expected with **lattice**, the default plotting routine does not really satisfy the (or maybe better my) aesthetic expectations.
+As is to be expected with **lattice**, the default plotting routine does not really satisfy the (or maybe better our) aesthetic expectations.
 
 ```{r altt-hist, tidy = FALSE, fig.cap = "A basic histogram produced with **lattice**.", fig.align = 'center'}
 hist_lattice <- histogram(~ price, data = diamonds)
@@ -483,7 +483,7 @@ print(l_his)
 
 Now, this is a plot that every journal editor will very likely accept.
 
-Until now, we have seen how to condition our plots according to one factorial variable (```diamonds$cut```). It is, in theory, possible to condition plots on any number of factorial variable, though more than two is seldom advisable. Two, however, is definitely acceptable and still easy enough to perceive and interpret. In **lattice** this is generally done as follows.
+Until now, we have seen how to condition our plots according to one factorial variable (```diamonds$cut```). It is, in theory, possible to condition plots on any number of factorial variable, though more than two is seldom advisable. Two, however, is definitely acceptable and still easy enough to perceive and interpret. In **lattice** this is generally formulated as 
 
 ```
 y ~ x | g + f
@@ -491,11 +491,11 @@ y ~ x | g + f
 
 where ```g``` and ```f``` are the factorial variables used for the conditioning.
 
-In the below code chunk we are first creating out plot object and the we are using a function called ```useOuterStrips()``` which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default **lattice** setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.
+In the below code chunk, we are first creating our plot object. Then, we are using a function called ```useOuterStrips()``` which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default **lattice** setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.
 
 Another default setting for density plots in **lattice** is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x--axis. In our case, as we have a lot of data points, this is not desirable, so we set ```plot.points = FALSE```.
 
-```{r latt-panel-dens, tidy = FALSE, fig.cap = "A panel density plot conditioned according to 2 variables using **lattice**.", fig.align = 'center'}
+```{r latt-panel-dens, tidy = FALSE, fig.cap = "A panel density plot conditioned according to two variables using **lattice**.", fig.align = 'center'}
 dens_lattice <- densityplot(~ price | cut + color, 
                             data = diamonds,
                             as.table = TRUE,
@@ -509,16 +509,16 @@ l_den <- useOuterStrips(dens_lattice)
 print(l_den)
 ```
 
-You may have noticed that the lines of the density plot are plotted in a light shade of blue (cornflowerblue to be precise). I it up to you to change this yourself...
+You may have noticed that the lines of the density plot are plotted in a light shade of blue (cornflowerblue to be precise). It is up to you to change this...
 
-Another thing you may notice when looking at the above plot is that the x-axis labels are rotated by 45 degrees. This one I also leave up to you to figure out... ;-)
+Another thing you may notice when looking at the above plot is that the x-axis labels are rotated by 45 degrees. This one we also leave up to you to figure out... ;-)
 
 
 ## Histograms and Density Plots (ggplot2)
 
-Much like with the box-and-whisker plot, the default settings of **ggplot2** are quite a bit nicer for both histograms and density plots.
+Much like with boxplots, the default settings of **ggplot2** are quite a bit nicer for both histograms and density plots.
 
-```{r gg-hist, tidy = FALSE, fig.cap = "A basic histogram produced with **ggplot2**.", fig.align = 'center'}
+```{r gg-hist-echo, tidy = FALSE, eval = FALSE}
 hist_ggplot <- ggplot(diamonds, aes(x = price))
 
 g_his <- hist_ggplot +
@@ -527,7 +527,16 @@ g_his <- hist_ggplot +
 print(g_his)
 ```
 
-One thing that is really nice about the **ggplot2** density plots that it is so easy to fill the area under the curve which really helps the visual representation of the data.
+```{r gg-hist-eval, tidy = FALSE, fig.cap = "A basic histogram produced with **ggplot2**.", fig.align = 'center', echo = FALSE}
+hist_ggplot <- ggplot(diamonds, aes(x = price))
+
+g_his <- hist_ggplot +
+  geom_histogram()
+
+suppressMessages(print(g_his))
+```
+
+One thing that is really nice about the **ggplot2** density plots is that it is so easy to fill the area under the curve which really helps the visual representation of the data.
 
 ```{r gg-dens, tidy = FALSE, fig.cap = "A basic density plot produced with **ggplot2**.", fig.align = 'center'}
 dens_ggplot <- ggplot(diamonds, aes(x = price))
@@ -538,9 +547,9 @@ g_den <- dens_ggplot +
 print(g_den)
 ```
 
-Just as before, we are encountering again the rather peculiar way of **ggplot2** to adjust certain default settings to suit our needs (likes). In we wanted to show percentages instead of counts for the histograms, we again need to use the strange ```..something..``` syntax.
+Just as before, we are encountering the rather peculiar way of **ggplot2** to adjust certain default settings to suit our needs (likes). If we wanted to show percentages instead of counts for the histograms, we again need to use the strange ```..something..``` syntax.
 
-Another thing I want to highlight in the following code chunk is the way to achieve binary conditioning in **ggplot2**. This is done as follows:
+Another thing I want to highlight in the following code chunk is the way to achieve binary conditioning in **ggplot2**. This can be achieved through
 
 ```
 facet_grid(g ~ f)
@@ -548,7 +557,7 @@ facet_grid(g ~ f)
 
 where, again, ```g``` and ```f``` are the two variables used for conditioning.
 
-```{r gg-facet-hist, tidy = FALSE, fig.cap = "A **ggplot2** panel histogram with y-axis labelled according to percentages.", fig.align = 'center', message = FALSE}
+```{r gg-facet-hist, tidy = FALSE, fig.cap = "A faceted **ggplot2** histogram with percentages on the y-axis.", fig.align = 'center', message = FALSE}
 g_his <- hist_ggplot +
   geom_histogram(aes(y = ..ncount..)) +
   scale_y_continuous(labels = percent_format()) +
@@ -560,7 +569,7 @@ print(g_his)
 
 Similar to our **lattice** approach we're going to rotate the x-axis labels by 45 degrees.
 
-```{r gg-facet-density, tidy = FALSE, fig.cap = "A **ggplot2** panel density plot conditioned according to 2 variables.", fig.align = 'center'}
+```{r gg-facet-density, tidy = FALSE, fig.cap = "A faceted **ggplot2** density plot conditioned according to two variables.", fig.align = 'center'}
 dens_ggplot <- ggplot(diamonds, aes(x = price))
 
 g_den <- dens_ggplot +
@@ -571,14 +580,14 @@ g_den <- dens_ggplot +
 print(g_den)
 ```
 
-Ok, another thing we might want to show is the value of a certain estimated value (like the mean of our sample) including error bars.
+Ok, another thing we might want to show is a certain estimated value (like the mean of our sample) including error bars.
 
 
 ## Plotting Error Bars (lattice)
 
-Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, I refer you to StackOverflow and other R related forums and lists, where you will find a solution, but I doubt that you will like it... As you will see in Section `{#gg-err}`, error bars are much easier plotted using **ggplot2**.
+Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, we refer you to StackOverflow and other R related forums and lists. You will possibly find a workable solution there, but we doubt that you will like it. As you will see in Section `{#gg-err}`, error bars are much easier plotted using **ggplot2**.
 
-```{r latt-err, tidy = FALSE, fig.cap = "A basic dotplot with error bars produced with **lattice**.", fig.align = 'center'}
+```{r latt-err, tidy = FALSE, fig.cap = "A **lattice** dotplot including error bars produced with `Hmisc::Dotplot()`.", fig.align = 'center'}
 my_theme$dot.symbol$col <- "black"
 my_theme$dot.symbol$cex <- 1.5
 my_theme$plot.line$col <- "black"
@@ -607,7 +616,7 @@ As mentioned above, when plotting error bars **ggplot2** is much easier. Whether
 
 Anyway, plotting error bars in **ggplot2** is as easy as everything else...
 
-```{r gg-err, tidy = FALSE, fig.cap = "A basic dotplot with error bars produced with **ggplot2**.", fig.align = 'center'}
+```{r gg-err, tidy = FALSE, fig.cap = "A **ggplot2** dotplot including error bars and using a classic theme.", fig.align = 'center'}
 errbar_ggplot <- ggplot(cuts, aes(cut, fit, ymin = fit - se.fit, 
                                   ymax=fit + se.fit))
 g_err <- errbar_ggplot + 
@@ -620,7 +629,7 @@ print(g_err)
 
 Especially, when plotting them as part of a bar plot.
 
-```{r gg-err-bar, tidy = FALSE, fig.cap = "A **ggplot2** bar plot with error bars.", fig.align = 'center'}
+```{r gg-err-bar, tidy = FALSE, fig.cap = "A **ggplot2** bar plot including error bars and using a classic theme.", fig.align = 'center'}
 g_err <- errbar_ggplot + 
   geom_bar(stat = "identity", fill = "grey80") +
   geom_errorbar(width = 0.2) +
@@ -630,7 +639,7 @@ g_err <- errbar_ggplot +
 print(g_err)
 ```
 
-Just as before (with the box widths) though, applying this to each panel is a little more complicated...
+Just as before with the box widths, though, applying this to each facet is a little more complicated... But still, trust us on this, much easier than to achieve the same result in **lattice**.
 
 ```{r gg-facet-err-bar, tidy = FALSE, concordance = TRUE, fig.cap = "A **ggplot2** panel bar plot with error bars and modified fill colors.", fig.align = 'center'}
 errbar_ggplot_facets <- ggplot(diamonds, aes(x = color, y = price))
@@ -653,5 +662,3 @@ g_err_f <- errbar_ggplot_facets +
 
 print(g_err_f)
 ```
-
-Still, trust me on this, much easier than to achieve the same result in **lattice**.
