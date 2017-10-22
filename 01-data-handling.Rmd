@@ -92,7 +92,7 @@ There is, in principle, no limitation to the combination of these so-called Bool
 * greater than (or equal): `>` (`>=`)
 * less than (or equal): `<` (`<=`)
 
-I guess you get the idea...
+You probably get the idea...
 
 
 ## Aggregating Data
@@ -124,7 +124,7 @@ names(ave_n_cut_color) <- c("cut", "color", "n")
 str(ave_n_cut_color)
 ```
 
-So, I hope you see how useful ```aggregate()``` is for calculating summary statistics of your data.
+So, hopefully you see how useful ```aggregate()``` is for calculating summary statistics of your data.
 
 ## Sorting Data
 
@@ -185,6 +185,6 @@ ave_n_cut_color_price
 
 Obviously, setting proper names would be the next step now...
 
-Ok, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
+Okay, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
 
 **So, let's start plotting stuff.**

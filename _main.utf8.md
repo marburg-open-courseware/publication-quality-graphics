@@ -1,7 +1,7 @@
 ---
 title: "Creating Publication Quality Graphs in R"
 author: "<b>Tim Appelhans and Florian Detsch</b>"
-date: "Last modified: 2017-10-21"
+date: "Last modified: 2017-10-22"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -15,7 +15,7 @@ github-repo: marburg-open-courseware/publication-quality-graphics
 
 # Preface {-}
 
-This tutorial was developed as part of a one-day workshop held within the Ecosystem Informatics PhD program at the University of Marburg. Its contents are published under the creative commons license ['Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)'](http://creativecommons.org/licenses/by-sa/3.0/).
+This tutorial was initially developed as part of a one-day workshop held within the Ecosystem Informatics PhD program at the University of Marburg. It has constantly evolved over the years and has lately become an annual course in the [event calendar](https://www.uni-marburg.de/mara/veranstaltungen/workshops/2017/programm_lnw/creating-graphics-using-r?language_sync=1) of the [MArburg University Research Academy (MARA)](https://www.uni-marburg.de/mara). Hence, it is still being updated regularly and its contents presented hereinafter are published under the creative commons license ['Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)'](http://creativecommons.org/licenses/by-sa/3.0/).
 
 ![](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
@@ -27,7 +27,7 @@ Comments, feedback, suggestions and bug reports are always welcome and should be
 
 * learn a few things about handling and preparing our data for the creation of meaningful graphs;
 * quickly introduce the two main ways of plot creation in R - base graphics and <b>grid</b> graphics (we will mostly concentrate on the latter later on);
-* become familiar with the two main packages for highly flexible data visualization in R - <b>lattice</b> and <b>ggplot2</b> (likely biased towards <b>lattice</b>, to be totally honest)
+* become familiar with the two main packages for highly flexible data visualization in R - <b>lattice</b> [@Sarkar2008] and <b>ggplot2</b> [@Wickham2009];
 * learn how to modify the default options of these packages in order to really get what we want; 
 * learn even more flexibility using the <b>grid</b> package to (i) create visualizations comprising multiple plots on one page and (ii) manipulate existing plots to suit our needs; and
 * learn how to save our visualizations in different formats that comply with general publication standards of most academic journals.
@@ -248,7 +248,7 @@ There is, in principle, no limitation to the combination of these so-called Bool
 * greater than (or equal): `>` (`>=`)
 * less than (or equal): `<` (`<=`)
 
-I guess you get the idea...
+You probably get the idea...
 
 
 ## Aggregating Data
@@ -338,7 +338,7 @@ str(ave_n_cut_color)
 ##  $ n    : int  163 662 1513 1603 2834 224 933 2400 2337 3903 ...
 ```
 
-So, I hope you see how useful ```aggregate()``` is for calculating summary statistics of your data.
+So, hopefully you see how useful ```aggregate()``` is for calculating summary statistics of your data.
 
 ## Sorting Data
 
@@ -566,22 +566,13 @@ ave_n_cut_color_price
 
 Obviously, setting proper names would be the next step now...
 
-Ok, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
+Okay, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
 
 **So, let's start plotting stuff.**
 
 <!--chapter:end:01-data-handling.Rmd-->
 
-# Data Visualization
-
-
-
-In the next few sections, we will produce several varieties of *scatter plots*, *box-and-whisker plots* (from here on after 'boxplots'), *histograms* and *density plots*, and *plots with error bars*. All of these will first be produced using the **lattice** package and then an attempt is made to recreate these in (pretty much) the exact same way in **ggplot2**. First, the default versions are created and then we will see how they can be modified in order to produce plots that satisfy the requirements of most academic journals.    
-
-We will see that some things are easier to achieve using **lattice**, whereas other things are easier in **ggplot2**, so it is probably good advice to learn how to use both of them...
-
-
-## A few Notes on using Color
+# A Brief Note on using Colors
 
 Before we start plotting our data, we need to spend some time to have a closer look at color representation of certain variables. A careful study of color spaces (e.g. @Zeileis2009, [HCLwizard](http://hclwizard.org/hcl-color-scheme/), [Aisch (2011)](http://vis4.net/blog/posts/avoid-equidistant-hsv-colors/) or [Wikipedia](https://en.wikipedia.org/wiki/HSL_and_HSV)) leads to the conclusion that the HCL color space is preferable when mapping a variable to color (be it factorial or continuous).
 
@@ -638,7 +629,7 @@ We see that this palette varies in lightness from a very bright center to darker
 
 This is quite ok in case we want to show some diverging data (deviations from a zero point, for example the mean). However, if we are dealing with a sequential measure, such as temperature, or in our case the density of points plotted per some grid cell, we really need to use a sequential color palette. There are two common problems with sequential palettes:
 
-1. We need to create a palette that maps the data accurately. This means that the perceived distances between the different hues utilized need to reflect the distances between our data points. AND this distance needs to be constant, no matter between which two point of the palette we want to estimate their distance. Let me give you an example. Consider the classic 'rainbow' palette ([MATLAB](https://www.mathworks.com/products/matlab.html) refers to this as 'jet colors'):
+1. We need to create a palette that maps the data accurately. This means that the perceived distances between the different hues utilized need to reflect the distances between our data points. AND this distance needs to be constant, no matter between which two point of the palette we want to estimate their distance. Let us consider the following example showing a classic 'rainbow' palette ([MATLAB](https://www.mathworks.com/products/matlab.html) refers to this as 'jet colors'):
 
 
 ```r
@@ -692,13 +683,21 @@ pal(desaturate(clrs_hcl(100)))
 
 
 
-As a general suggestion I encourage you to make use of the HCL color space whenever you can. But most importantly, it is essential to do some thinking before mapping data to color. The most basic question you always need to ask yourself is probably
+As a general suggestion, we encourage you to make use of the HCL color space whenever you can. But most importantly, it is essential to do some thinking before mapping data to color. The most basic question you always need to ask yourself is probably
 
 > What is the nature of the data that I want to show? More precisely, is it sequential, diverging, or qualitative? 
 
 Once you know this, it is easy to choose the appropriate color palette for the mapping. A good place to start for choosing palettes that are perceptually well thought through is [ColorBrewer](http://www.colorbrewer2.org).
 
-Ok, so now let's start with the classic statistical plot, the scatter plot...
+<!--chapter:end:02-colors-note.Rmd-->
+
+# Data Visualization
+
+
+
+In the next few sections, we will produce several varieties of *scatter plots*, *box-and-whisker plots* (from here on after 'boxplots'), *histograms* and *density plots*, and *plots with error bars*. All of these will first be produced using the **lattice** package and then an attempt is made to recreate these in (pretty much) the exact same way in **ggplot2**. First, the default versions are created and then we will see how they can be modified in order to produce plots that satisfy the requirements of most academic journals.    
+
+We will see that some things are easier to achieve using **lattice**, whereas other things are easier in **ggplot2**, so it is probably good advice to learn how to use both of them...
 
 
 ## Scatter plots (lattice)
@@ -720,7 +719,7 @@ scatter_lattice
 
 What we see is that, generally, lower carat values tend to be cheaper. However, there is a lot of scatter, especially at the high price end, i.e. there are diamonds of 1 carat that cost just as much as diamonds of 4 or more carat. So maybe this is a function of the cut? Let's see...
 
-[//]: # (Another thing that we might be interested in is the nature and strength of the relationship that we see in our scatter plot. These plots are still the fundamental way of visualizing linear (and non-linear) statistics between 2 (or more) variables. In our case (and I said we will only be marginally touching statistics here) let's try to figure out what the linear relationship between x (cut) and y (price) is. Given that we are plotting cut on the y-axis and the general linear regression formula is ```y ~ a + b*x```, this means that we are assuming that cut is influencing (determining) price, NOT the other way round!!)
+[//]: # (Another thing that we might be interested in is the nature and strength of the relationship that we see in our scatter plot. These plots are still the fundamental way of visualizing linear (and non-linear) statistics between 2 (or more) variables. In our case (and we will only be marginally touching statistics here) let's try to figure out what the linear relationship between x (cut) and y (price) is. Given that we are plotting cut on the y-axis and the general linear regression formula is ```y ~ a + b*x```, this means that we are assuming that cut is influencing (determining) price, NOT the other way round!!)
 
 **lattice** is a very powerful package that provides a lot of flexibility and power to create all sorts of tailor-made statistical plots. In particular, it is designed to provide an easy-to-use framework for the representation of some variable(s) conditioned on some other variable(s). This means, that we can easily show the same relationship from figure 1, but this time for each of the different quality levels (the variable ```cut``` in the `diamonds` data set) into which diamonds are classified. These conditional subsets are called 'panels' in **lattice**.
 
@@ -789,7 +788,7 @@ There's two more things to note with regard to panel functions:
 
 2. The order in which panel functions are supplied does matter. This means that the first panel function will be evaluated (and drawn) first, then the second, then the third and so on. Hence, if we were to plot the points of our plot on top of everything else, we would need to provide the ```panel.xyplot()``` function as the last of the panel functions.
 
-Right, so now we have seen how to use panel functions to calculate and draw things specific to each panel. One thing I really dislike about **lattice** is the default graphical parameter settings, in particular colors. However, changing these is rather straightforward. We can easily create our own themes by replacing the default values for each of the graphical parameters individually and saving these as our own themes. The function that lets us access the default (or already modified) graphical parameter settings is called ```trellis.par.get()```. By assigning this to a new object, we can modify every entry of the default settings to our liking (remember ```str()``` provides a 'road map' for accessing individual bits of an object).
+Right, so now we have seen how to use panel functions to calculate and draw things specific to each panel. One thing that you might dislike about **lattice** is the default graphical parameter settings, in particular colors. However, changing these is rather straightforward. We can easily create our own themes by replacing the default values for each of the graphical parameters individually and saving these as our own themes. The function that lets us access the default (or already modified) graphical parameter settings is called ```trellis.par.get()```. By assigning this to a new object, we can modify every entry of the default settings to our liking (remember ```str()``` provides a 'road map' for accessing individual bits of an object).
 
 
 ```r
@@ -813,7 +812,7 @@ print(l_sc)
 
 Apart from showing us how to change the graphical parameter settings, the above code chunk also highlights one of the very handy properties of **lattice** (which is also true for **ggplot2**). We are able to store any plot we create in an object and can refer to this object later. This enables us to simply ```update()``` the object rather than having to define it over (and over) again.
 
-Like many other packages, **lattice** has a companion called **latticeExtra**. This package provides several additions and extensions to the core functionality of **lattice**. One of the very handy additions is a panel function called ```panel.smoother()``` which enables us to evaluate several linear and non-linear models for each panel individually. This means that we actually don't need to calculate these models 'by hand' for each panel, but can use this pre-defined function to evaluate them. This is demonstrated in the next code chunk.
+Like many other packages, **lattice** has a companion called **latticeExtra** [@Sarkar2016]. This package provides several additions and extensions to the core functionality of **lattice**. One of the very handy additions is a panel function called ```panel.smoother()``` which enables us to evaluate several linear and non-linear models for each panel individually. This means that we actually don't need to calculate these models 'by hand' for each panel, but can use this pre-defined function to evaluate them. This is demonstrated in the next code chunk.
 
 Note that we are still calculating the linear model in order to be able to provide the R-squared value for each panel. We don't need ```panel.abline()``` to draw the regression line anymore. Actually, this is done using ```panel.smoother()``` which also provides us with an estimation of the standard error related to the mean estimation of ```y``` for each ```x```. This may be hard to see, but there is a confidence band of the standard error plotted around the regression line in each panel. 
 
@@ -852,7 +851,7 @@ print(l_sc)
 <p class="caption">(\#fig:latt-panel-smooth-scat)A panel plot showing regression lines and confidence intervals for each **lattice** panel.</p>
 </div>
 
-Having a look at the scatter plots we have produced so far, there is an obvious problem. There are so many points that it is impossible to determine their actual distribution. One way to address this problem could be to plot each point in a semi-transparent manner. I have tried this potential solution and found that it does not help a great deal (but please, feel free to try this out for yourselves). Hence, we need another way to address the over-plotting of points.
+Having a look at the scatter plots we have produced so far, there is an obvious problem. There are so many points that it is impossible to determine their actual distribution. One way to address this problem could be to plot each point in a semi-transparent manner. We have tried this potential solution and found that it does not help a great deal (but please, feel free to try this out for yourselves). Hence, we need another way to address the over-plotting of points.
 
 A potential remedy is to map the 2-dimensional space, in which we create our plot, to a regular grid and estimate the point density in each of the cells. This can be done using a so-called 2-dimensional kernel density estimator. We won't have the time to go into much detail about this method here, but we will see how this can be done...
 
@@ -908,10 +907,6 @@ l_sc_smooth <- update(scatter_lattice, aspect = 1,
                       panel = panel.smoothScatter)
 
 print(l_sc_smooth)
-```
-
-```
-## (loaded the KernSmooth namespace)
 ```
 
 <div class="figure" style="text-align: center">
@@ -1005,7 +1000,7 @@ print(g_sc)
 
 Simple and straightforward, and the result looks rather similar to the **lattice** version we created earlier.
 
-Creating a point density scatter plot in **ggplot2** is actually a fair bit easier than in **lattice**, as **ggplot2** provides several predefined ```stat_*()``` functions. One of these is designed to create 2-dimensional kernel density estimations, just what we want. However, this is where the syntax of **ggplot2** really becomes a bit abstract. The definition of the fill argument of this call is ```..density..``` which, at least to me, does not seem very intuitive. 
+Creating a point density scatter plot in **ggplot2** is actually a fair bit easier than in **lattice**, as **ggplot2** provides several predefined ```stat_*()``` functions. One of these is designed to create 2-dimensional kernel density estimations, just what we want. However, this is where the syntax of **ggplot2** really becomes a bit abstract. The definition of the fill argument of this call is ```..density..``` which, at least at first glance, does not seem very intuitive. 
 
 Furthermore, it is not quite sufficient to supply the `stat_*()` function, we also need to state how to map the colors to that definition. Therefore, we need yet another layer which defines what color palette to use. As we want a continuous variable (density) to be filled with a gradient of _n_ colors, we need to use ```scale_fill_gradientn()``` in which we can define the colors we want to be used.
 
@@ -1032,7 +1027,7 @@ print(g_sc)
 
 ## Box-and-Whisker Plots (lattice)
 
-I honestly don't have a lot to say about boxplots. They are probably the most useful plots for showing the nature (or distribution) of your data and allow for some easy comparisons between different levels of a factor for example. See [Wikimedia](http://upload.wikimedia.org/wikipedia/commons/1/1a/Boxplot_vs_PDF.svg) for a visual representation of the standard R settings of boxplots in relation to mean and standard deviation of a normal distribution.
+Boxplots are probably the most useful visual way for showing the nature (or distribution) of your data and allow for some easy comparisons between different levels of a factor for example. See [Wikimedia](http://upload.wikimedia.org/wikipedia/commons/1/1a/Boxplot_vs_PDF.svg) for a visual representation of the standard R settings of boxplots in relation to mean and standard deviation of a normal distribution.
 
 So without further ado, here's a basic **lattice** boxplot.
 
@@ -1095,7 +1090,7 @@ In addition to the rather obvious provision of a color palette to fill the boxes
 
 ## Box-and-Whisker Plots (ggplot2)
 
-As much as we are **lattice** enthusiasts, we always end up drawing boxplots with **ggplot2** because they look so much nicer, meaning that there's no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what I mean when we plot a **ggplot2** version using the default settings.
+As much as we are **lattice** enthusiasts, we always end up drawing boxplots with **ggplot2** because they look so much nicer, meaning that there's no need to modify so many graphical parameter settings in order to get an acceptable result. You will see what we mean when we plot a **ggplot2** version using the default settings.
 
 
 ```r
@@ -1129,9 +1124,9 @@ print(g_bw)
 <p class="caption">(\#fig:gg-facet-bw)A faceted **ggplot2** boxplot.</p>
 </div>
 
-So far, you may have gotten the impression that pretty much everything is a little bit easier the **ggplot2** way. Well, a lot of things are, but some are not. If we wanted to highlight the relative sample sizes of the different color levels like we did earlier in **lattice** (using ```varwidth = TRUE```) we have to put a little more effort into **ggplot2**. Meaning, we have to calculate this ourselves. There is no built-in functionality for this feature (yet), at least none that I am aware of.
+So far, you may have gotten the impression that pretty much everything is a little bit easier the **ggplot2** way. Well, a lot of things are, but some are not. If we wanted to highlight the relative sample sizes of the different color levels like we did earlier in **lattice** (using ```varwidth = TRUE```) we have to put a little more effort into **ggplot2**. Meaning, we have to calculate this ourselves. There is no built-in functionality for this feature (yet), at least not to our knowledge.
 
-But anyway, it is not too complicated. The equation for this adjustment is rather straightforward, we simply take the square root of the counts for each color and divide it by the overall number of observations. Then we standardize this relative to the maximum of this calculation. As a final step, we need to break this down to each of the panels of the plot. This is the toughest part of it. I won't go into any detail here, but the ```llply()``` part of the following code chunk is basically the equivalent of what is going on behind the scenes of **lattice** (though the latter most likely does not use ```llply()```).
+But anyway, it is not too complicated. The equation for this adjustment is rather straightforward, we simply take the square root of the counts for each color and divide it by the overall number of observations. Then we standardize this relative to the maximum of this calculation. As a final step, we need to break this down to each of the panels of the plot. This is the toughest part of it. We won't go into any detail here, but the ```llply()``` part of the following code chunk is basically the equivalent of what is going on behind the scenes of **lattice** (though the latter most likely does not use ```llply()```).
 
 Anyway, it does not require too many lines of code to achieve the box width adjustment in **ggplot2**.
 
@@ -1288,7 +1283,7 @@ print(g_den)
 
 Just as before, we are encountering the rather peculiar way of **ggplot2** to adjust certain default settings to suit our needs (likes). If we wanted to show percentages instead of counts for the histograms, we again need to use the strange ```..something..``` syntax.
 
-Another thing I want to highlight in the following code chunk is the way to achieve binary conditioning in **ggplot2**. This can be achieved through
+Another thing that we want to highlight in the following code chunk is the way to achieve binary conditioning in **ggplot2**. This can be achieved through
 
 ```
 facet_grid(g ~ f)
@@ -1331,12 +1326,14 @@ print(g_den)
 <p class="caption">(\#fig:gg-facet-density)A faceted **ggplot2** density plot conditioned according to two variables.</p>
 </div>
 
-Ok, another thing we might want to show is a certain estimated value (like the mean of our sample) including error bars.
+Okay, another thing we might want to show is a certain estimated value (like the mean of our sample) including error bars.
 
 
 ## Plotting Error Bars (lattice)
 
 Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, we refer you to StackOverflow and other R related forums and lists. You will possibly find a workable solution there, but we doubt that you will like it. As you will see in Section `{#gg-err}`, error bars are much easier plotted using **ggplot2**.
+
+Anyway, here is a solution built on a function called `Dotplot()` (not to be mistaken with `lattice::dotplot()`) from **Hmisc** [@Harrell2017].
 
 
 ```r
@@ -1369,7 +1366,7 @@ print(l_err)
 
 ## Plotting Error Bars (ggplot2) {#gg-err}
 
-As mentioned above, when plotting error bars **ggplot2** is much easier. Whether this is because of the general ongoing discussion about the usefulness of these plots I do not want to judge.
+As mentioned above, when plotting error bars **ggplot2** is much easier. Whether this is because of the general ongoing discussion about the usefulness of these plots we do not want to judge.
 
 Anyway, plotting error bars in **ggplot2** is as easy as everything else...
 
@@ -1438,11 +1435,11 @@ print(g_err_f)
 <p class="caption">(\#fig:gg-facet-err-bar)A **ggplot2** panel bar plot with error bars and modified fill colors.</p>
 </div>
 
-<!--chapter:end:02-data-visualisation.Rmd-->
+<!--chapter:end:03-data-visualisation.Rmd-->
 
 # Manipulating Plots with the grid Package
 
-Okay, so now we have seen how to produce a variety of widely used plot types using both **lattice** and **ggplot2**. I hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we've touched upon in scenarios other than the ones provided here.
+Okay, so now we have seen how to produce a variety of widely used plot types using both **lattice** and **ggplot2**. We hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we've touched upon in scenarios other than the ones provided here.
 
 Now, we're moving on to a more basic and much more flexible level of modifying, constructing and arranging graphs. Both **lattice** and **ggplot2** are based on the **grid** package. This means that we can use this package to fundamentally modify whatever we've produced (remember, we're always storing our plots in objects) in a much more flexible way than provided by any of these packages.
 
@@ -1473,15 +1470,7 @@ Here, `width` and `height` should be rather self-explanatory. On the other hand,
 
 ```r
 library(grid)
-```
-
-<div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/grid-first-vp-1.svg" alt="Producing a standard viewport using **grid**." width="672" />
-<p class="caption">(\#fig:grid-first-vp)Producing a standard viewport using **grid**.</p>
-</div>
-
-```r
-grid.newpage() # open a new (ie empty) 'root' viewport
+grid.newpage() # open a new (i.e. empty) 'root' viewport
 
 grid.rect()
 grid.text("this is the root vp", x = 0.5, y = 0.95, 
@@ -1499,7 +1488,7 @@ grid.text("this is our first vp", x = 0.5, y = 0.95,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="_main_files/figure-html/grid-first-vp-2.svg" alt="Producing a standard viewport using **grid**." width="672" />
+<img src="_main_files/figure-html/grid-first-vp-1.svg" alt="Producing a standard viewport using **grid**." width="672" />
 <p class="caption">(\#fig:grid-first-vp)Producing a standard viewport using **grid**.</p>
 </div>
 
@@ -1523,7 +1512,7 @@ grid.rect(gp = gpar(fill = "cornflowerblue"))
 <p class="caption">(\#fig:grid-second-vp)Producing a second viewport using **grid**.</p>
 </div>
 
-In more practical terms, this means that whatever viewport we are currently in, this one defines our reference system (0 to 1). In case you don't believe me, we can repeat this procedure five times more...
+In more practical terms, this means that whatever viewport we are currently in, this one defines our reference system (0 to 1). In case you don't believe that, we can repeat this procedure five times more...
 
 
 ```r
@@ -1581,10 +1570,10 @@ grid.rect(gp = gpar(fill = "grey", alpha = 0.5))
 
 
 
-I hope that you have understood two things now:
+You should have understood two things now:
 
 1. How to create and navigate between viewports, and
-2. Why I said earlier that **grid** is a package for drawing.
+2. Why it was said earlier that **grid** is a package for drawing.
 
 Assuming that you have understood these two points, let's make use of the first one and use this incredibly flexible plotting framework for arranging multiple plots on one page.
 
@@ -1807,11 +1796,11 @@ Not too complicated, is it? And, in comparison to the **ggplot2** version, we ar
 
 So far, we have put our efforts into plot creation and learned about a variety of tools that can help us achieve what we want. As a next logical step, let's see how we can save our graphics to our hard drive.
 
-<!--chapter:end:03-data-manipulation.Rmd-->
+<!--chapter:end:04-data-manipulation.Rmd-->
 
 # Saving your Visualizations {#saving}
 
-Saving graphics in R is, in theory, straightforward. We simply need to call a suitable device. There are a number of different plotting devices available. Here, we will introduce 4 examples, `tiff()`, `png()`, `postscript()`, and `pdf()`. The latter two should be used for vector graphics (e.g. line plots, point plots, polygon plots etc.), whereas `tiff()` and `png()` are preferable for raster graphics (e.g. photos, our density scatter plot or anything pixel based).
+Saving graphics in R is, in theory, straightforward. We simply need to call a suitable device. There are a number of different plotting devices available. Here, we will introduce four examples: `tiff()`, `png()`, `postscript()`, and `pdf()`. The latter two should be used for vector graphics (e.g. line plots, point plots, polygon plots etc.), whereas `tiff()` and `png()` are preferable for raster graphics (e.g. photos, our density scatter plot in Figures \@ref(fig:latt-dens-scat) and \@ref(fig:gg-dens-scat), or anything pixel based).
 
 All the graphics devices in R basically work the same way:
 
@@ -1825,12 +1814,12 @@ In code, this is:
 ```r
 png("some_filename.png", width = 10, height = 10, units = "cm", res = 300)
 ## here goes your plotting routine, e.g.: xyplot(1:10 ~ 1:10)
-invisible(dev.off())
+dev.off()
 ```
 
-Sounds rather easy, but as they say, the devil is in the details... Unfortunately, neither **lattice** nor **ggplot2** graphics play very well with the respective graphics devices. Consider the following setting where we want to produce a `tiff` output with a resolution of 300 dpi, a width of 17.35 cm, a height of 23.35 cm, the font family "ArialMT" and a point size of 18.
+Sounds rather easy, but as they say, the devil is in the details... Unfortunately, neither **lattice** nor **ggplot2** graphics play very well with the respective graphics devices. Consider the following setting where we want to produce a `.tiff` output with a resolution of 300 dpi, a width of 17.35 cm, a height of 23.35 cm, the font family "ArialMT" and a point size of 18.
 
-Instead of saving a graph, however, we only check whether the point size of 18 is passed correctly to the respective plotting environment (i.e. `base graphics`, **lattice** and **ggplot2**).
+Instead of saving a graph, however, we only check whether the point size of 18 is passed correctly to the respective plotting environment (i.e. base **graphics**, **lattice**, and **ggplot2**).
 
 
 ```r
@@ -1868,7 +1857,7 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
-We see that neither **lattice** nor **ggplot2** adhere to the specified point size whereas `base graphics` do. Let's try this for the other devices, too. First, `png`:
+We see that neither **lattice** nor **ggplot2** adhere to the specified point size, whereas base graphics do. Let's try this for the other devices, too. First, `png()`:
 
 
 ```r
@@ -1905,7 +1894,7 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
-Similar to `tiff`. Now for `eps`:
+As you can see, `png()` behaves similar to `tiff()`. Now for `eps()`:
 
 
 ```r
@@ -1942,7 +1931,7 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
-Finally, for `pdf`:
+Finally, for `pdf()`:
 
 
 ```r
@@ -1976,12 +1965,12 @@ theme_bw()$text$size
 
 ```r
 # turn device off
-invisible(dev.off())
+invisible(dev.off()) # dev.off() is sufficient, invisible() suppresses text output
 ```
 
-... and we see that only `base graphics` really correctly sets the supplied font size.
+... and we see that only base **graphics** really adhere to the supplied font size.
 
-Alright, this was only a small exercise to highlight the fact, that it is not straightforward to get that fine control over graphics output in R. But before we dive into this deeper, we will first need to know what it is that we want to achieve, meaning we need a precise definition of the guidelines our graphics output should adhere to. Generally, academic journals provide formatting guidelines for both figures and tables. These, however, differ from journal to journal so that it is impossible to come up with a one-fits-all solution here. Therefore, we will pick one of these guides to highlight the process of achieving the desired formatting which can then be adapted to any other formatting guide. Even though this is in R terms not directly related to exporting visualizations through different devices, these finer controls will be covered her, as from an academic publishing point of view this is exactly the point where we need to start thinking about these formatting issues.
+Alright, this was only a small exercise to highlight the fact that it is not straightforward to get that fine control over graphics output in R. But before we dive into this deeper, we will first need to know what it is that we want to achieve, meaning we need a precise definition of the guidelines our graphics output should adhere to. Generally, academic journals provide formatting guidelines for both figures and tables. These, however, differ from journal to journal so that it is impossible to come up with a one-fits-all solution here. Therefore, we will pick one of these guides to highlight the process of achieving the desired formatting which can then be adapted to any other formatting guide. Even though this is - in R terms - not directly related to exporting visualizations through different devices, these finer controls will be covered her. In the end, from an academic publishing point of view, this is exactly the point where we need to start thinking about these formatting issues.
 
 Depending on the journal the formatting guidelines can be quite detailed, though some journals allow for more flexibility. Generally, there are a few parameters that the majority of journals define in their formatting guides. These include (but are surely not limited to):
 
@@ -1999,35 +1988,32 @@ In case of more rigid formatting guidelines, further rules may be imposed on:
 * file size
 * orientation
 
-As an example, we will use the [artwork guidelines](http://www.plosone.org/static/figureGuidelines#figures) from PLOS ONE, for which more details are listed [here](http://www.plosone.org/static/figureSpecifications). 
+As an example, we will use the [artwork guidelines](http://www.plosone.org/static/figureGuidelines#figures) from PLOS ONE, for which more details are listed [here](http://www.plosone.org/static/figureSpecifications). For `.tiff` images, the requirements are as follows:
 
-For `tiff` images the requirements are as follows:
-
-* __width:__ 8.30 cm (one column images), 17.35 (two column images)
+* __width:__ 8.30 cm (one-column images), 17.35 (two-column images)
 * __maximum height:__ 23.35 cm (caption will not fit on the same page then)
 * __minimum resolution:__ 300 ppi
 * __compression:__ LZW
 * __color mode:__ RGB (millions of colors), 8 bits per channel
 * __background:__ white, not transparent
 * __layers:__ a single layer called "Background"
-* __text:__ font types Arial, Times or Symbol 6 - 12 pt
+* __font type, size:__ Arial, Times or Symbol, 6 to 12 pt
 * __lines:__ line width between 0.5 to 1.5 pt
 * __white space:__ a 2 pt white space around each figure is recommended
 * __file size:__ 10 MB max
-* __orientation:__ up to the author
 
-Additionally, some general remarks on software related issues can be found [here](http://www.plosone.org/static/figureInstructions). From the latter I quote:
+Additionally, some general remarks on software related issues can be found [here](http://www.plosone.org/static/figureInstructions), in which it reads:
 
 > Numerous programs can create figures but are not dedicated to working with graphics. These may be limited in their capability to create TIFFs or EPSs that comply with PLOS specifications. Such applications include ChemDraw, Haploview, PyMol, R, ImageMagick, Corel Draw, GeneSpring, Matlab, Origin, Prism, Sigmaplot, and Stata. To create a high-quality TIFF from images created in other applications, use the instructions below to convert to PDF and then to TIFF or EPS.
 
-This basically means that we should not directly export our graphics from R to either `tiff` or `eps` (the only two file formats accepted by PLOS ONE), but rather save them as a `pdf` and then follow [this guide](http://www.plosone.org/static/figureInstructions#convertingfigs) on how to convert the `pdf` to acceptable `tiff` or `eps` formats. Here, we will cover all of these, so whether you send an original R `tiff` or convert it from the R `pdf` is completely up to you.
+This basically means that we should not directly export our graphics from R to either `.tiff` or `.eps` (the only two file formats accepted by PLOS ONE), but rather save them as `.pdf` and then follow [this guide](http://www.plosone.org/static/figureInstructions#convertingfigs) on how to convert the `.pdf` to the accepted formats. Here, we will cover all of these, so whether you send an original R `.tiff` or convert it from the R `.pdf` is completely up to you.
 
-Ok, so let's start with the `tiff` device...
+Okay, so let's start with the `tiff()` device...
 
 
 ## Tagged Image File Format
 
-In all of the following chapters we will first create very basic **lattice** and **ggplot2** plot objects:
+In all of the following chapters, we will use very basic **lattice** and **ggplot2** plot objects:
 
 
 ```r
@@ -2036,27 +2022,27 @@ p_ggplot <- ggplot(aes(x = carat, y = price), data = diamonds) +
   geom_point()
 ```
 
-Ok, so we have our basic plot objects that we want to export as `tiff` images. Note that for graphics of points and lines it is usually preferred to export them using a vector graphics device (`eps` or `pdf`) but for the sake of demonstration, we will not care about this right now and export our scatter plot as `tiff` anyway (`eps` and `pdf` examples follow). In all the examples that follow, we will produce figures that are maximum width (17.35 cm) and maximum height (23.35 cm) according to the PLOS ONE specifications. Furthermore, we will always first see how this is done with lattice, then with ggplot2.
+Okay, so we have our basic plot objects that we want to export as `.tiff` images. Note that graphics of points and lines are usually preferred as vector graphics (`.eps` or `.pdf`), but for the sake of demonstration, we will not care about this right now and export our scatter plot as `.tiff` anyway (`.eps` and `.pdf` examples follow). In all the examples that follow, we will produce figures that are of maximum width (17.35 cm) and height (23.35 cm) according to the PLOS ONE specifications. Furthermore, we will always first see how this is done with **lattice**, then with **ggplot2**.
 
-For `tiff` the default settings are as follows (PLOS ONE requirements in brackets):
+For `.tiff` artworks, the default settings are as follows (PLOS ONE requirements in brackets):
 
-* width and heigth: 480 (max 2049 / 2758)
-* units: "px" - pixels (n.a.)
-* pointsize: 12 (6 - 12)
-* compression: "none" (LZW)
-* bg (background): "white" (white)
-* res (resolution): NA - this basically means 72 ppi (300 - 600 ppi)
+* width and heigth: `480` by `480` (max. 2049 by 2758)
+* units: pixels, or `"px"` (n.a.)
+* pointsize: `12` (6 - 12)
+* compression: `"none"` (LZW)
+* bg (background): `"white"` (white)
+* res (resolution): n.a., which basically means 72 ppi (300 - 600 ppi)
 * type: system dependent (check with `getOption("bitmapType")`)
-* family: system dependent - on Linux X11 it is "Helvetica" (Arial, Times, Symbol)
+* family: system dependent, on Linux X11 it is `"Helvetica"` (Arial, Times, Symbol)
 
-If we want to use units different from pixels for our width and height specifications, we need to supply a resolution to be used through `res`. 
+If we want to use units different from pixels for our width and height specifications, we need to supply a target resolution through `res = ...`. 
 
-So, the first thing to do is open the `tiff` device. In order to comply with PLOS ONE we set:
+So, the first thing to do is open the `tiff()` device. In order to comply with PLOS ONE, we set
 
-* width to 17.35
-* height to 23.35
-* res to 300
-* compression to "lzw"
+* `width` to 17.35,
+* `height` to 23.35,
+* `res` to 300, and
+* `compression` to "lzw".
 
 
 ```r
@@ -2075,10 +2061,10 @@ and finally, we close our device:
 
 
 ```r
-invisible(dev.off()) # dev.off() is sufficient. Invisible suppresses text.
+dev.off()
 ```
 
-This will create a `tiff` image of our plot with a text point size of 12 for the axis labels, a point size of 10 for the axis tick labels and a point size of 14 for the plot title (iff supplied). As we have seen, both **lattice** and **ggplot2** ignore any parameter passed to the device via `pointsize`. Therefore, in case we want to change the point size of the text in our plot, we need to achieve this in another way. 
+This will create a `.tiff` image of our plot with a text point size of 12 for the axis labels, a point size of 10 for the axis tick labels and a point size of 14 for the plot title (if supplied). As we have seen, both **lattice** and **ggplot2** ignore any parameter passed to the device via `pointsize = ...`. Therefore, in case we want to change the point size of the text in our plot, we need to achieve this in another way. 
 
 In the following setup we will change the default font size to 20 pt and the axis tick labels to _italic_.
 
@@ -2093,7 +2079,7 @@ print(update(p_lattice, par.settings = tiff_theme))
 
 <img src="_main_files/figure-html/change-pointsize-tiff-1.svg" width="672" />
 
-In order to export the graphic we simply wrap the above between the `tiff()` and `dev.off()` calls (note here that we change the default font family to "Times" - check the exported image):
+In order to export the graphic we simply wrap the above code between our `tiff()` and `dev.off()` calls (note here that we change the default font family to "Times" - check the exported image):
 
 
 ```r
@@ -2109,37 +2095,29 @@ print(update(p_lattice, par.settings = tiff_theme))
 invisible(dev.off())
 ```
 
-This, however, does change the axis label text to a point size of `20`, but the axis ticks are labelled with a point size of `16`. This is because **lattice** uses so-called `character expansion (short cex)` factors for different regions of the plot. Axis tick labels have `cex = 0.8` and the title has `cex = 1.2`. Therefore, the tick labels will be `fontsize * cex` i.e. `20 * 0.8` in point size. We can, however, change this as well. 
+This, however, does change the axis label text to a point size of `20`, but the axis ticks are labelled with a point size of `16`. This is because **lattice** uses so-called "character expansion" (short `cex`) factors for different regions of the plot. Axis tick labels have `cex = 0.8` and the title has `cex = 1.2`. Therefore, the tick labels will be `fontsize * cex` (i.e. `20 * 0.8`) in point size. We can, however, change this as well. 
 
 In the following we will change the axis font size to 10 and the axis tick label font size to 17.5:
 
 
 ```r
-# tiff("test_la.tif", width = 17.35, height = 23.35, units = "cm", res = 300,
-#      compression = "lzw")
-
 tiff_theme <- trellis.par.get()
+
 tiff_theme$fontsize$text <- 12 # set back to base fontsize 12
-expansion_axislabs <- 10/12
-expansion_ticks <- 17.5/12
-tiff_theme$par.xlab.text$cex <- expansion_axislabs
-tiff_theme$par.ylab.text$cex <- expansion_axislabs
-tiff_theme$axis.text$cex <- expansion_ticks
+
+tiff_theme$par.xlab.text$cex <- 10/12
+tiff_theme$par.ylab.text$cex <- 10/12
+
+tiff_theme$axis.text$cex <- 17.5/12
 
 print(update(p_lattice, par.settings = tiff_theme))
 ```
 
 <img src="_main_files/figure-html/change-relative-pointsize-tiff-1.svg" width="672" />
 
-```r
-# invisible(dev.off())
-```
+The same also applies if you use `panel.text()` or `panel.key()`. Use the `cex` parameter to adjust the font size you want your text to be.
 
-The same also applies if you use `panel.text()` or `panel.key()`. Use the `cex` parameter to adjust to the font size you want your text to be.
-
-Ok, so much for **lattice**. Let's see how we can change things in **ggplot2**.
-
-The equivalent to the `par.settings = ` in **lattice** are the different `theme_`s in **ggplot2**. We have already seen this in the **ggplot2** queries of the text size in Section \@ref(saving). However, the way we set the font size is not at all equivalent. We are not allowed to assign a new value to the themes like e.g. `theme_bw()$text$size <- 5`. But ggplot2 provides functionality to set the font size via `theme_set()` with the parameter `base_size`:
+Okay, so much for **lattice**. Let's see how we can change things in **ggplot2**. The equivalent to **lattice**'s `par.settings` are the different `theme`s in **ggplot2**. We have already seen this in the text size queries in Section \@ref(saving). However, the way we set the font size is not at all equivalent as we are not allowed to assign a new value to a particular theme as `theme_bw()$text$size <- 5`. Instead, **ggplot2** provides functionality to set the font size via `theme_set()` with the parameter `base_size`:
 
 
 ```r
@@ -2151,9 +2129,9 @@ print(p_ggplot +
 
 <img src="_main_files/figure-html/change-pointsize-gg-tiff-1.svg" width="672" />
 
-Apart from `theme_set()` which changes the theme globally there is also a function called `theme_update()` which changes parameters for the current theme in use. Once you change to a different theme, these settings will be neglected. 
+Apart from `theme_set()` which changes the theme globally, there is also a function called `theme_update()` which changes parameters for the current theme in use. Once you change to a different theme, these settings will be neglected. 
 
-**Note, we need to supply the absolute point sizes to these functions, not the relative expansion factors!**
+_Note, we need to supply the absolute point sizes to these functions, not the relative expansion factors!_
 
 
 ```r
@@ -2190,7 +2168,7 @@ Right, so now we know how to modify the standard settings shipped with both **la
 
 ## Portable Network Graphics
 
-For `.png` files things are very similar to `.tiff` except that we don't need to specify a compression:
+For `.png` files, things are very similar to `.tiff` except that we don't need to specify a compression:
 
 
 ```r
@@ -2205,20 +2183,21 @@ invisible(dev.off())
 
 ## Encapsulated Postscript
 
-As mentioned earlier, the proper way of saving vector based graphics (such as line graphs, point graphs or basically anything with not too many graphical features, e.g. polygons) is using a vector graphics based device. Here, we will consider `(encapsulated) postscript - .eps` and `portable document format - .pdf`.
+As mentioned earlier, the proper way of saving vector-based graphics (such as line graphs, point graphs, or basically anything with not too many graphical features, e.g. polygons) is using a vector graphics-based device. Here, we will consider "(encapsulated) postscript" (`.eps`) and "portable document format" (`.pdf`).
 
-For R's `postscript` device the important default settings are as follows (PLOS ONE requirements in brackets):
+For R's `postscript` device, the relevant default settings are as follows (PLOS ONE requirements in brackets):
 
-* width and heigth: 0 inches (max 6.83 / 9.19)
-* pointsize: 12 (6 - 12)
-* bg (background): "transparent" (white)
-* family: "Helvetica" (Arial, Times, Symbol)
-* onefile: TRUE (n.a. - yet likely only one file is acceptable)
-* horizontal: TRUE (accepting both)
-* paper: "default" check via `getOption("papersize")` (n.a.)
-* colormodel: "srgb" (RGB - so sRGB should be fine)
+* width and heigth: `0` (max. 6.83 by 9.19)
+* units: inches (n.a.)
+* pointsize: `12` (6 to 12)
+* bg (background): `"transparent"` (white)
+* family: `"Helvetica"` (Arial, Times, Symbol)
+* onefile: `TRUE` (n.a., yet likely only one file is acceptable)
+* horizontal: `TRUE` (both is accepted)
+* paper: `"default"`, check via `getOption("papersize")` (n.a.)
+* colormodel: `"srgb"` (RGB, so `sRGB` should be fine)
 
-The full set of details can be retrieved using:
+The full set of details can be retrieved using
 
 
 ```r
@@ -2227,10 +2206,10 @@ ps.options()
 
 ```
 ## $onefile
-## [1] TRUE
+## [1] FALSE
 ## 
 ## $family
-## [1] "Helvetica"
+## [1] "Times"
 ## 
 ## $title
 ## [1] "R Graphics Output"
@@ -2242,25 +2221,25 @@ ps.options()
 ## [1] "default"
 ## 
 ## $bg
-## [1] "transparent"
+## [1] "white"
 ## 
 ## $fg
 ## [1] "black"
 ## 
 ## $width
-## [1] 0
+## [1] 6.83
 ## 
 ## $height
-## [1] 0
+## [1] 7
 ## 
 ## $horizontal
-## [1] TRUE
+## [1] FALSE
 ## 
 ## $pointsize
 ## [1] 12
 ## 
 ## $paper
-## [1] "default"
+## [1] "special"
 ## 
 ## $pagecentre
 ## [1] TRUE
@@ -2281,7 +2260,7 @@ ps.options()
 ## [1] FALSE
 ```
 
-Changing these is basically the way to handle device setup when printing to `eps`. These default settings can be changed using `setEPS()`. And here is where it gets a little awkward. If you run `setEPS()` without any arguments, the defaults listed above will change slightly
+Changing these is basically the way to handle device setup when printing to `.eps`. These default settings can be changed using `setEPS()`. And here is where it gets a little awkward. If you run `setEPS()` without any arguments, the defaults listed above will change slightly.
 
 
 ```r
@@ -2294,7 +2273,7 @@ ps.options()
 ## [1] FALSE
 ## 
 ## $family
-## [1] "Helvetica"
+## [1] "Times"
 ## 
 ## $title
 ## [1] "R Graphics Output"
@@ -2306,7 +2285,7 @@ ps.options()
 ## [1] "default"
 ## 
 ## $bg
-## [1] "transparent"
+## [1] "white"
 ## 
 ## $fg
 ## [1] "black"
@@ -2345,7 +2324,13 @@ ps.options()
 ## [1] FALSE
 ```
 
-Notably, `onefile` is now `FALSE` as is `horizontal`, `paper` is now `special` and `height` and `width` are now 7. Apart from the `onefile` I think this is fine. Especially when utilizing layered plotting approaches like we do here (i.e. **lattice** and **ggplot2**), `onefile` should be set to `TRUE` as otherwise we may well end up with `.eps` files with many pages. However, `setEPS()` will not let us change this. Therefore, we will need to set this for each device.
+Notably, 
+
+* `onefile` is now `FALSE` as is `horizontal`, 
+* `paper` changes from `default` to `special`, and 
+* `height` and `width` are no longer `0`, but `7` inches. 
+
+Apart from `onefile`, this should be fine. Especially when utilizing layered plotting approaches like we do here (i.e. **lattice** and **ggplot2**), `onefile` should be set to `TRUE` as otherwise we may well end up with multi-page `.eps` files. However, `setEPS()` will not let us change this, which requires us to set this manually for each device.
 
 Hence, in order to comply with PLOS ONE we need:
 
@@ -2361,9 +2346,9 @@ invisible(dev.off())
 
 All the tweaking of the plot layout applies here just the same (e.g. adjusting the axis tick labelling font sizes etc.). 
 
-For vector graphics resolution is irrelevant as the elements are actual lines or points and not pixels. Therefore, we need to start thinking about lines and points now. And here things are again a little "special" in R. The base size for points is 1/72 inch (standard) but for lines it is 1/96 inch. This means that when we specify a line width of 1 via `lwd = 1` we are really getting a line width of 0.75 as `72/96 = 0.75`. In light of the PLOS ONE requirements for lines to be at least 0.5 pt this will mean that when we set `lwd = 0.5` we are actually producing a line that is too thin (0.375 pt). On the other hand, setting `lwd = 2` means that we still adhere to the guidelines as the result will only be 1.5 pt in width. 
+For vector graphics, resolution is irrelevant as the elements are actual lines or points and not pixels. Therefore, we need to start thinking about lines and points now. And here things are again a little "special" in R. The base size for points is 1/72 inch (standard), but for lines it is 1/96 inch. This means that when we specify a line width of 1 via `lwd = 1`, we are really getting a line width of 0.75 as `72/96 = 0.75`. In light of the PLOS ONE requirements for lines to be at least 0.5 pt this will mean that when we set `lwd = 0.5` we are actually producing a line that is too thin (0.375 pt). On the other hand, setting `lwd = 2` means that we still adhere to the guidelines as the result will only be 1.5 pt in width. 
 
-If, however, we want to address this issue we could do something like this (using a simple line plot as an example):
+If we wanted to address this issue, we could do something like this (using a simple lines plot as an example):
 
 
 ```r
@@ -2381,9 +2366,6 @@ As a final tweak, we will see how to change the white space around a plot in **l
 
 
 ```r
-# setEPS(bg = "white", family = "Times", width = 6.83)
-# postscript("test_la_line.eps", onefile = TRUE)
-
 mar_theme <- lattice.options()
 mar_theme$layout.widths$left.padding$x <- 2
 mar_theme$layout.widths$left.padding$units <- "points"
@@ -2398,15 +2380,14 @@ print(xyplot(1:10 ~ 1:10, type = "l", lwd = 96/72 * 2,
              lattice.options = mar_theme))
 ```
 
-<img src="_main_files/figure-html/seteps-whitespace-1.svg" width="672" />
+<div class="figure" style="text-align: center">
+<img src="_main_files/figure-html/seteps-whitespace-1.svg" alt="A **lattice** lines plot with a 2 pt white margin (at least on the left side)." width="672" />
+<p class="caption">(\#fig:seteps-whitespace)A **lattice** lines plot with a 2 pt white margin (at least on the left side).</p>
+</div>
 
-```r
-# invisible(dev.off())
-```
+This will, however, only really provide a 2 pt white space on the left side of the plot. There are some indications as to some bugs in setting these layout parameters, so whether this is intended or not remains unclear for now. We will keep digging and update this tutorial as soon as we come up with a proper solution.
 
-This will, however, only really provide a 2 pt white space on the left side of the plot. I found some indications as to some bugs in setting these layout parameters, so whether this is intended or not remains unclear for now. I will keep digging and update this tutorial as soon as I find a proper solution.
-
-In **ggplot2** the margin adjustment can again be done using `theme_update()`:
+In **ggplot2**, the margin adjustment can again be done using `theme_update()`:
 
 
 ```r
@@ -2416,16 +2397,19 @@ theme_update(plot.margin = unit(rep(2, 4), units = "points"))
 print(p_ggplot)
 ```
 
-<img src="_main_files/figure-html/change-themes-gg-eps-1.svg" width="672" />
+<div class="figure" style="text-align: center">
+<img src="_main_files/figure-html/change-themes-gg-eps-1.svg" alt="A **ggplot2** lines plot with a 2 pt white margin." width="672" />
+<p class="caption">(\#fig:change-themes-gg-eps)A **ggplot2** lines plot with a 2 pt white margin.</p>
+</div>
 
 You might say that the approach taken by **ggplot2** regarding the margin adjustment is favorable as we don't need to provide the desired values to each entry of the `lattice.options()`. There is, however, an equivalent function in **lattice** called `trellis.par.set()`.
 
-Personally, I like the assignment approach (`<-`) better as it usually involves a little more poking around in the various settings which means you are likely to understand things in a little more detail.
+Personally, we prefer the assignment approach (`<-`) as it usually involves a little more poking around in the various settings, which means you are likely to understand things in a little more detail.
 
 
 ## Portable Document Format
 
-`pdf` basically works the same as `postscript`. Both produce vector graphics output. The default settings can be checked with:
+`pdf()` basically works the same as `postscript()`. Both produce vector graphics output. The default settings can be checked with:
 
 
 ```r
@@ -2488,7 +2472,7 @@ pdf.options()
 ## [1] TRUE
 ```
 
-However, there is no equivalent to `setEPS()`. Therefore, we need to provide all device specifications/changes of the default settings directly in the device setup:
+However, there is no equivalent to `setEPS()`. Therefore, we need to provide all device specifications and changes of the default settings directly in the device setup call:
 
 
 ```r
@@ -2500,23 +2484,23 @@ print(xyplot(1:10 ~ 1:10, type = "l", lwd = 96/72 * 2))
 invisible(dev.off())
 ```
 
-<!--chapter:end:04-saving-graphics.Rmd-->
+<!--chapter:end:05-saving-graphics.Rmd-->
 
 # Final remarks
 
-Ok, so now we have a rather comprehensive, though far from complete (if that is even possible) set of tools for visualizing our data using classical statistical plots.
+Okay, so now we have a rather comprehensive, though far from complete (if that is even possible) set of tools for visualizing our data using classical statistical plots.
 
-I hope that this tutorial was, at least in parts, useful for some of you and that we were able to expand your skill set of producing publication quality graphics using R to some extent.
+We hope that this tutorial was, at least in parts, useful for some of you and that we were able to expand your skill set of producing publication quality graphics using R to some extent.
 
-As mentioned at the beginning of this tutorial, I am happy to receive feedback, comments, criticism and bug reports at the e-mail address provided.
+As mentioned at the beginning of this tutorial, we am happy to receive feedback, comments, criticism and bug reports at the e-mail address provided.
 
 Cheers,
 
 Tim and Florian
 
-<!--chapter:end:05-final-remarks.Rmd-->
+<!--chapter:end:06-final-remarks.Rmd-->
 
 # References {-}
 
-<!--chapter:end:06-references.Rmd-->
+<!--chapter:end:07-references.Rmd-->
 
