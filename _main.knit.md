@@ -1,7 +1,7 @@
 ---
 title: "Creating Publication Quality Graphs in R"
 author: "<b>Tim Appelhans and Florian Detsch</b>"
-date: "Last modified: 2017-10-22"
+date: "Last modified: 2017-10-23"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -1435,6 +1435,37 @@ print(g_err_f)
 <p class="caption">(\#fig:gg-facet-err-bar)A **ggplot2** panel bar plot with error bars and modified fill colors.</p>
 </div>
 
+## Plotting Error Bars (base graphics)
+
+Although the focus is mostly put on other packages in this tutorial, it is worth mentioning at this point that R base **graphics** also offer opportunities to create plots with error bars. For example, `plotCI()` from **plotrix** provides an approach that lets us recreate (at least more or less) our **lattice**-based Figure \@ref(fig:latt-err).
+
+
+```r
+library(plotrix)
+
+# increase left-side margin for horizontal tick labels to fit on page
+par(mar = c(5, 8, 2, 2), las = 1) # see ?par
+plotCI(cuts$fit, as.numeric(cuts$cut), uiw = cuts$se.fit, err = "x", yaxt = "n", 
+       pch = 21, pt.bg = "black", xlab = "fit", ylab = "")
+
+# add y-axis title
+title(ylab = "cut", line = 6) # see ?title
+
+# add y-axis tick labels
+lvl = levels(cuts$cut)
+axis(side = 2, at = 1:length(lvl), labels = lvl)
+```
+
+<div class="figure" style="text-align: center">
+<img src="_main_files/figure-html/plotCI-1.svg" alt="A base **graphics** scatter plot with error bars." width="672" />
+<p class="caption">(\#fig:plotCI)A base **graphics** scatter plot with error bars.</p>
+</div>
+
+
+```r
+invisible(dev.off()) # if not run, edits to par() persist
+```
+
 <!--chapter:end:03-data-visualisation.Rmd-->
 
 # Manipulating Plots with the grid Package
@@ -1857,6 +1888,11 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
+
+```
+## [1] TRUE
+```
+
 We see that neither **lattice** nor **ggplot2** adhere to the specified point size, whereas base graphics do. Let's try this for the other devices, too. First, `png()`:
 
 
@@ -1892,6 +1928,11 @@ theme_bw()$text$size
 ```r
 # turn device off
 invisible(dev.off())
+```
+
+
+```
+## [1] TRUE
 ```
 
 As you can see, `png()` behaves similar to `tiff()`. Now for `eps()`:
@@ -1931,6 +1972,11 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
+
+```
+## [1] TRUE
+```
+
 Finally, for `pdf()`:
 
 
@@ -1966,6 +2012,11 @@ theme_bw()$text$size
 ```r
 # turn device off
 invisible(dev.off()) # dev.off() is sufficient, invisible() suppresses text output
+```
+
+
+```
+## [1] TRUE
 ```
 
 ... and we see that only base **graphics** really adhere to the supplied font size.
@@ -2209,7 +2260,7 @@ ps.options()
 ## [1] FALSE
 ## 
 ## $family
-## [1] "Times"
+## [1] "Helvetica"
 ## 
 ## $title
 ## [1] "R Graphics Output"
@@ -2221,13 +2272,13 @@ ps.options()
 ## [1] "default"
 ## 
 ## $bg
-## [1] "white"
+## [1] "transparent"
 ## 
 ## $fg
 ## [1] "black"
 ## 
 ## $width
-## [1] 6.83
+## [1] 7
 ## 
 ## $height
 ## [1] 7
@@ -2273,7 +2324,7 @@ ps.options()
 ## [1] FALSE
 ## 
 ## $family
-## [1] "Times"
+## [1] "Helvetica"
 ## 
 ## $title
 ## [1] "R Graphics Output"
@@ -2285,7 +2336,7 @@ ps.options()
 ## [1] "default"
 ## 
 ## $bg
-## [1] "white"
+## [1] "transparent"
 ## 
 ## $fg
 ## [1] "black"
@@ -2492,7 +2543,7 @@ Okay, so now we have a rather comprehensive, though far from complete (if that i
 
 We hope that this tutorial was, at least in parts, useful for some of you and that we were able to expand your skill set of producing publication quality graphics using R to some extent.
 
-As mentioned at the beginning of this tutorial, we am happy to receive feedback, comments, criticism and bug reports at the e-mail address provided.
+As mentioned at the beginning of this tutorial, we are happy to receive feedback, comments, criticism and bug reports at the e-mail address provided.
 
 Cheers,
 

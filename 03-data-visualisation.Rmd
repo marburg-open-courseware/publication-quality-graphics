@@ -579,3 +579,27 @@ g_err_f <- errbar_ggplot_facets +
 
 print(g_err_f)
 ```
+
+## Plotting Error Bars (base graphics)
+
+Although the focus is mostly put on other packages in this tutorial, it is worth mentioning at this point that R base **graphics** also offer opportunities to create plots with error bars. For example, `plotCI()` from **plotrix** provides an approach that lets us recreate (at least more or less) our **lattice**-based Figure \@ref(fig:latt-err).
+
+```{r plotCI, tidy = FALSE, fig.cap = "A base **graphics** scatter plot with error bars.", fig.align = 'center', fis.asp = 1}
+library(plotrix)
+
+# increase left-side margin for horizontal tick labels to fit on page
+par(mar = c(5, 8, 2, 2), las = 1) # see ?par
+plotCI(cuts$fit, as.numeric(cuts$cut), uiw = cuts$se.fit, err = "x", yaxt = "n", 
+       pch = 21, pt.bg = "black", xlab = "fit", ylab = "")
+
+# add y-axis title
+title(ylab = "cut", line = 6) # see ?title
+
+# add y-axis tick labels
+lvl = levels(cuts$cut)
+axis(side = 2, at = 1:length(lvl), labels = lvl)
+```
+
+```{r tmp}
+invisible(dev.off()) # if not run, edits to par() persist
+```

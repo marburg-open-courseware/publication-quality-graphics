@@ -37,6 +37,11 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
+```{r test-remove, echo = FALSE, message = FALSE}
+if (file.exists("test.tif"))
+    file.remove("test.tif")
+```
+
 We see that neither **lattice** nor **ggplot2** adhere to the specified point size, whereas base graphics do. Let's try this for the other devices, too. First, `png()`:
 
 ```{r graphical-paramters-png, message=FALSE}
@@ -53,6 +58,11 @@ theme_bw()$text$size
 
 # turn device off
 invisible(dev.off())
+```
+
+```{r test-remove-2, echo = FALSE, message = FALSE}
+if (file.exists("test.png"))
+    file.remove("test.png")
 ```
 
 As you can see, `png()` behaves similar to `tiff()`. Now for `eps()`:
@@ -73,6 +83,11 @@ theme_bw()$text$size
 invisible(dev.off())
 ```
 
+```{r test-remove-3, echo = FALSE, message = FALSE}
+if (file.exists("test.eps"))
+    file.remove("test.eps")
+```
+
 Finally, for `pdf()`:
 
 ```{r graphical-paramters-pdf, message=FALSE}
@@ -89,6 +104,11 @@ theme_bw()$text$size
 
 # turn device off
 invisible(dev.off()) # dev.off() is sufficient, invisible() suppresses text output
+```
+
+```{r test-remove-4, echo = FALSE, message = FALSE}
+if (file.exists("test.pdf"))
+    file.remove("test.pdf")
 ```
 
 ... and we see that only base **graphics** really adhere to the supplied font size.
@@ -197,7 +217,7 @@ print(update(p_lattice, par.settings = tiff_theme))
 
 In order to export the graphic we simply wrap the above code between our `tiff()` and `dev.off()` calls (note here that we change the default font family to "Times" - check the exported image):
 
-```{r export-lattice-tiff, message=FALSE, eval=TRUE}
+```{r export-lattice-tiff, message=FALSE, eval=FALSE}
 tiff("test_la.tif", width = 17.35, height = 23.35, units = "cm", res = 300,
      compression = "lzw")
 
@@ -253,7 +273,7 @@ print(p_ggplot +
 
 The export procedure will then be equivalent to before:
 
-```{r save-gg-tiff, message=FALSE, eval=TRUE}
+```{r save-gg-tiff, message=FALSE, eval=FALSE}
 tiff("test_gg.tif", width = 17.35, height = 23.35, units = "cm", res = 300,
      compression = "lzw")
 theme_set(theme_bw(base_size = 10))
@@ -270,7 +290,7 @@ Right, so now we know how to modify the standard settings shipped with both **la
 
 For `.png` files, things are very similar to `.tiff` except that we don't need to specify a compression:
 
-```{r save-gg-png, message=FALSE, eval=TRUE}
+```{r save-gg-png, message=FALSE, eval=FALSE}
 png("test_gg.png", width = 17.35, height = 23.35, units = "cm", res = 300)
 theme_set(theme_bw(base_size = 10))
 theme_update(axis.text = element_text(size = 17.5, face = "italic"))
@@ -319,7 +339,7 @@ Apart from `onefile`, this should be fine. Especially when utilizing layered plo
 
 Hence, in order to comply with PLOS ONE we need:
 
-```{r seteps-detail}
+```{r seteps-detail, eval = FALSE}
 setEPS(bg = "white", family = "Times", width = 6.83)
 postscript("test_la.eps", onefile = TRUE)
 
@@ -334,7 +354,7 @@ For vector graphics, resolution is irrelevant as the elements are actual lines o
 
 If we wanted to address this issue, we could do something like this (using a simple lines plot as an example):
 
-```{r seteps-line-width}
+```{r seteps-line-width, eval = FALSE}
 setEPS(bg = "white", family = "Times", width = 6.83)
 postscript("test_la_line.eps", onefile = TRUE)
 
@@ -388,7 +408,7 @@ pdf.options()
 
 However, there is no equivalent to `setEPS()`. Therefore, we need to provide all device specifications and changes of the default settings directly in the device setup call:
 
-```{r setpdf-line-width}
+```{r setpdf-line-width, eval = FALSE}
 pdf("test_la_line.pdf", onefile = TRUE, bg = "white", 
     family = "Times", width = 6.83)
 

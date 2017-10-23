@@ -118,6 +118,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6" data-path="histograms-and-density-plots-ggplot2.html"><a href="histograms-and-density-plots-ggplot2.html"><i class="fa fa-check"></i><b>3.6</b> Histograms and Density Plots (ggplot2)</a></li>
 <li class="chapter" data-level="3.7" data-path="plotting-error-bars-lattice.html"><a href="plotting-error-bars-lattice.html"><i class="fa fa-check"></i><b>3.7</b> Plotting Error Bars (lattice)</a></li>
 <li class="chapter" data-level="3.8" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>3.8</b> Plotting Error Bars (ggplot2)</a></li>
+<li class="chapter" data-level="3.9" data-path="plotting-error-bars-base-graphics.html"><a href="plotting-error-bars-base-graphics.html"><i class="fa fa-check"></i><b>3.9</b> Plotting Error Bars (base graphics)</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>4</b> Manipulating Plots with the grid Package</a><ul>
 <li class="chapter" data-level="4.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>4.1</b> Multiple Plots per Page</a></li>
@@ -179,6 +180,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
 <span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>We see that neither <strong>lattice</strong> nor <strong>ggplot2</strong> adhere to the specified point size, whereas base graphics do. Let’s try this for the other devices, too. First, <code>png()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">png</span>(<span class="st">&quot;test.png&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>,
      <span class="dt">width =</span> <span class="fl">17.35</span>, <span class="dt">height =</span> <span class="fl">23.35</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>, <span class="dt">res =</span> <span class="dv">300</span>)
@@ -193,6 +195,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
 <span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>As you can see, <code>png()</code> behaves similar to <code>tiff()</code>. Now for <code>eps()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">postscript</span>(<span class="st">&quot;test.eps&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>,
            <span class="dt">width =</span> <span class="fl">17.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">height =</span> <span class="fl">23.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>)
@@ -207,6 +210,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
 <span class="kw">invisible</span>(<span class="kw">dev.off</span>())</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>Finally, for <code>pdf()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">&quot;test.pdf&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;ArialMT&quot;</span>,
     <span class="dt">width =</span> <span class="fl">17.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">height =</span> <span class="fl">23.35</span> <span class="op">/</span><span class="st"> </span><span class="fl">2.54</span>, <span class="dt">pointsize =</span> <span class="dv">18</span>)
@@ -221,6 +225,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn device off</span>
 <span class="kw">invisible</span>(<span class="kw">dev.off</span>()) <span class="co"># dev.off() is sufficient, invisible() suppresses text output</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 <p>… and we see that only base <strong>graphics</strong> really adhere to the supplied font size.</p>
 <p>Alright, this was only a small exercise to highlight the fact that it is not straightforward to get that fine control over graphics output in R. But before we dive into this deeper, we will first need to know what it is that we want to achieve, meaning we need a precise definition of the guidelines our graphics output should adhere to. Generally, academic journals provide formatting guidelines for both figures and tables. These, however, differ from journal to journal so that it is impossible to come up with a one-fits-all solution here. Therefore, we will pick one of these guides to highlight the process of achieving the desired formatting which can then be adapted to any other formatting guide. Even though this is - in R terms - not directly related to exporting visualizations through different devices, these finer controls will be covered her. In the end, from an academic publishing point of view, this is exactly the point where we need to start thinking about these formatting issues.</p>
 <p>Depending on the journal the formatting guidelines can be quite detailed, though some journals allow for more flexibility. Generally, there are a few parameters that the majority of journals define in their formatting guides. These include (but are surely not limited to):</p>
