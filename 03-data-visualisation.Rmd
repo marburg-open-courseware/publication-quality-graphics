@@ -506,7 +506,7 @@ Okay, another thing we might want to show is a certain estimated value (like the
 
 ## Plotting Error Bars (lattice)
 
-Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, we refer you to StackOverflow and other R related forums and lists. You will possibly find a workable solution there, but we doubt that you will like it. As you will see in Section `{#gg-err}`, error bars are much easier plotted using **ggplot2**.
+Honestly, **lattice** sucks at plotting error bars... Therefore, we will only explore one way of achieving this. In case you really want to explore this further, we refer you to StackOverflow and other R related forums and lists. You will possibly find a workable solution there, but we doubt that you will like it. As you will see in Section \@ref(gg-error), error bars are much easier plotted using **ggplot2**.
 
 Anyway, here is a solution built on a function called `Dotplot()` (not to be mistaken with `lattice::dotplot()`) from **Hmisc** [@Harrell2017].
 
@@ -533,7 +533,7 @@ print(l_err)
 ```
 
 
-## Plotting Error Bars (ggplot2) {#gg-err}
+## Plotting Error Bars (ggplot2) {#gg-error}
 
 As mentioned above, when plotting error bars **ggplot2** is much easier. Whether this is because of the general ongoing discussion about the usefulness of these plots we do not want to judge.
 
