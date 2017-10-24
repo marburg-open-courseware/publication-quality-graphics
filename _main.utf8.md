@@ -1,7 +1,7 @@
 ---
-title: "Creating Publication Quality Graphs in R"
+title: "Creating Publication Quality Graphics in R"
 author: "<b>Tim Appelhans and Florian Detsch</b>"
-date: "Last modified: 2017-10-23"
+date: "Last modified: 2017-10-24"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -86,7 +86,7 @@ jnk <- sapply(pkg, library, character.only = TRUE)
 data(diamonds)
 ```
 
-**Right, enough of that introductory talk, let's start getting our hands dirty...**
+Right, enough of that introductory talk, let's start getting our hands dirty!
 
 
 ## Subsetting Data {#subset}
@@ -177,7 +177,7 @@ str(diamonds_premium)
 ##  $ z      : num  2.31 2.63 2.33 2.27 2.68 2.47 2.65 2.41 2.31 2.61 ...
 ```
 
-Note the **two** equal signs in order to specify our selection. This stems from an effort to be consistent with selection criteria such as "smaller than" (`<=`) or "not equal" (`!=`) and basically translates to "is equal"!
+Note the _two_ equal signs in order to specify our selection. This stems from an effort to be consistent with selection criteria such as "smaller than" (`<=`) or "not equal" (`!=`) and basically translates to "is equal"!
 
 Any combinations of these conditional statements are valid within one and the same `subset` call, e.g.
 
@@ -189,15 +189,15 @@ diamonds_premium_and_cheap <- subset(diamonds, cut == "Premium" &
 
 produces a rather strict subset only allowing diamonds of premium quality that cost less than 1000 USD.
 
-In case we want **ANY** of these, meaning all diamonds of premium quality **OR** cheaper than 1000 USD, we would use the `|` operator to combine the two specifications:
+In case we want _ANY_ of these, meaning all diamonds of premium quality _OR_ cheaper than 1000 USD, we would use the `|` operator to combine the two specifications:
 
 
 ```r
 diamonds_premium_or_cheap <- subset(diamonds, cut == "Premium" | 
-                                   price <= 1000)
+                                      price <= 1000)
 ```
 
-The **OR** specification is much less rigid than the **AND** specification which will result in a larger data set:
+The _OR_ specification is much less rigid than the _AND_ specification which will result in a larger data set:
 
 * `diamonds_premium_and_cheap` has 3204 rows, while
 * `diamonds_premium_or_cheap` has 25111 rows.
@@ -568,7 +568,7 @@ Obviously, setting proper names would be the next step now...
 
 Okay, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
 
-**So, let's start plotting stuff.**
+So, let's start plotting stuff!
 
 <!--chapter:end:01-data-handling.Rmd-->
 
@@ -961,14 +961,14 @@ print(g_sc)
 <p class="caption">(\#fig:gg-facet-scat)The **ggplot2** version of a faceted plot.</p>
 </div>
 
-If the plot we aim to create is a simple black-and-white scatter plot, as in our case here, a white facet background seems reasonable. However, there might be cases when a grey background, as used to be the default setting of **ggplot2** for quite a long time, is a better idea. This is particularly valid as soon as colors are involved as this tends to increase the contrast of the colors. In such cases, we could easily change the background color to grey using a pre-defined theme called ```theme_grey()``` (make sure to check out `?theme_grey` for a list of available themes).
+By default, all plots created by `ggplot()` have a grey background. This comes in particularly handy as soon as colors are involved because it increases the contrast of the colors. However, quite some people tend to dislike the grey default theme when aiming to create a simple black-and-white scatter plot, just like in our case. Here, a white facet background seems more suitable, and luckily, **ggplot2** lets us easily change the background color using a pre-defined theme called ```theme_bw()``` (make sure to check out `?theme_bw` for a full list of available themes).
 
 
 ```r
 g_sc <- scatter_ggplot + 
   geom_point() +
   facet_wrap(~ cut) + 
-  theme_grey()
+  theme_bw()
 
 print(g_sc)
 ```
@@ -977,6 +977,8 @@ print(g_sc)
 <img src="_main_files/figure-html/gg-facet-scat-grey-1.svg" alt="The **ggplot2** version of a faceted plot with grey facet background." width="672" />
 <p class="caption">(\#fig:gg-facet-scat-grey)The **ggplot2** version of a faceted plot with grey facet background.</p>
 </div>
+
+In case you wanted to remove the horizontal and vertical grid lines as well, and hence, end up with a plain white background, an additional line `+ theme(panel.grid = element_blank())` would be required. For our purposes, however, the above plot version drawing a white instead of a grey background is totally sufficient.
 
 In order to provide the regression line for each panel like we did in **lattice**, we need a function called ```stat_smooth()```. This is fundamentally the same function that we used earlier, as the ```panel.smoother()``` in **lattice** is based on ```stat_smooth()```.
 
@@ -988,7 +990,8 @@ g_sc <- scatter_ggplot +
   geom_point(color = "grey60") +
   facet_wrap(~ cut, nrow = 2, ncol = 3) +
   stat_smooth(method = "lm", se = TRUE, 
-              fill = "black", color = "black")
+              fill = "black", color = "black") + 
+  theme_bw()
 
 print(g_sc)
 ```
@@ -1014,7 +1017,8 @@ g_sc <- scatter_ggplot +
   scale_fill_gradientn(colors = c("white",
                                    rev(clrs_hcl(100)))) +
   stat_smooth(method = "lm", se = FALSE, color = "black") +
-  coord_fixed(ratio = 5/30000)
+  coord_fixed(ratio = 5/30000) + 
+  theme_bw()
 
 print(g_sc)
 ```
@@ -1152,7 +1156,7 @@ print(g_bw)
 <p class="caption">(\#fig:gg-facet-width-bw)A faceted **ggplot2** boxplot with colored boxes and box widths relative to number of observations.</p>
 </div>
 
-The result is very similar to what we have achieved earlier. In summary, **lattice** needs a little more care to adjust the standard graphical parameters, whereas **ggplot2** requires us to manually calculate the width of the boxes. WE leave it up to you which way suits you better... the two of us have already made our choice a few years ago ;-)
+The result is very similar to what we have achieved earlier. In summary, **lattice** needs a little more care to adjust the standard graphical parameters, whereas **ggplot2** requires us to manually calculate the width of the boxes. We leave it up to you which way suits you better... the two of us have already made our choice a few years ago ;-)
 
 Boxplots are, as mentioned above, a brilliant way to visualize data distribution(s). Their strength lies in the comparability of different classes as they are plotted next to each other using a common scale. Another, more classical - as parametric - way are histograms and density plots.
 
@@ -1218,7 +1222,7 @@ where ```g``` and ```f``` are the factorial variables used for the conditioning.
 
 In the below code chunk, we are first creating our plot object. Then, we are using a function called ```useOuterStrips()``` which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default **lattice** setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.
 
-Another default setting for density plots in **lattice** is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x--axis. In our case, as we have a lot of data points, this is not desirable, so we set ```plot.points = FALSE```.
+Another default setting for density plots in **lattice** is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x-axis. In our case, as we have a lot of data points, this is not desirable, so we set ```plot.points = FALSE```.
 
 
 ```r
@@ -1468,7 +1472,7 @@ invisible(dev.off()) # if not run, edits to par() persist
 
 <!--chapter:end:03-data-visualisation.Rmd-->
 
-# Manipulating Plots with the grid Package
+# Manipulating Plots with grid
 
 Okay, so now we have seen how to produce a variety of widely used plot types using both **lattice** and **ggplot2**. We hope that, apart from the specifics, you also obtained a general idea of how these two packages work and how you may use the various things we've touched upon in scenarios other than the ones provided here.
 
@@ -1478,7 +1482,7 @@ With his **grid** package, Paul Murrell has achieved nothing less than a highly 
 
 In order to fully appreciate the possibilities of the **grid** package, it helps to think of this package as a package for drawing things. Yes, we're not producing statistical plots as such (for this we have **lattice** and **ggplot2**), we're actually _drawing_ things!
 
-The fundamental features of the **grid** package are the ```viewports```. By default, the whole plotting area, may it be the standard R or any other such plotting device (e.g. `png()`), is considered as the root viewport (basically like the ```home/<username>``` folder on Linux or the ```C:\Users\<username>``` folder on Windows). In this viewport we now have the possibility to specify other viewports which are relative to the root viewport (just like the ```Users\<username>\Documents``` folder on Windows or ```home/<username>/Downloads``` under Linux). 
+The fundamental features of the **grid** package are the "viewports". By default, the whole plotting area, may it be the standard R or any other such plotting device (e.g. `png()`), is considered as the root viewport (basically like the ```home/<username>``` folder on Linux or the ```C:\Users\<username>``` folder on Windows). In this viewport we now have the possibility to specify other viewports which are relative to the root viewport (just like the ```Users\<username>\Documents``` folder on Windows or ```home/<username>/Downloads``` under Linux). 
 
 The very important thing to realize here is that in order to do anything in this folder (be it creating another sub-folder, or simply saving a file, or whatever), we first need to _create_ the folder and then we need to _navigate_ into it. If you keep this in mind, you will quickly understand the fundamental principle of **grid**.
 
@@ -1889,9 +1893,6 @@ invisible(dev.off())
 ```
 
 
-```
-## [1] TRUE
-```
 
 We see that neither **lattice** nor **ggplot2** adhere to the specified point size, whereas base graphics do. Let's try this for the other devices, too. First, `png()`:
 
@@ -1931,9 +1932,6 @@ invisible(dev.off())
 ```
 
 
-```
-## [1] TRUE
-```
 
 As you can see, `png()` behaves similar to `tiff()`. Now for `eps()`:
 
@@ -2257,7 +2255,7 @@ ps.options()
 
 ```
 ## $onefile
-## [1] FALSE
+## [1] TRUE
 ## 
 ## $family
 ## [1] "Helvetica"
@@ -2278,19 +2276,19 @@ ps.options()
 ## [1] "black"
 ## 
 ## $width
-## [1] 7
+## [1] 0
 ## 
 ## $height
-## [1] 7
+## [1] 0
 ## 
 ## $horizontal
-## [1] FALSE
+## [1] TRUE
 ## 
 ## $pointsize
 ## [1] 12
 ## 
 ## $paper
-## [1] "special"
+## [1] "default"
 ## 
 ## $pagecentre
 ## [1] TRUE

@@ -3,6 +3,6 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Publication Quality Graphs in R</a></li>
+        <li><a href="./">Publication Quality Graphics in R</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with <b>bookdown</b></a></li>

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Creating Publication Quality Graphs in R</title>
-  <meta name="description" content="Creating Publication Quality Graphs in R">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <title>Creating Publication Quality Graphics in R</title>
+  <meta name="description" content="Creating Publication Quality Graphics in R">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Creating Publication Quality Graphs in R" />
+  <meta property="og:title" content="Creating Publication Quality Graphics in R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="marburg-open-courseware/publication-quality-graphics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Creating Publication Quality Graphs in R" />
+  <meta name="twitter:title" content="Creating Publication Quality Graphics in R" />
   
   
   
@@ -98,7 +98,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Publication Quality Graphs in R</a></li>
+<li><a href="./">Publication Quality Graphics in R</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
@@ -120,7 +120,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>3.8</b> Plotting Error Bars (ggplot2)</a></li>
 <li class="chapter" data-level="3.9" data-path="plotting-error-bars-base-graphics.html"><a href="plotting-error-bars-base-graphics.html"><i class="fa fa-check"></i><b>3.9</b> Plotting Error Bars (base graphics)</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>4</b> Manipulating Plots with the grid Package</a><ul>
+<li class="chapter" data-level="4" data-path="manipulating-plots-with-grid.html"><a href="manipulating-plots-with-grid.html"><i class="fa fa-check"></i><b>4</b> Manipulating Plots with grid</a><ul>
 <li class="chapter" data-level="4.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>4.1</b> Multiple Plots per Page</a></li>
 <li class="chapter" data-level="4.2" data-path="manipulating-existing-plots.html"><a href="manipulating-existing-plots.html"><i class="fa fa-check"></i><b>4.2</b> Manipulating Existing Plots</a></li>
 </ul></li>
@@ -143,7 +143,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creating Publication Quality Graphs in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creating Publication Quality Graphics in R</a>
           </h1>
         </div>
 
@@ -182,11 +182,11 @@ Figure 3.7: A basic scatter plot created with <strong>ggplot2</strong>.
 Figure 3.8: The <strong>ggplot2</strong> version of a faceted plot.
 </p>
 </div>
-<p>If the plot we aim to create is a simple black-and-white scatter plot, as in our case here, a white facet background seems reasonable. However, there might be cases when a grey background, as used to be the default setting of <strong>ggplot2</strong> for quite a long time, is a better idea. This is particularly valid as soon as colors are involved as this tends to increase the contrast of the colors. In such cases, we could easily change the background color to grey using a pre-defined theme called <code>theme_grey()</code> (make sure to check out <code>?theme_grey</code> for a list of available themes).</p>
+<p>By default, all plots created by <code>ggplot()</code> have a grey background. This comes in particularly handy as soon as colors are involved because it increases the contrast of the colors. However, quite some people tend to dislike the grey default theme when aiming to create a simple black-and-white scatter plot, just like in our case. Here, a white facet background seems more suitable, and luckily, <strong>ggplot2</strong> lets us easily change the background color using a pre-defined theme called <code>theme_bw()</code> (make sure to check out <code>?theme_bw</code> for a full list of available themes).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g_sc &lt;-<span class="st"> </span>scatter_ggplot <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cut) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme_grey</span>()
+<span class="st">  </span><span class="kw">theme_bw</span>()
 
 <span class="kw">print</span>(g_sc)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:gg-facet-scat-grey"></span>
@@ -195,13 +195,15 @@ Figure 3.8: The <strong>ggplot2</strong> version of a faceted plot.
 Figure 3.9: The <strong>ggplot2</strong> version of a faceted plot with grey facet background.
 </p>
 </div>
+<p>In case you wanted to remove the horizontal and vertical grid lines as well, and hence, end up with a plain white background, an additional line <code>+ theme(panel.grid = element_blank())</code> would be required. For our purposes, however, the above plot version drawing a white instead of a grey background is totally sufficient.</p>
 <p>In order to provide the regression line for each panel like we did in <strong>lattice</strong>, we need a function called <code>stat_smooth()</code>. This is fundamentally the same function that we used earlier, as the <code>panel.smoother()</code> in <strong>lattice</strong> is based on <code>stat_smooth()</code>.</p>
 <p>Putting this together we could do something like this (note that we also change the number of rows and columns into which the facets should be arranged):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g_sc &lt;-<span class="st"> </span>scatter_ggplot <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;grey60&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cut, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">TRUE</span>, 
-              <span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)
+              <span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_bw</span>()
 
 <span class="kw">print</span>(g_sc)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:gg-facet-smooth-scat"></span>
@@ -221,7 +223,8 @@ Figure 3.10: A faceted <strong>ggplot2</strong> plot with regression lines and c
 <span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>,
                                    <span class="kw">rev</span>(<span class="kw">clrs_hcl</span>(<span class="dv">100</span>)))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio =</span> <span class="dv">5</span><span class="op">/</span><span class="dv">30000</span>)
+<span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio =</span> <span class="dv">5</span><span class="op">/</span><span class="dv">30000</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_bw</span>()
 
 <span class="kw">print</span>(g_sc)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:gg-dens-scat"></span>

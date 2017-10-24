@@ -15,7 +15,7 @@ jnk <- sapply(pkg, library, character.only = TRUE)
 data(diamonds)
 ```
 
-**Right, enough of that introductory talk, let's start getting our hands dirty...**
+Right, enough of that introductory talk, let's start getting our hands dirty!
 
 
 ## Subsetting Data {#subset}
@@ -55,7 +55,7 @@ diamonds_premium <- subset(diamonds, cut == "Premium")
 str(diamonds_premium)
 ```
 
-Note the **two** equal signs in order to specify our selection. This stems from an effort to be consistent with selection criteria such as "smaller than" (`<=`) or "not equal" (`!=`) and basically translates to "is equal"!
+Note the _two_ equal signs in order to specify our selection. This stems from an effort to be consistent with selection criteria such as "smaller than" (`<=`) or "not equal" (`!=`) and basically translates to "is equal"!
 
 Any combinations of these conditional statements are valid within one and the same `subset` call, e.g.
 
@@ -66,14 +66,14 @@ diamonds_premium_and_cheap <- subset(diamonds, cut == "Premium" &
 
 produces a rather strict subset only allowing diamonds of premium quality that cost less than 1000 USD.
 
-In case we want **ANY** of these, meaning all diamonds of premium quality **OR** cheaper than 1000 USD, we would use the `|` operator to combine the two specifications:
+In case we want _ANY_ of these, meaning all diamonds of premium quality _OR_ cheaper than 1000 USD, we would use the `|` operator to combine the two specifications:
 
 ```{r subset premium or cheap, tidy = FALSE}
 diamonds_premium_or_cheap <- subset(diamonds, cut == "Premium" | 
-                                   price <= 1000)
+                                      price <= 1000)
 ```
 
-The **OR** specification is much less rigid than the **AND** specification which will result in a larger data set:
+The _OR_ specification is much less rigid than the _AND_ specification which will result in a larger data set:
 
 * `diamonds_premium_and_cheap` has `r nrow(diamonds_premium_and_cheap)` rows, while
 * `diamonds_premium_or_cheap` has `r nrow(diamonds_premium_or_cheap)` rows.
@@ -187,4 +187,4 @@ Obviously, setting proper names would be the next step now...
 
 Okay, so now we have a few tools at hand to manipulate our data in a way that we should be able to produce some meaningful graphs which tell the story that we want to be heard, or better, seen...
 
-**So, let's start plotting stuff.**
+So, let's start plotting stuff!

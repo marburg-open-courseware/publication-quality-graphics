@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Creating Publication Quality Graphs in R</title>
-  <meta name="description" content="Creating Publication Quality Graphs in R">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <title>Creating Publication Quality Graphics in R</title>
+  <meta name="description" content="Creating Publication Quality Graphics in R">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Creating Publication Quality Graphs in R" />
+  <meta property="og:title" content="Creating Publication Quality Graphics in R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="marburg-open-courseware/publication-quality-graphics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Creating Publication Quality Graphs in R" />
+  <meta name="twitter:title" content="Creating Publication Quality Graphics in R" />
   
   
   
@@ -98,7 +98,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Publication Quality Graphs in R</a></li>
+<li><a href="./">Publication Quality Graphics in R</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
@@ -120,7 +120,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8" data-path="gg-err.html"><a href="gg-err.html"><i class="fa fa-check"></i><b>3.8</b> Plotting Error Bars (ggplot2)</a></li>
 <li class="chapter" data-level="3.9" data-path="plotting-error-bars-base-graphics.html"><a href="plotting-error-bars-base-graphics.html"><i class="fa fa-check"></i><b>3.9</b> Plotting Error Bars (base graphics)</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="manipulating-plots-with-the-grid-package.html"><a href="manipulating-plots-with-the-grid-package.html"><i class="fa fa-check"></i><b>4</b> Manipulating Plots with the grid Package</a><ul>
+<li class="chapter" data-level="4" data-path="manipulating-plots-with-grid.html"><a href="manipulating-plots-with-grid.html"><i class="fa fa-check"></i><b>4</b> Manipulating Plots with grid</a><ul>
 <li class="chapter" data-level="4.1" data-path="multiple-plots-per-page.html"><a href="multiple-plots-per-page.html"><i class="fa fa-check"></i><b>4.1</b> Multiple Plots per Page</a></li>
 <li class="chapter" data-level="4.2" data-path="manipulating-existing-plots.html"><a href="manipulating-existing-plots.html"><i class="fa fa-check"></i><b>4.2</b> Manipulating Existing Plots</a></li>
 </ul></li>
@@ -143,7 +143,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creating Publication Quality Graphs in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creating Publication Quality Graphics in R</a>
           </h1>
         </div>
 
@@ -192,7 +192,7 @@ Figure 3.20: A <strong>lattice</strong> panel histogram with modified graphical 
 <pre><code>y ~ x | g + f</code></pre>
 <p>where <code>g</code> and <code>f</code> are the factorial variables used for the conditioning.</p>
 <p>In the below code chunk, we are first creating our plot object. Then, we are using a function called <code>useOuterStrips()</code> which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default <strong>lattice</strong> setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.</p>
-<p>Another default setting for density plots in <strong>lattice</strong> is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x–axis. In our case, as we have a lot of data points, this is not desirable, so we set <code>plot.points = FALSE</code>.</p>
+<p>Another default setting for density plots in <strong>lattice</strong> is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x-axis. In our case, as we have a lot of data points, this is not desirable, so we set <code>plot.points = FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dens_lattice &lt;-<span class="st"> </span><span class="kw">densityplot</span>(<span class="op">~</span><span class="st"> </span>price <span class="op">|</span><span class="st"> </span>cut <span class="op">+</span><span class="st"> </span>color, 
                             <span class="dt">data =</span> diamonds,
                             <span class="dt">as.table =</span> <span class="ot">TRUE</span>,

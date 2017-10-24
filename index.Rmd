@@ -1,5 +1,5 @@
 ---
-title: "Creating Publication Quality Graphs in R"
+title: "Creating Publication Quality Graphics in R"
 author: "<b>Tim Appelhans and Florian Detsch</b>"
 date: "`r paste('Last modified:', Sys.Date())`"
 site: bookdown::bookdown_site

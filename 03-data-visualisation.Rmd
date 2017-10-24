@@ -4,6 +4,8 @@
 pkg <- c('ggplot2', 'latticeExtra', 'gridExtra', 'MASS', 
          'colorspace', 'plyr', 'Hmisc', 'scales')
 jnk <- sapply(pkg, library, character.only = TRUE)
+
+theme_set(theme_grey())
 ```
 
 In the next few sections, we will produce several varieties of *scatter plots*, *box-and-whisker plots* (from here on after 'boxplots'), *histograms* and *density plots*, and *plots with error bars*. All of these will first be produced using the **lattice** package and then an attempt is made to recreate these in (pretty much) the exact same way in **ggplot2**. First, the default versions are created and then we will see how they can be modified in order to produce plots that satisfy the requirements of most academic journals.    
@@ -179,7 +181,7 @@ print(l_sc)
 
 It should not go unnoted that there is a panel function in **lattice** that does this for you. The function is called ```panel.smoothScatter()``` and unless we need to specify a custom color palette, this is more than sufficient. As a hint, if you want to use this panel function with your own color palette, you need to make sure that your palette starts with white as otherwise things will look really weird...
 
-```{r latt-smooth-scat, tidy = FALSE, fig.cap = "A **lattice** panel plot of the point density within each panel created by `panel.smoothScatter()`.", fig.align = 'center'}
+```{r latt-smooth-scat, tidy = FALSE, fig.cap = "A **lattice** panel plot of the point density within each panel created by `panel.smoothScatter()`.", fig.align = 'center', message = FALSE}
 l_sc_smooth <- update(scatter_lattice, aspect = 1, 
                       par.settings = my_theme, 
                       between = list(x = 0.3, y = 0.3),
@@ -223,16 +225,18 @@ g_sc <- scatter_ggplot +
 print(g_sc)
 ```
 
-If the plot we aim to create is a simple black-and-white scatter plot, as in our case here, a white facet background seems reasonable. However, there might be cases when a grey background, as used to be the default setting of **ggplot2** for quite a long time, is a better idea. This is particularly valid as soon as colors are involved as this tends to increase the contrast of the colors. In such cases, we could easily change the background color to grey using a pre-defined theme called ```theme_grey()``` (make sure to check out `?theme_grey` for a list of available themes).
+By default, all plots created by `ggplot()` have a grey background. This comes in particularly handy as soon as colors are involved because it increases the contrast of the colors. However, quite some people tend to dislike the grey default theme when aiming to create a simple black-and-white scatter plot, just like in our case. Here, a white facet background seems more suitable, and luckily, **ggplot2** lets us easily change the background color using a pre-defined theme called ```theme_bw()``` (make sure to check out `?theme_bw` for a full list of available themes).
 
 ```{r gg-facet-scat-grey, tidy = FALSE, fig.cap = "The **ggplot2** version of a faceted plot with grey facet background.", fig.align = 'center'}
 g_sc <- scatter_ggplot + 
   geom_point() +
   facet_wrap(~ cut) + 
-  theme_grey()
+  theme_bw()
 
 print(g_sc)
 ```
+
+In case you wanted to remove the horizontal and vertical grid lines as well, and hence, end up with a plain white background, an additional line `+ theme(panel.grid = element_blank())` would be required. For our purposes, however, the above plot version drawing a white instead of a grey background is totally sufficient.
 
 In order to provide the regression line for each panel like we did in **lattice**, we need a function called ```stat_smooth()```. This is fundamentally the same function that we used earlier, as the ```panel.smoother()``` in **lattice** is based on ```stat_smooth()```.
 
@@ -243,7 +247,8 @@ g_sc <- scatter_ggplot +
   geom_point(color = "grey60") +
   facet_wrap(~ cut, nrow = 2, ncol = 3) +
   stat_smooth(method = "lm", se = TRUE, 
-              fill = "black", color = "black")
+              fill = "black", color = "black") + 
+  theme_bw()
 
 print(g_sc)
 ```
@@ -263,7 +268,8 @@ g_sc <- scatter_ggplot +
   scale_fill_gradientn(colors = c("white",
                                    rev(clrs_hcl(100)))) +
   stat_smooth(method = "lm", se = FALSE, color = "black") +
-  coord_fixed(ratio = 5/30000)
+  coord_fixed(ratio = 5/30000) + 
+  theme_bw()
 
 print(g_sc)
 ```
@@ -360,7 +366,7 @@ g_bw <- bw_ggplot +
 print(g_bw)
 ```
 
-The result is very similar to what we have achieved earlier. In summary, **lattice** needs a little more care to adjust the standard graphical parameters, whereas **ggplot2** requires us to manually calculate the width of the boxes. WE leave it up to you which way suits you better... the two of us have already made our choice a few years ago ;-)
+The result is very similar to what we have achieved earlier. In summary, **lattice** needs a little more care to adjust the standard graphical parameters, whereas **ggplot2** requires us to manually calculate the width of the boxes. We leave it up to you which way suits you better... the two of us have already made our choice a few years ago ;-)
 
 Boxplots are, as mentioned above, a brilliant way to visualize data distribution(s). Their strength lies in the comparability of different classes as they are plotted next to each other using a common scale. Another, more classical - as parametric - way are histograms and density plots.
 
@@ -408,7 +414,7 @@ where ```g``` and ```f``` are the factorial variables used for the conditioning.
 
 In the below code chunk, we are first creating our plot object. Then, we are using a function called ```useOuterStrips()``` which makes sure that the strips that correspond to the conditioning variables are plotted on both the top and the left side of our plot. The default **lattice** setting is to plot both at the top, which makes the navigation through the plot by the viewer a little more difficult.
 
-Another default setting for density plots in **lattice** is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x--axis. In our case, as we have a lot of data points, this is not desirable, so we set ```plot.points = FALSE```.
+Another default setting for density plots in **lattice** is to plot a point (circle) for each observation of our variable (price) at the bottom of the plot along the x-axis. In our case, as we have a lot of data points, this is not desirable, so we set ```plot.points = FALSE```.
 
 ```{r latt-panel-dens, tidy = FALSE, fig.cap = "A panel density plot conditioned according to two variables using **lattice**.", fig.align = 'center'}
 dens_lattice <- densityplot(~ price | cut + color, 
@@ -584,7 +590,7 @@ print(g_err_f)
 
 Although the focus is mostly put on other packages in this tutorial, it is worth mentioning at this point that R base **graphics** also offer opportunities to create plots with error bars. For example, `plotCI()` from **plotrix** provides an approach that lets us recreate (at least more or less) our **lattice**-based Figure \@ref(fig:latt-err).
 
-```{r plotCI, tidy = FALSE, fig.cap = "A base **graphics** scatter plot with error bars.", fig.align = 'center', fis.asp = 1}
+```{r plotCI, tidy = FALSE, fig.cap = "A base **graphics** scatter plot with error bars.", fig.align = 'center', fis.asp = 1, message = FALSE}
 library(plotrix)
 
 # increase left-side margin for horizontal tick labels to fit on page
